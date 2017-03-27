@@ -1,0 +1,146 @@
+﻿@model IEnumerable<WebApplication.Ingresos>
+
+<input hidden="hidden" value=3 id="fecha1" />
+<input hidden="hidden" value=4 id="suma1" />
+<input hidden="hidden" value=5 id="suma2" />
+<input hidden="hidden" value=6 id="suma3" />
+
+  <script src="../../Scripts/tablaexportar.js"></script>
+
+    <div class="box-body">
+     
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Factura y tipo
+                    </th>                   
+                    <th>
+                        Fecha Límite
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Cobrado
+                    </th>
+                    <th>
+                        Saldo
+                    </th>                   
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Cliente
+                    </th>                  
+                    <th>                       
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Factura y tipo
+                    </th>
+                    <th>
+                        Fecha Límite
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Cobrado
+                    </th>
+                    <th>
+                        Saldo
+                    </th>
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.factura)-@Html.DisplayFor(modelItem => item.tipoFactura)
+                            @{ if (item.enBlanco == true)
+                                {
+                                    <i class='fa fa-circle-o'></i>
+                                }
+                                else
+                                {
+                                    <i class='fa fa-circle'></i>
+                                }
+                            }
+                        </td> 
+
+                        <td>
+                            @Html.Raw(item.fechaLimite.ToShortDateString()).ToHtmlString()
+                        </td>
+
+                        <td>
+                            @{
+                                decimal total = Convert.ToDecimal(Html.Action("getTotalIngreso", "Ingresos", new { idIngreso = item.idIngreso }).ToString());
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()                               
+                            }
+                        </td>
+                        <td>
+                            @{
+                                decimal totalCobrado = Convert.ToDecimal(Html.Action("getCobradoIngreso", "Ingresos", new { idIngreso = item.idIngreso }).ToString());
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalCobrado)).ToHtmlString()
+                            }
+                        </td>
+
+                        <td>
+                            @{   @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total - totalCobrado)).ToHtmlString()}
+                        </td>
+                     
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                        </td>
+                        <td>                         
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>       
+        </div>

@@ -1,0 +1,79 @@
+﻿@model WebApplication.Pagos
+
+@{
+    ViewBag.Title = "Delete";  
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+    <h3>¿Está seguro de anular este pago?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuentas.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuentas.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Egresos.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Egresos.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

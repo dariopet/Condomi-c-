@@ -1,0 +1,127 @@
+﻿@model IEnumerable<WebApplication.DetalleMantenimientoPreventivo>
+@{
+    ViewBag.Title = "DetalleMantenimientoPreventivo";
+    Layout = null;
+}
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box col-md-12">
+    <div class="box-header">
+        <h3 class="box-title"> Detalle del Mantenimiento Preventivo</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @*@Html.ActionLink("Agregar un item al mantenimiento", "Create", "DetalleMantenimientoPreventivo", new { idMantenimientoPreventivo = ViewBag.idMantenimientoPreventivo }, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })*@
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabladetalles">
+            <thead>
+              <tr>
+           <th>
+               Equipo
+           </th>
+                  <th>
+                      Nº de Serie
+                  </th>
+           <th>
+               Observaciones
+           </th>
+           <th>
+               Estado
+           </th>
+           <th>
+               Chequeado por
+           </th>
+           <th>
+               Fecha Chequeado
+           </th>           
+           <th>
+            Acciones
+            </th>
+         </tr>
+    </thead>
+     <tfoot>
+          <tr>
+              <th>
+                  Equipo
+              </th>
+              <th>
+                  Nº de Serie
+              </th>
+              <th>
+                  Observaciones
+              </th>
+              <th>
+                  Estado
+              </th>
+              <th>
+                  Chequeado por
+              </th>
+              <th>
+                  Fecha Chequeado
+              </th>
+              <th>
+                  Acciones
+              </th>
+           </tr>
+          </tfoot>
+          <tbody>
+            @foreach (var item in Model) {
+               <tr>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Equipos.ModelosEquipos.descripcion)
+                       @{ if (item.Equipos.numero != null)
+                           {
+                               @Html.Raw("- Nº" + item.Equipos.numero).ToHtmlString()
+
+                           }
+                       }
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Equipos.serialNumber)
+                   </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.observaciones)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.estado)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.fechaChequeado)
+                      </td>
+                    
+                         <td>  
+                             @{ 
+                                 if(item.estado==estadoMantenimientoPreventivo.Pendiente)
+                                 {
+                                        @Html.Raw(@Html.ActionLink("XXX", "Reparandose", "DetalleMantenimientoPreventivo", new {id=item.idDetalleMantenimientoPreventivo }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Cambiar a Reparándose" }).ToHtmlString().Replace("XXX", "<i class='fa fa-gear'></i>"))
+                                 }
+                                 else if (item.estado == estadoMantenimientoPreventivo.Reparándose)
+                                 {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Terminado", "DetalleMantenimientoPreventivo", new { id = item.idDetalleMantenimientoPreventivo }, new { data_modal = "", id = "btnEdit", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Cambiar a Terminado" }).ToHtmlString().Replace("XXX", "<i class='fa fa-thumbs-o-up'></i>"))
+
+                                 }
+                            }                     
+                        
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "DetalleMantenimientoPreventivo", new { id=item.idDetalleMantenimientoPreventivo }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))                                     
+                        </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

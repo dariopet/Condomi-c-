@@ -1,0 +1,135 @@
+﻿@model IEnumerable<WebApplication.LogCobranzas>
+@{ Layout = null; }
+
+
+@Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+@Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+@Scripts.Render("~/AdminLTE/bootstrap/jsB")
+@Scripts.Render("~/Scripts/modalform.js")
+@Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box-body">
+    <p>
+        @Html.ActionLink("Agregar seguimiento", "Create", "LogCobranzas", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+         <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+    </p>
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Observaciones
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Se comunicó
+                </th>
+
+
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Observaciones
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Se comunicó
+                </th>
+
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{ if (item.activo == false)
+                            {
+                                @Html.Raw(0).ToHtmlString();
+
+                            }
+                            else
+                            {
+                                @Html.Raw(1).ToHtmlString();
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.observacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaEditado)
+                    </td>
+
+                    <td>
+                        @{if (item.activo == true)
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "Edit", "LogCobranzas", new { id = item.idLogCobranza }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                @Html.Raw(@Html.ActionLink("XXX", "Delete", "LogCobranzas", new { id = item.idLogCobranza }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                            }
+                            else
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "Activate", "LogCobranzas", new { id = item.idLogCobranza }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                            }
+                        }
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

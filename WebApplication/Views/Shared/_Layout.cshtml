@@ -1,0 +1,363 @@
+﻿@using WebApplication.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Condomi | Sistema de Gestión</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @*@Styles.Render("~/AdminLTE/plugins/font-awesome/cssB")*@ 
+    @Styles.Render("~/AdminLTE/plugins/font-awesome/css/font-awesome.min.css")
+
+
+    @Styles.Render("~/AdminLTE/bootstrap/cssB")
+    @Styles.Render("~/AdminLTE/dist/cssB")
+    @Styles.Render("~/AdminLTE/dist/css/skinsB")
+    @Styles.Render("~/AdminLTE/plugins/jquery-ui/cssB")
+    @Styles.Render("~/AdminLTE/plugins/datatables/cssB")
+    
+
+
+
+</head >
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href = "@Url.Action("Inicio", "Home")" class="logo">
+                <span class="logo-mini">C</span>
+                <span class="logo-lg">Condomi</span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href = "#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown notifications-menu">
+                            @* <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-bell-o"></i>
+                                        <span class="label label-warning">10</span>
+                                    </a>
+                                   <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                                page and may cause design problems
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-red"></i> 5 new members joined
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user text-red"></i> You changed your username
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                                    </ul>*@
+                        </li>
+                        @Html.Partial("_LoginPartial")
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-eye"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/AdminLTE/dist/img/user.svg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>@User.Identity.GetUserNameIdentifier()</p>
+
+                    </div>
+                </div>              
+                <ul class="sidebar-menu">
+                    <li class="header" style="color: cornflowerblue; font-size: large">Menú Principal</li>
+                    <li id="left-sidebar-menu-inicio" class="treeview">
+                        <a href="@Url.Action("Inicio", "Home")">
+                            <i class="fa fa-calendar"></i> <span>Inicio</span> @*<i class="fa fa-angle-left pull-right"></i>*@
+                        </a>
+                    </li>
+                    <li id="left-sidebar-menu-inventario" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-list"></i>
+                            <span>Inventario</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-tipo-servicios"><a href="@Url.Action("Index", "TipoServicios")"><i class="fa fa-circle-o"></i> Tipo de servicios</a></li>
+                            <li id="left-sidebar-menu-modelo-equipos"><a href="@Url.Action("Index", "ModelosEquipos")"><i class="fa fa-circle-o"></i> Modelos de Equipos y operarios</a></li>
+                            <li id="left-sidebar-menu-lista-equipos"><a href="@Url.Action("Index", "Equipos")"><i class="fa fa-circle-o"></i> Inventario Completo</a></li>
+                            <li id="left-sidebar-menu-proximas-compras"><a href="@Url.Action("Index", "ProximasCompras")"><i class="fa fa-circle-o"></i> Próximas compras</a></li>
+                            <li id="left-sidebar-menu-movimientos-equipos"><a href="@Url.Action("Index", "MovimientosEquipos")"><i class="fa fa-circle-o"></i> Movimientos de equipos</a></li>
+                            <li id="left-sidebar-menu-equipos-no-regresaron"><a href="@Url.Action("Index","EquiposNoRegresaron")"><i class="fa fa-circle-o"></i> Equipos que no regresaron</a></li>
+                            <li id="left-sidebar-menu-log-equipos"><a href="@Url.Action("Index","LogEquipos")"><i class="fa fa-circle-o"></i> Mantenimiento de equipos</a></li>
+                            <li id="left-sidebar-menu-mantenimiento-preventivo"><a href="@Url.Action("Index","MantenimientoPreventivo")"><i class="fa fa-circle-o"></i> Mantenimiento preventivo</a></li>
+                        </ul>
+                    </li>
+                    <li id="left-sidebar-menu-eventos" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-calendar-check-o"></i>
+                            <span>Eventos</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-eventos"><a href="@Url.Action("Index", "Eventos")"><i class="fa fa-circle-o"></i> Ver eventos</a></li>
+                            <li id="left-sidebar-menu-ver-presupuestos"><a href="@Url.Action("Index", "Presupuestos",null)"><i class="fa fa-circle-o"></i>Ver presupuestos</a></li>
+                        </ul>
+                    </li>
+                    <li id="left-sidebar-menu-contabilidad" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-calculator "></i>
+                            <span>Contabilidad</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-cuentas"><a href="@Url.Action("Index", "Cuentas")"><i class="fa fa-circle-o"></i> Cuentas bancarias</a></li>
+                            <li id="left-sidebar-menu-logcobranzas"><a href="@Url.Action("Index", "LogCobranzas")"><i class="fa fa-circle-o"></i> Seguimiento de cobranzas</a></li>
+                            <li id="left-sidebar-menu-transferencias"><a href="@Url.Action("Index", "Transferencias")"><i class="fa fa-circle-o"></i> Transferencias</a></li>
+                            <li id="left-sidebar-menu-egresos"><a href="@Url.Action("Index", "Egresos")"><i class="fa fa-circle-o"></i> Egresos</a></li>
+                            <li id="left-sidebar-menu-pagos"><a href="@Url.Action("Index", "Pagos")"><i class="fa fa-circle-o"></i> Pagos</a></li>
+                            <li id="left-sidebar-menu-ingresos"><a href="@Url.Action("Index", "Ingresos")"><i class="fa fa-circle-o"></i> Ingresos</a></li>
+                            <li id="left-sidebar-menu-cobros"><a href="@Url.Action("Index", "Cobros")"><i class="fa fa-circle-o"></i> Cobros</a></li>
+                            <li id="left-sidebar-menu-cheques"><a href="@Url.Action("Index", "Cheques")"><i class="fa fa-circle-o"></i> Cheques</a></li>
+                            <li id="left-sidebar-menu-sueldos"><a href="@Url.Action("Index", "Sueldos")"><i class="fa fa-circle-o"></i> Sueldos</a></li>
+                            <li id="left-sidebar-menu-liquidacion-tecnico"><a href="@Url.Action("Liquidacion", "HorasTrabajadasTecnico")"><i class="fa fa-circle-o"></i> Liquidación técnicos</a></li>
+                            <li id="left-sidebar-menu-saldo-iva"><a href="@Url.Action("Index", "SaldoIva")"><i class="fa fa-circle-o"></i> Saldo IVA</a></li>
+                            <li id="left-sidebar-menu-proximos-pagos"><a href="@Url.Action("ProximosPagos", "Egresos")"><i class="fa fa-circle-o"></i> Obligaciones de pago</a></li>
+                            <li id="left-sidebar-menu-proximos-cobros"><a href="@Url.Action("ProximosCobros", "Ingresos")"><i class="fa fa-circle-o"></i> Próximos cobros</a></li>
+                            <li id="left-sidebar-menu-posibles-ingresos"><a href="@Url.Action("PosiblesIngresos", "Presupuestos")"><i class="fa fa-circle-o"></i> Posibles ingresos</a></li>
+                            <li id="left-sidebar-menu-movimientos-vinculado"><a href="@Url.Action("Index", "MovimientosVinculadoA")"><i class="fa fa-circle-o"></i>Movimientos por concepto</a></li>
+                            <li id="left-sidebar-menu-movimientos-plan-cuentas"><a href="@Url.Action("Index", "MovimientosPlanCuentas")"><i class="fa fa-circle-o"></i>Movimientos cuentas contables</a></li>
+                            <li id="left-sidebar-menu-movimientos-evento"><a href="@Url.Action("Index", "MovimientosEventos")"><i class="fa fa-circle-o"></i>Movimientos por evento</a></li>
+                            <li id="left-sidebar-menu-movimientos-terceros"><a href="@Url.Action("Index", "MovimientosTerceros")"><i class="fa fa-circle-o"></i>Movimientos de terceros</a></li>
+                            <li id="left-sidebar-menu-movimientos-cuentas"><a href="@Url.Action("Index", "MovimientosCuentas")"><i class="fa fa-circle-o"></i>Movimientos de cuentas bancarias</a></li>
+                           
+                             <li id="left-sidebar-menu-vales"><a href="@Url.Action("Index", "Vales")"><i class="fa fa-circle-o"></i> Vales</a></li>
+                            <li id="left-sidebar-menu-adelantos"><a href="@Url.Action("Index", "Adelantos")"><i class="fa fa-circle-o"></i> Adelantos</a></li>
+
+                        </ul>
+                    </li>
+                    <li id="left-sidebar-menu-terceros" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Terceros</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-tipo-terceros"><a href="@Url.Action("Index", "TipoTerceros")"><i class="fa fa-circle-o"></i> Tipos de terceros</a></li>
+                            <li id="left-sidebar-menu-terceros"><a href="@Url.Action("Index", "Terceros")"><i class="fa fa-circle-o"></i> Lista de terceros</a></li>
+                            <li id="left-sidebar-menu-horas-no-trabajadas"><a href="@Url.Action("Index", "HorasNoTrabajadas")"><i class="fa fa-circle-o"></i> Horas no trabajadas empleados</a></li>
+                            <li id="left-sidebar-menu-jornadas-trabajadas-tecnico"><a href="@Url.Action("Index", "HorasTrabajadasTecnico")"><i class="fa fa-circle-o"></i> Jornadas trabajadas técnicos</a></li>
+                        </ul>
+                    </li>
+                    <li id="left-sidebar-menu-usuarios" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>Usuarios</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-usuarios"><a href="@Url.Action("Index", "AspNetUsers")"><i class="fa fa-circle-o"></i> Lista de usuarios</a></li>
+                        </ul>
+                    </li>
+                    <li id="left-sidebar-menu-gestion-contabilidad" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-calculator "></i>
+                            <span>Gestión de contabilidad</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="left-sidebar-menu-tipo-egresos"><a href="@Url.Action("Index", "TipoEgresos")"><i class="fa fa-circle-o"></i>Tipos de egresos</a></li>
+                            <li id="left-sidebar-menu-tipo-ingresos"><a href="@Url.Action("Index", "TipoIngresos")"><i class="fa fa-circle-o"></i> Tipos de ingresos</a></li>
+                            <li id="left-sidebar-menu-tipo-cuentas"><a href="@Url.Action("Index", "TipoCuentas")"><i class="fa fa-circle-o"></i> Tipos de cuentas bancarias</a></li>
+                            <li id="left-sidebar-menu-plan-cuentas"><a href="@Url.Action("Index", "PlanCuentas")"><i class="fa fa-circle-o"></i> Cuentas contables</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                    @*<li id="left-sidebar-menu-widgets">
+                            <a href="@Url.Action("Index", "Widgets")">
+                                <i class="fa fa-th"></i> <span>Widgets</span>
+                                <small class="label pull-right bg-green">new</small>
+                            </a>
+                        </li>
+                        <li id="left-sidebar-menu-elements" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>UI Elements</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="left-sidebar-menu-elements-general"><a href="@Url.Action("General", "Elements")"><i class="fa fa-circle-o"></i> General</a></li>
+                                <li id="left-sidebar-menu-elements-icons"><a href="@Url.Action("Icons", "Elements")"><i class="fa fa-circle-o"></i> Icons</a></li>
+                                <li id="left-sidebar-menu-elements-buttons"><a href="@Url.Action("Buttons", "Elements")"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                                <li id="left-sidebar-menu-elements-sliders"><a href="@Url.Action("Sliders", "Elements")"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                                <li id="left-sidebar-menu-elements-timeline"><a href="@Url.Action("Timeline", "Elements")"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                                <li id="left-sidebar-menu-elements-modals"><a href="@Url.Action("Modals", "Elements")"><i class="fa fa-circle-o"></i> Modals</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-forms" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pencil"></i> <span>Forms</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="left-sidebar-menu-forms-general"><a href="@Url.Action("General", "Forms")"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                                <li id="left-sidebar-menu-forms-advanced"><a href="@Url.Action("Advanced", "Forms")"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                                <li id="left-sidebar-menu-forms-editors"><a href="@Url.Action("Editors", "Forms")"><i class="fa fa-circle-o"></i> Editors</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-tables" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Tables</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="left-sidebar-menu-tables-simple"><a href="@Url.Action("Simple", "Tables")"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Data", "Tables")"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-calendar">
+                            <a href="@Url.Action("Index", "Calendar")">
+                                <i class="fa fa-calendar"></i>
+                                <span>Calendar</span>
+                                <small class="label pull-right bg-red">3</small>
+                            </a>
+                        </li>
+                        <li id="left-sidebar-menu-mailbox" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="left-sidebar-menu-mailbox-inbox"><a href="@Url.Action("Inbox", "Mailbox")">Inbox <span class="label label-primary pull-right">13</span></a></li>
+                                <li id="left-sidebar-menu-mailbox-compose"><a href="@Url.Action("Compose", "Mailbox")">Compose</a></li>
+                                <li id="left-sidebar-menu-mailbox-read"><a href="@Url.Action("Read", "Mailbox")">Read</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-examples" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder"></i> <span>Examples</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="left-sidebar-menu-examples-invoice"><a href="@Url.Action("Invoice", "Examples")"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                                <li id="left-sidebar-menu-examples-profileex"><a href="@Url.Action("ProfileEx", "Examples")"><i class="fa fa-circle-o"></i> Profile</a></li>
+                                <li id="left-sidebar-menu-examples-login"><a href="@Url.Action("Login", "Examples")"><i class="fa fa-circle-o"></i> Login</a></li>
+                                <li id="left-sidebar-menu-examples-register"><a href="@Url.Action("Register", "Examples")"><i class="fa fa-circle-o"></i> Register</a></li>
+                                <li id="left-sidebar-menu-examples-lockscreen"><a href="@Url.Action("Lockscreen", "Examples")"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                                <li id="left-sidebar-menu-examples-p404"><a href="@Url.Action("P404", "Examples")"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                                <li id="left-sidebar-menu-examples-p500"><a href="@Url.Action("P500", "Examples")"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                                <li id="left-sidebar-menu-examples-blank"><a href="@Url.Action("Blank", "Examples")"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                                <li id="left-sidebar-menu-examples-pace"><a href="@Url.Action("Pace", "Examples")"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-multilevel" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-share"></i> <span>Multilevel</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                                <li>
+                                    <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                            <ul class="treeview-menu">
+                                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                            </ul>
+                        </li>
+                        <li id="left-sidebar-menu-documentation">
+                            <a href="@Url.Action("Index", "Documentation")">
+                                <i class="fa fa-book"></i>
+                                <span>Layout Documentation</span>
+                            </a>
+                        </li>
+                        <li class="header">LABELS</li>
+                        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+                        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+                        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>*@
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.SubTitle</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-calendar"></i>@ViewBag.SubTitle</a></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </section>
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0
+            </div>
+            <p class="hidden-print">Copyright&copy; 2017   <strong>Dario Pettigrosso || dario.pettigrosso@gmail.com</strong> Todos los derechos reservados.</p>
+        </footer>
+        <aside class="control-sidebar control-sidebar-dark">
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                @*<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>*@
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                </div>
+            </div>
+        </aside>
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+    @RenderSection("menu", required: false)
+    @Scripts.Render("~/AdminLTE/bootstrap/jsB")
+    @*@Scripts.Render("~/AdminLTE/plugins/slimscroll/jsB")*@
+    @*@Scripts.Render("~/AdminLTE/plugins/fastclick/jsB")*@
+    @Scripts.Render("~/Scripts/modalform.js")
+    @Scripts.Render("~/adminlte/dist/js/colores.js")
+    @Scripts.Render("~/AdminLTE/dist/js/app.min.js")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+    @*@Scripts.Render("~/AdminLTE/plugins/timepicker/jsB")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

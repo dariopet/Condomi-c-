@@ -1,0 +1,119 @@
+﻿@model IEnumerable<WebApplication.MovimientosEquipos>
+@{
+    ViewBag.Title = "Equipos que no regresaron";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+   $(function () {
+    var menuItem = $('#left-sidebar-menu-inventario');
+    menuItem.addClass('active');
+    var subMenuItem = menuItem.find('#left-sidebar-menu-equipos-no-regresaron');
+    subMenuItem.addClass('active');
+   });
+</script>
+<script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<input hidden="hidden" value=2 id="fecha1" />
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Equipos que no regresaron</h3>
+    </div>
+    <div class="box-body">
+       
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+              <tr>
+                  <th>
+                      activo
+                  </th>
+          
+           <th>
+               Descripción
+           </th>
+           <th>
+               Fecha de salida
+           </th>
+           <th>
+               Evento
+           </th>
+           
+           <th>
+               Modelo de equipo
+           </th>
+                  <th>
+                      Nº de serie
+                  </th>
+          
+         </tr>
+    </thead>
+     <tfoot>
+          <tr>
+              <th>
+                  activo
+              </th>
+             
+              <th>
+                  Descripción
+              </th>
+              <th>
+                  Fecha de salida
+              </th>
+              <th>
+                  Evento
+              </th>
+
+              <th>
+                  Modelo de equipo
+              </th>
+              <th>
+                  Nº de serie
+              </th>
+             
+           </tr>
+          </tfoot>
+          <tbody>
+            @foreach (var item in Model) {
+               <tr>
+                   <td>
+                       1
+                   </td>
+                      
+                       <td>
+                              @Html.DisplayFor(modelItem => item.descripcion)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.fecha)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                      </td>
+                       
+                       <td>
+                              @Html.DisplayFor(modelItem => item.Equipos.ModelosEquipos.descripcion)
+                      </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Equipos.serialNumber)
+                   </td>
+                        
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

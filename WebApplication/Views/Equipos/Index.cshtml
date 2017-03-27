@@ -1,0 +1,176 @@
+﻿@model IEnumerable<WebApplication.Equipos>
+@{
+    ViewBag.Title = "Lista de equipos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-inventario');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-lista-equipos');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+<style type="text/css">
+    @@font-face {
+        font-family: 'barcode';
+        src:url('../../AdminLTE/fonts/barcode.ttf');
+        font-size:larger;
+    }
+
+    .barcode {
+        font-family: 'barcode';
+    }
+</style>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Inventario completo de equipos</h3>
+    </div>
+
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar Equipo", "Create", "Equipos", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+            
+
+            <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print">Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        Activo
+                    </th>
+                    <th>
+                        Modelo
+                    </th>
+                    <th>
+                        Nº de Serie
+                    </th>
+                    <th>
+                        Código de Barras
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Ubicación
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        Activo
+                    </th>
+                    <th>
+                        Modelo
+                    </th>
+                    <th>
+                        Nº de Serie
+                    </th>
+                    <th>
+                        Código de Barras
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Ubicación
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModelosEquipos.descripcion)
+                            @{ if (item.numero != null)
+                                {
+                                    @Html.Raw("- Nº" + item.numero).ToHtmlString()
+
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.serialNumber)
+                        </td>
+                        <td>
+                            @*genero el codigo de barras en el controlador*@
+                            <img src="@Url.Action("codigoBarras", "Equipos", new { texto = item.codigoBarras })" />
+                            <br />
+                            <span>@item.codigoBarras</span>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ubicacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+                        </td>
+                        <td>
+                            @{if (item.activo == true)
+                                {
+
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "Equipos", new { id = item.idEquipo }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Delete", "Equipos", new { id = item.idEquipo }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Index", "MovimientosEquipos", new { id = item.idEquipo }, new { @class = "btn btn-primary hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Ver movimientos" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrows'></i>"))
+                                    @Html.Raw(@Html.ActionLink("XXX", "Create", "LogEquipos", new { id = item.idEquipo }, new { data_modal = "", @class = "btn btn-success hidden-print hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Registro nuevo" }).ToHtmlString().Replace("XXX", "<i class='fa fa-book'></i>"))
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Activate", "Equipos", new { id = item.idEquipo }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+
+                                }
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

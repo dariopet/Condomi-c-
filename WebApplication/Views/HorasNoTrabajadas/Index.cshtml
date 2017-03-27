@@ -1,0 +1,151 @@
+﻿@model IEnumerable<WebApplication.HorasNoTrabajadas>
+@{
+    ViewBag.Title = "Horas No Trabajadas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-terceros');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-horas-no-trabajadas');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<input hidden="hidden" value=3 id="fecha1" />
+<input hidden="hidden" value=2 id="texto1" />
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Horas No Trabajadas</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar horas no trabajadas", "Create", "HorasNoTrabajadas", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Empleado
+                    </th>
+                    <th>
+                        Período
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Horas
+                    </th>
+
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Empleado
+                    </th>
+                    <th>
+                        Período
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Horas
+                    </th>
+
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                        </td>
+                        <td>
+                            @Html.Raw(item.periodo.Month + "/" + item.periodo.Year).ToHtmlString()
+
+                        </td>
+                        <td>
+                            @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cantidad)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+                        </td>
+                        <td>
+
+                            @Html.Raw(@Html.ActionLink("XXX", "Edit", "HorasNoTrabajadas", new { id = item.idHorasNoTrabajadas }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "HorasNoTrabajadas", new { id = item.idHorasNoTrabajadas }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

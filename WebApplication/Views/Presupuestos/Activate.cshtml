@@ -1,0 +1,72 @@
+﻿@model WebApplication.Presupuestos
+
+@{
+    ViewBag.Title = "Activate";  
+}
+
+<div class="modal-header ">
+   <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>   
+    <h3>¿Está seguro de activar este presupuesto?</h3>   
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+       
+
+        <dt>
+           Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+        <dt>
+            Parte del evento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eventos.descripcion)
+        </dd>
+
+        <dt>
+           Fecha de inicio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+        <dt>
+          Fecha de Finalización
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFin)
+        </dd>
+
+        <dt>
+          Creado por
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+        
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">             
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

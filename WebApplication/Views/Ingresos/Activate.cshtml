@@ -1,0 +1,67 @@
+﻿@model WebApplication.Ingresos
+
+@{
+    ViewBag.Title = "Activate";  
+}
+
+<div class="modal-header ">
+   <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>    
+    <h3>¿Está seguro de activar este ingreso?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+   
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            Factura
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.factura)- @Html.DisplayFor(model => model.tipoFactura)
+        </dd>
+
+
+
+        <dt>
+            Fecha generada
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaGenerada)
+        </dd>
+
+        <dt>
+            Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terceros.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">             
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

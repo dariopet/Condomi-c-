@@ -1,0 +1,196 @@
+﻿@model IEnumerable<WebApplication.Terceros>
+@{
+    ViewBag.Title = "Terceros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-terceros');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-terceros');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Terceros</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar Terceros", "Create", "Terceros", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+             <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Teléfono
+                    </th>
+                    <th>
+                        Dirección
+                    </th>
+                    <th>
+                        Localidad - CP
+                    </th>
+                    <th>
+                        CUIL
+                    </th>
+                    <th>
+                        E-Mail
+                    </th>
+                    <th>
+                        Celular
+                    </th>
+                    <th>
+                        Saldo
+                    </th>
+                    <th>
+                        Observaciones
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Teléfono
+                    </th>
+                    <th>
+                        Dirección
+                    </th>
+                    <th>
+                        Localidad - CP
+                    </th>
+                    <th>
+                        CUIL
+                    </th>
+                    <th>
+                        E-Mail
+                    </th>
+                    <th>
+                        Celular
+                    </th>
+                    <th>
+                        Saldo
+                    </th>
+                    <th>
+                        Observaciones
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @{ if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.Raw(item.nombre + "- Nº" + item.idTercero.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoTerceros.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.direccion)
+                        </td>
+                        <td>
+                            @Html.Raw(item.localidad + " - " + item.cp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cuil)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.celular)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.saldo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.observaciones)
+                        </td>
+
+
+                        <td>
+
+                            @{
+                                if (item.activo == true)
+                                {
+                                    @*@Html.Raw(@Html.ActionLink("XXX", "Index", "MovimientosTerceros", new { idTercero = item.idTercero }, new { id = "btnEdit", @class = "btn btn-info", @style = "margin-right:3px; margin-bottom:3px", @title = "Ver movimientos" }).ToHtmlString().Replace("XXX", "<i class='fa fa-calculator'></i>")) ;*@
+
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                    if (item.idTercero != 0)
+                                    {
+                                        @Html.Raw(@Html.ActionLink("XXX", "Delete", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Activate", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                                }
+
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

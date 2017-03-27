@@ -1,0 +1,155 @@
+﻿@model WebApplication.Egresos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Egresos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.factura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.factura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoFactura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoFactura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaVencimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaGenerada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaGenerada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enBlanco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enBlanco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.impuestosInternos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.impuestosInternos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ingresosBrutos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ingresosBrutos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.percepcionIva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.percepcionIva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuentas.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuentas.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eventos.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eventos.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Terceros.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terceros.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEgreso }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,63 @@
+﻿@model WebApplication.DetalleEgresos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>¿Está seguro de anular este detalle?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+    <div>
+
+
+        <dl class="dl-horizontal">
+            <dt>
+                Precio unitario
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.monto)
+            </dd>
+
+            <dt>
+                Cantidad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cantidad)
+            </dd>
+
+
+
+            <dt>
+                Tipo de egreso
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TipoEgresos.descripcion)
+            </dd>
+
+        </dl>
+
+        @*es un misterio, cuando uso solamente un beginform sin antiforgery vuelve a la pagina anterior, sino
+            da la antyforgery exception*@
+
+        @using (Html.BeginForm())
+        {
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,37 @@
+//fetch precios
+function calcularIva() {
+    var subtotal = parseFloat($('#totalegreso').val().replace(",", "."));
+    var iva = $('#iva').val();
+    var resultadoiva;
+    var ingresosbrutos;
+    var impuestosinternos;
+    var percepcioniva;
+    var totalfinal;
+    if ($('#tipofactura').val() == 0) {
+        $('#txtsubtotal').show();
+        $('#txtingresosbrutos').show();
+        $('#txtimpuestosinternos').show();
+        $('#txtpercepcioniva').show();
+        $('#txtresultadoiva').show();
+        resultadoiva = subtotal * ((parseFloat(iva) / 100));
+        ingresosbrutos = subtotal * ((parseFloat($('#ingresosbrutos').val()) / 100));
+        impuestosinternos = subtotal * ((parseFloat($('#impuestosinternos').val()) / 100));
+        percepcioniva = subtotal * ((parseFloat($('#percepcioniva').val()) / 100));
+        $('#txtsubtotal').text("Subtotal: $" + subtotal.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        $('#txtingresosbrutos').text("Ingresos brutos: $" + ingresosbrutos.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        $('#txtimpuestosinternos').text("Impuestos internos: $" + impuestosinternos.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        $('#txtpercepcioniva').text("Percepción Iva: $" + percepcioniva.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        $('#txtresultadoiva').text("IVA: $" + resultadoiva.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        $('#txttotalfinal').text("Total: $" + (subtotal + ingresosbrutos + impuestosinternos + percepcioniva + resultadoiva).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    }
+    else {
+        $('#txtsubtotal').hide();
+        $('#txtingresosbrutos').hide();
+        $('#txtimpuestosinternos').hide();
+        $('#txtpercepcioniva').hide();
+        $('#txtresultadoiva').hide();
+        $('#txttotalfinal').text("Total: $" + (subtotal).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    }
+}
+calcularIva();
+//# sourceMappingURL=calcularIvaEgresos.js.map

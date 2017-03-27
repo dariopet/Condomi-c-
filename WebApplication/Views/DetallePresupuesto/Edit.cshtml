@@ -1,0 +1,119 @@
+﻿@model WebApplication.DetallePresupuesto
+
+
+@{
+    ViewBag.Title = "Edit";
+<script src="~/Scripts/detallePresupuestoDinamico.ts"></script>
+
+}
+<script>
+    $(window).load(function () {
+        
+        calcularTotal();
+        CargarModelosTexto('#tipoServicio', @Model.idModeloEquipo.ToString(),'@Model.ModelosEquipos.descripcion');
+    });
+
+</script>
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Editar</h4>
+</div>
+ 
+@using (Html.BeginForm())
+{
+
+    <div class="modal-body ">
+        <div class="form-horizontal">              
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.idDetallePresupuesto)
+        @Html.HiddenFor(model => model.idPresupuesto)      
+               
+
+            <div class="form-group">
+                <b class="control-label col-md-2"> Servicio</b>
+                <div class="col-md-6">
+                    @Html.DropDownList("idModeloEquipo", null, htmlAttributes: new { @id = "tipoServicio", @class = "form-control", @onchange = "CargarPrecios()" })
+                    @Html.ValidationMessageFor(model => model.idModeloEquipo, "", new { @class = "text-danger" })
+
+                </div>
+                <b class="control-label col-md-2">Cantidad</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new { @id = "cantidad", @class = "form-control", @onchange = "calcularTotal()", min = 1 } })
+                    @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-2">Costo x hora</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.costoHora, new { htmlAttributes = new { @id = "costoHora", @class = "form-control", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.costoHora, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Precio x hora</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.precioHora, new { htmlAttributes = new { @id = "precioHora", @class = "form-control", @onchange = "calcularTotal()", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.precioHora, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Horas</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.horas, new { htmlAttributes = new { @id = "horas", @class = "form-control", @onchange = "calcularTotal()", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.horas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-2">Costo x día</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.costoDia, new { htmlAttributes = new { @id = "costoDia", @class = "form-control", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.costoDia, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Precio x día</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.precioDia, new { htmlAttributes = new { @id = "precioDia", @class = "form-control", @onchange = "calcularTotal()", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.precioDia, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Días</b>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.dias, new { htmlAttributes = new { @id = "dias", @class = "form-control", @onchange = "calcularTotal()", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.dias, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-2"> Provee</b>
+                <div class="col-md-10">
+                    @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idTercero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-2"> Observaciones</b>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.observaciones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="text-right">
+                    <h2 id="total">@{
+                        decimal total = 0m;
+
+                        total = Model.cantidad * ((Model.precioDia * Model.dias) + (Model.precioHora * Model.horas));
+                        @Html.Raw("Total: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString() }</h2>
+                </div>
+            </div>
+                    
+        </div>
+     </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+}
+
+

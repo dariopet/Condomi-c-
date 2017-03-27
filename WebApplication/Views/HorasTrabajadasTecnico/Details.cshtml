@@ -1,0 +1,67 @@
+﻿@model WebApplication.HorasTrabajadasTecnico
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HorasTrabajadasTecnico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pagadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pagadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Terceros.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terceros.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eventos.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eventos.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idHorasTrabajadasTecnico }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

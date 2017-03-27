@@ -1,0 +1,26 @@
+﻿@model WebApplication.Vales
+
+@{
+    ViewBag.Title = "Rendido";  
+}
+
+
+    <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Está seguro de marcar este vale como rendido?</h3>
+    </div>
+
+<b>Nota: Una vez rendido el vale no podrá ser editado</b>
+    @*es un misterio, cuando uso solamente un beginform sin antiforgery vuelve a la pagina anterior, sino
+        da la antyforgery exception*@
+
+  
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+

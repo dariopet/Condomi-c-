@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebApplication.LogEquipos>
+@{
+    ViewBag.Title = "Mantenimiento de equipos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-inventario');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-log-equipos');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+<input hidden="hidden" value=3 id="fecha1" />
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de mantenimientos de equipos</h3>
+    </div>
+    <div class="box-body">
+
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Equipo
+                    </th>
+                    <th>
+                        Nº de serie
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Registrado por
+                    </th>
+
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Equipo
+                    </th>
+                    <th>
+                        Nº de serie
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Registrado por
+                    </th>
+
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Equipos.ModelosEquipos.descripcion)
+                            @{ if (item.Equipos.numero != null)
+                                {
+                                    @Html.Raw("- Nº" + item.Equipos.numero).ToHtmlString()
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Equipos.serialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+
+                        </td>
+
+                        <td>
+                            @Html.Raw(@Html.ActionLink("XXX", "Edit", "LogEquipos", new { id = item.idLogEquipos }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "LogEquipos", new { id = item.idLogEquipos }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Eliminar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))
+
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

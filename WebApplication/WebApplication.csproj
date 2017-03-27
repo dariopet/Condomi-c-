@@ -1,0 +1,1119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2AD3ACB9-AE01-4AA2-8B82-A06137109700}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication</RootNamespace>
+    <AssemblyName>WebApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.3.1.10729.1\lib\Zen.Barcode.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adelantos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Messages.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cheques.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cobros.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CondomiAppModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CondomiAppModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CondomiAppModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CondomiAppModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CondomiAppModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdelantosController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\ChequesController.cs" />
+    <Compile Include="Controllers\CobrosController.cs" />
+    <Compile Include="Controllers\CuentasController.cs" />
+    <Compile Include="Controllers\DetalleEgresosController.cs" />
+    <Compile Include="Controllers\DetalleIngresosController.cs" />
+    <Compile Include="Controllers\DetalleMantenimientoPreventivoController.cs" />
+    <Compile Include="Controllers\DetallePresupuestoController.cs" />
+    <Compile Include="Controllers\EgresosController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
+    <Compile Include="Controllers\EventosController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorasNoTrabajadasController.cs" />
+    <Compile Include="Controllers\HorasTrabajadasTecnicoController.cs" />
+    <Compile Include="Controllers\IngresosController.cs" />
+    <Compile Include="Controllers\LogCobranzasController.cs" />
+    <Compile Include="Controllers\LogEquiposController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\EquiposNoRegresaron.cs" />
+    <Compile Include="Controllers\MantenimientoPreventivoController.cs" />
+    <Compile Include="Controllers\ModelosEquiposController.cs" />
+    <Compile Include="Controllers\MovimientosEventosController.cs" />
+    <Compile Include="Controllers\MovimientosPlanCuentasController.cs" />
+    <Compile Include="Controllers\MovimientosVinculadoAController.cs" />
+    <Compile Include="Controllers\-PagosController.old.cs" />
+    <Compile Include="Controllers\SaldoIvaController.cs" />
+    <Compile Include="Controllers\MovimientosEquiposController.cs" />
+    <Compile Include="Controllers\MovimientosCuentasController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
+    <Compile Include="Controllers\PlanCuentasController.cs" />
+    <Compile Include="Controllers\PresupuestosController.cs" />
+    <Compile Include="Controllers\ProximasComprasController.cs" />
+    <Compile Include="Controllers\SueldosController.cs" />
+    <Compile Include="Controllers\MovimientosTercerosController.cs" />
+    <Compile Include="Controllers\TercerosController.cs" />
+    <Compile Include="Controllers\TipoCuentasController.cs" />
+    <Compile Include="Controllers\TipoEgresosController.cs" />
+    <Compile Include="Controllers\TipoIngresosController.cs" />
+    <Compile Include="Controllers\TipoServiciosController.cs" />
+    <Compile Include="Controllers\TipoTercerosController.cs" />
+    <Compile Include="Controllers\TransferenciasController.cs" />
+    <Compile Include="Controllers\ValesController.cs" />
+    <Compile Include="Cuentas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomFilters\AuthLogAttribute.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleEgresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleIngresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleMantenimientoPreventivo.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetallePresupuesto.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Egresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="estadoEvento.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="estadoMantenimientoPreventivo.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="estadoPresupesto.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estados.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ClaimsExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HorasNoTrabajadas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HorasTrabajadasTecnico.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ingresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogCobranzas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogEquipos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MantenimientoPreventivo.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosEquipos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EventoCalendario.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\CertificadoRetencion.cs" />
+    <Compile Include="Models\RolUsuarios.cs" />
+    <Compile Include="Models\MovimientosEventos.cs" />
+    <Compile Include="Models\MovimientosPlanCuentas.cs" />
+    <Compile Include="Models\SaldoIva.cs" />
+    <Compile Include="Models\MovimientosVinculadoA.cs" />
+    <Compile Include="Models\MovimientosCuentas.cs" />
+    <Compile Include="Models\MovimientosTerceros.cs" />
+    <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="MovimientosEquipos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlanCuentas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presupuestos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prioridades.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="probabilidadPresupuesto.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProximasCompras.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="Sueldos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Terceros.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoCuentas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoEgresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoIngresos.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipoMovimiento.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoServicios.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tiposFacturas.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoTerceros.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transferencias.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vales.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vinculadoARubros.cs">
+      <DependentUpon>CondomiAppModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminLTE\bootstrap\css\bootstrap.css" />
+    <Content Include="AdminLTE\bootstrap\css\bootstrap.min.css" />
+    <Content Include="AdminLTE\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="AdminLTE\bootstrap\js\bootstrap.js" />
+    <Content Include="AdminLTE\bootstrap\js\bootstrap.min.js" />
+    <Content Include="AdminLTE\dist\css\admin-lte.css" />
+    <Content Include="AdminLTE\dist\css\admin-lte.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-black-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-black-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-black.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-black.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-blue-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-blue.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-blue.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-green-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-green-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-green.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-green.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-purple-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-purple.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-purple.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-red-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-red-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-red.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-red.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-yellow-light.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-yellow.css" />
+    <Content Include="AdminLTE\dist\css\skins\skin-yellow.min.css" />
+    <Content Include="AdminLTE\dist\css\skins\_all-skins.css" />
+    <Content Include="AdminLTE\dist\css\skins\_all-skins.min.css" />
+    <Content Include="AdminLTE\dist\img\avatar.png" />
+    <Content Include="AdminLTE\dist\img\avatar04.png" />
+    <Content Include="AdminLTE\dist\img\avatar2.png" />
+    <Content Include="AdminLTE\dist\img\avatar3.png" />
+    <Content Include="AdminLTE\dist\img\avatar5.png" />
+    <Content Include="AdminLTE\dist\img\boxed-bg.jpg" />
+    <Content Include="AdminLTE\dist\img\boxed-bg.png" />
+    <Content Include="AdminLTE\dist\img\default-50x50.gif" />
+    <Content Include="AdminLTE\dist\img\icons.png" />
+    <Content Include="AdminLTE\dist\img\photo1.png" />
+    <Content Include="AdminLTE\dist\img\photo2.png" />
+    <Content Include="AdminLTE\dist\img\photo3.jpg" />
+    <Content Include="AdminLTE\dist\img\photo4.jpg" />
+    <Content Include="AdminLTE\dist\img\user.svg" />
+    <Content Include="AdminLTE\dist\js\app.js" />
+    <Content Include="AdminLTE\dist\js\app.min.js" />
+    <Content Include="AdminLTE\dist\js\colores.js" />
+    <Content Include="AdminLTE\documentation\css\style.css" />
+    <Content Include="AdminLTE\documentation\js\docs.js" />
+    <Content Include="AdminLTE\plugins\icheck\css\all.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\aero%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\aero%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\aero%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\aero.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\aero.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\blue%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\blue%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\blue%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\blue.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\blue.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\flat%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\flat%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\flat%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\flat.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\flat.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\green%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\green%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\green%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\green.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\green.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\grey%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\grey%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\grey%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\grey.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\grey.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\orange%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\orange%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\orange%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\orange.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\orange.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\pink%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\pink%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\pink%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\pink.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\pink.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\purple%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\purple%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\purple%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\purple.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\purple.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\red%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\red%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\red%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\red.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\red.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\yellow%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\yellow%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\yellow%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\yellow.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\yellow.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\flat\_all.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\futurico\futurico%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\futurico\futurico%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\futurico\futurico%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\futurico\futurico.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\futurico\futurico.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\aero.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\blue.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\green.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\grey.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\line%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\line%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\line%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\line.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\line.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\orange.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\pink.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\purple.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\red.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\yellow.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\line\_all.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\aero%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\aero%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\aero%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\aero.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\aero.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\blue%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\blue%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\blue%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\blue.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\blue.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\green%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\green%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\green%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\green.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\green.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\grey%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\grey%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\grey%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\grey.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\grey.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\minimal%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\minimal%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\minimal%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\minimal.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\minimal.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\orange%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\orange%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\orange%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\orange.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\orange.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\pink%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\pink%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\pink%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\pink.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\pink.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\purple%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\purple%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\purple%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\purple.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\purple.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\red%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\red%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\red%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\red.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\red.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\yellow%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\yellow%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\yellow%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\yellow.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\yellow.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\minimal\_all.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\polaris\polaris%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\polaris\polaris%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\polaris\polaris%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\polaris\polaris.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\polaris\polaris.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\aero%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\aero%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\aero%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\aero.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\aero.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\blue%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\blue%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\blue%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\blue.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\blue.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\green%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\green%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\green%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\green.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\green.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\grey%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\grey%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\grey%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\grey.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\grey.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\orange%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\orange%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\orange%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\orange.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\orange.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\pink%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\pink%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\pink%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\pink.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\pink.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\purple%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\purple%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\purple%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\purple.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\purple.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\red%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\red%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\red%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\red.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\red.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\square%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\square%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\square%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\square.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\square.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\yellow%402x.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\yellow%402x.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\yellow%402x.png.png.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\yellow.css" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\yellow.png" />
+    <Content Include="AdminLTE\plugins\icheck\css\sqare\_all.css" />
+    <Content Include="AdminLTE\plugins\icheck\js\icheck.js" />
+    <Content Include="AdminLTE\plugins\icheck\js\icheck.min.js" />
+    <Content Include="AdminLTE\plugins\ionicons\css\ionicons.css" />
+    <Content Include="AdminLTE\plugins\ionicons\css\ionicons.min.css" />
+    <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.eot" />
+    <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.svg" />
+    <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.ttf" />
+    <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.woff" />
+    <Content Include="AdminLTE\plugins\bootstrap-slider\css\slider.css" />
+    <Content Include="AdminLTE\plugins\bootstrap-slider\js\bootstrap-slider.js" />
+    <Content Include="AdminLTE\plugins\bootstrap-wysihtml5\css\bootstrap3-wysihtml5.css" />
+    <Content Include="AdminLTE\plugins\bootstrap-wysihtml5\css\bootstrap3-wysihtml5.min.css" />
+    <Content Include="AdminLTE\plugins\bootstrap-wysihtml5\js\bootstrap3-wysihtml5.all.js" />
+    <Content Include="AdminLTE\plugins\bootstrap-wysihtml5\js\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="AdminLTE\plugins\ckeditor\js\ckeditor.js" />
+    <Content Include="AdminLTE\plugins\datatables\css\buttons.dataTables.min.css" />
+    <Content Include="AdminLTE\plugins\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="AdminLTE\plugins\datatables\css\jquery.dataTables.css" />
+    <Content Include="AdminLTE\plugins\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="AdminLTE\plugins\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="AdminLTE\plugins\datatables\css\responsive.bootstrap.min.css" />
+    <Content Include="AdminLTE\plugins\datatables\images\sort_asc.png" />
+    <Content Include="AdminLTE\plugins\datatables\images\sort_asc_disabled.png" />
+    <Content Include="AdminLTE\plugins\datatables\images\sort_both.png" />
+    <Content Include="AdminLTE\plugins\datatables\images\sort_desc.png" />
+    <Content Include="AdminLTE\plugins\datatables\images\sort_desc_disabled.png" />
+    <Content Include="AdminLTE\plugins\datatables\js\buttons.flash.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\buttons.html5.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\buttons.print.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.buttons.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.responsive.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.tableTools.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\jquery.dataTables.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\jszip.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\pdfmake.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\responsive.bootstrap.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\vfs_fonts.js" />
+    <Content Include="AdminLTE\plugins\datepicker\css\bootstrap-datepicker3.css" />
+    <Content Include="AdminLTE\plugins\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="AdminLTE\plugins\daterangepicker\css\daterangepicker.css" />
+    <Content Include="AdminLTE\plugins\daterangepicker\js\daterangepicker.js" />
+    <Content Include="AdminLTE\plugins\daterangepicker\js\moment-with-locales.min.js" />
+    <Content Include="AdminLTE\plugins\daterangepicker\js\moment.min.js" />
+    <Content Include="AdminLTE\plugins\datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="AdminLTE\plugins\datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="AdminLTE\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.es.js" />
+    <Content Include="AdminLTE\plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="AdminLTE\plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="AdminLTE\plugins\fullcalendar\css\fullcalendar.css" />
+    <Content Include="AdminLTE\plugins\fullcalendar\css\fullcalendar.print.css" />
+    <Content Include="AdminLTE\plugins\fullcalendar\js\fullcalendar.min.js" />
+    <Content Include="AdminLTE\plugins\fullcalendar\js\fullcalendar.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.date.extensions.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.extensions.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.phone.extensions.js" />
+    <Content Include="AdminLTE\plugins\input-mask\js\jquery.inputmask.regex.extensions.js" />
+    <Content Include="AdminLTE\plugins\jquery-ui\css\datepicker.css" />
+    <Content Include="AdminLTE\plugins\jquery-ui\css\jquery-ui.css" />
+    <Content Include="AdminLTE\plugins\jquery-ui\css\jquery-ui.min.css" />
+    <Content Include="AdminLTE\plugins\jquery-ui\js\datepicker-es.js" />
+    <Content Include="AdminLTE\plugins\jquery-ui\js\jquery-ui.js" />
+    <Content Include="AdminLTE\plugins\jquery-ui\js\jquery-ui.min.js" />
+    <Content Include="AdminLTE\plugins\datatables\es.json" />
+    <Content Include="AdminLTE\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AdminLTE\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AdminLTE\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AdminLTE\fonts\barcode.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AdminLTE\fonts\code128.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="AdminLTE\plugins\jquery-validate\js\jquery.validate-vsdoc.js" />
+    <Content Include="AdminLTE\plugins\jquery-validate\js\jquery.validate.js" />
+    <Content Include="AdminLTE\plugins\jquery-validate\js\jquery.validate.min.js" />
+    <Content Include="AdminLTE\plugins\jquery-validate\js\jquery.validate.unobtrusive.js" />
+    <Content Include="AdminLTE\plugins\jquery-validate\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="AdminLTE\plugins\jquery\js\jQuery-2.1.4.min.js" />
+    <Content Include="AdminLTE\plugins\momentjs\js\es.js" />
+    <Content Include="AdminLTE\plugins\momentjs\js\moment.min.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="CondomiAppModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CondomiAppModel.edmx</DependentUpon>
+      <LastGenOutput>CondomiAppModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CondomiAppModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CondomiAppModel.edmx</DependentUpon>
+      <LastGenOutput>CondomiAppModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\Account\Login.js" />
+    <Content Include="Scripts\Account\Register.js" />
+    <Content Include="AdminLTE\plugins\datatables\css\jquery.dataTables.yadcf.css" />
+    <Content Include="AdminLTE\plugins\datatables\js\jquery.dataTables.yadcf.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\buttons.colVis.min.js" />
+    <Content Include="Views\Presupuestos\PosiblesIngresos.cshtml" />
+    <Content Include="Views\ProximasCompras\Create.cshtml" />
+    <Content Include="Views\ProximasCompras\Delete.cshtml" />
+    <Content Include="Views\ProximasCompras\Edit.cshtml" />
+    <Content Include="Views\ProximasCompras\Index.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Create.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Delete.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Details.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Edit.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Index.cshtml" />
+    <Content Include="Views\MantenimientoPreventivo\Activate.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Create.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Reparandose.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Edit.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Index.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Liquidacion.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Terminado.cshtml" />
+    <Content Include="Views\DetalleMantenimientoPreventivo\Delete.cshtml" />
+    <Content Include="Views\Vales\Create.cshtml" />
+    <Content Include="Views\Vales\Details.cshtml" />
+    <Content Include="Views\Vales\Edit.cshtml" />
+    <Content Include="Views\Vales\Index.cshtml" />
+    <Content Include="Views\Vales\Rendido.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\NoPagadas.cshtml" />
+    <Content Include="Views\MovimientosTerceros\Index.cshtml" />
+    <Content Include="Views\MovimientosCuentas\Index.cshtml" />
+    <Content Include="Views\Adelantos\Create.cshtml" />
+    <Content Include="Views\Adelantos\Delete.cshtml" />
+    <Content Include="Views\Adelantos\Details.cshtml" />
+    <Content Include="Views\Adelantos\Edit.cshtml" />
+    <Content Include="Views\Adelantos\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Local ddns.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <Content Include="Views\SaldoIva\Index.cshtml" />
+    <Content Include="Views\MovimientosVinculadoA\Index.cshtml" />
+    <Content Include="Views\MovimientosVinculadoA\EntreFechas.cshtml" />
+    <Content Include="Views\SaldoIva\EntreFechas.cshtml" />
+    <Content Include="Views\Egresos\ProximosPagosPartial.cshtml" />
+    <Content Include="Views\Egresos\ProximosPagos.cshtml" />
+    <Content Include="Views\Ingresos\ProximosCobros.cshtml" />
+    <Content Include="Views\Ingresos\ProximosCobrosPartial.cshtml" />
+    <Content Include="Views\MovimientosEventos\Index.cshtml" />
+    <Content Include="Views\MovimientosEventos\PorEvento.cshtml" />
+    <Content Include="Views\MovimientosPlanCuentas\EntreFechas.cshtml" />
+    <Content Include="Views\MovimientosPlanCuentas\Index.cshtml" />
+    <Content Include="Views\Pagos\EntreFechas.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
+    <Content Include="Views\AspNetUsers\AsignarRol.cshtml" />
+    <Content Include="Views\AspNetUsers\ResetearPassword.cshtml" />
+    <Content Include="Views\-Pagos3\Create.cshtml" />
+    <Content Include="Views\-Pagos3\Delete.cshtml" />
+    <Content Include="Views\-Pagos3\Details.cshtml" />
+    <Content Include="Views\-Pagos3\Edit.cshtml" />
+    <Content Include="Views\-Pagos3\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\remoto ddns.pubxml" />
+    <Content Include="Views\Egresos\EntreFechas.cshtml" />
+    <Content Include="Views\Ingresos\EntreFechas.cshtml" />
+    <Content Include="Views\MovimientosEquipos\EntreFechas.cshtml" />
+    <Content Include="Views\Sueldos\EntreFechas.cshtml" />
+    <Content Include="Views\Transferencias\EntreFechas.cshtml" />
+    <Content Include="Views\LogCobranzas\EntreFechas.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\EntreFechas.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\LiquidacionEntreFechas.cshtml" />
+    <Content Include="Views\Adelantos\EntreFechas.cshtml" />
+    <Content Include="Views\Vales\EntreFechas.cshtml" />
+    <Content Include="Views\Cobros\EntreFechas.cshtml" />
+    <Content Include="Views\Pagos\CertificadoRetencion.cshtml" />
+    <Content Include="Views\MovimientosTerceros\EntreFechas.cshtml" />
+    <Content Include="Views\MovimientosCuentas\EntreFechas.cshtml" />
+    <TypeScriptCompile Include="Scripts\calcularIvaIngresos.ts" />
+    <TypeScriptCompile Include="Scripts\movimientosCuentas.ts" />
+    <TypeScriptCompile Include="Scripts\movimientosTerceros.ts" />
+    <TypeScriptCompile Include="Scripts\movimientosPlanCuentas.ts" />
+    <TypeScriptCompile Include="Scripts\movimientosEventos.ts" />
+    <TypeScriptCompile Include="Scripts\proximosCobros.ts" />
+    <TypeScriptCompile Include="Scripts\proximosPagos.ts" />
+    <TypeScriptCompile Include="Scripts\movimientosVinculadoA.ts" />
+    <TypeScriptCompile Include="Scripts\pagosDinamico.ts" />
+    <TypeScriptCompile Include="Scripts\cobrosDinamico.ts" />
+    <TypeScriptCompile Include="Scripts\pagosTecnicos.ts" />
+    <Content Include="Views\Errores\P500.cshtml" />
+    <Content Include="Views\PlanCuentas\Create.cshtml" />
+    <Content Include="Views\PlanCuentas\Delete.cshtml" />
+    <Content Include="Views\PlanCuentas\Edit.cshtml" />
+    <Content Include="Views\PlanCuentas\Index.cshtml" />
+    <Content Include="Views\PlanCuentas\Activate.cshtml" />
+    <Content Include="Views\Egresos\Create.cshtml" />
+    <Content Include="Views\Egresos\Delete.cshtml" />
+    <Content Include="Views\Egresos\Details.cshtml" />
+    <Content Include="Views\Egresos\Edit.cshtml" />
+    <Content Include="Views\Egresos\Index.cshtml" />
+    <Content Include="Views\DetalleEgresos\Create.cshtml" />
+    <Content Include="Views\DetalleEgresos\Delete.cshtml" />
+    <Content Include="Views\DetalleEgresos\Details.cshtml" />
+    <Content Include="Views\DetalleEgresos\Edit.cshtml" />
+    <Content Include="Views\DetalleEgresos\Index.cshtml" />
+    <Content Include="Views\DetalleIngresos\Create.cshtml" />
+    <Content Include="Views\DetalleIngresos\Delete.cshtml" />
+    <Content Include="Views\DetalleIngresos\Details.cshtml" />
+    <Content Include="Views\DetalleIngresos\Edit.cshtml" />
+    <Content Include="Views\DetalleIngresos\Index.cshtml" />
+    <Content Include="Views\Egresos\Activate.cshtml" />
+    <Content Include="Views\Ingresos\Create.cshtml" />
+    <Content Include="Views\Ingresos\Delete.cshtml" />
+    <Content Include="Views\Ingresos\Details.cshtml" />
+    <Content Include="Views\Ingresos\Edit.cshtml" />
+    <Content Include="Views\Ingresos\Index.cshtml" />
+    <Content Include="Views\Ingresos\Activate.cshtml" />
+    <Content Include="Views\Cobros\Create.cshtml" />
+    <Content Include="Views\Cobros\Delete.cshtml" />
+    <Content Include="Views\Cobros\Details.cshtml" />
+    <Content Include="Views\Cobros\Edit.cshtml" />
+    <Content Include="Views\Cobros\Index.cshtml" />
+    <Content Include="Views\Pagos\Create.cshtml" />
+    <Content Include="Views\Pagos\Delete.cshtml" />
+    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Edit.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Cheques\Create.cshtml" />
+    <Content Include="Views\Cheques\Delete.cshtml" />
+    <Content Include="Views\Cheques\Details.cshtml" />
+    <Content Include="Views\Cheques\Edit.cshtml" />
+    <Content Include="Views\Cheques\Index.cshtml" />
+    <Content Include="Views\Cheques\Activate.cshtml" />
+    <Content Include="Views\HorasNoTrabajadas\Create.cshtml" />
+    <Content Include="Views\HorasNoTrabajadas\Delete.cshtml" />
+    <Content Include="Views\HorasNoTrabajadas\Details.cshtml" />
+    <Content Include="Views\HorasNoTrabajadas\Edit.cshtml" />
+    <Content Include="Views\HorasNoTrabajadas\Index.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Create.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Delete.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Details.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Edit.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Index.cshtml" />
+    <Content Include="Views\HorasTrabajadasTecnico\Pagadas.cshtml" />
+    <Content Include="Views\Sueldos\Create.cshtml" />
+    <Content Include="Views\Sueldos\Delete.cshtml" />
+    <Content Include="Views\Sueldos\Details.cshtml" />
+    <Content Include="Views\Sueldos\Edit.cshtml" />
+    <Content Include="Views\Sueldos\Index.cshtml" />
+    <TypeScriptCompile Include="AdminLTE\plugins\jquery\js\d.ts" />
+    <Content Include="Scripts\modalform.js" />
+    <Content Include="Scripts\Shared\_Layout.js" />
+    <Content Include="Scripts\tabladetalles.js" />
+    <Content Include="Scripts\tablaexportar.js" />
+    <Content Include="Styles\Elements\General.css" />
+    <Content Include="Styles\Elements\Icons.css" />
+    <Content Include="Styles\Elements\Modals.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Equipos\Activate.cshtml" />
+    <Content Include="Views\Equipos\Create.cshtml" />
+    <Content Include="Views\Equipos\Delete.cshtml" />
+    <Content Include="Views\Equipos\Details.cshtml" />
+    <Content Include="Views\Equipos\Edit.cshtml" />
+    <Content Include="Views\Equipos\Index.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\ModelosEquipos\Create.cshtml" />
+    <Content Include="Views\ModelosEquipos\Delete.cshtml" />
+    <Content Include="Views\ModelosEquipos\Details.cshtml" />
+    <Content Include="Views\ModelosEquipos\Edit.cshtml" />
+    <Content Include="Views\ModelosEquipos\Index.cshtml" />
+    <Content Include="Views\ModelosEquipos\Activate.cshtml" />
+    <Content Include="Views\Terceros\Create.cshtml" />
+    <Content Include="Views\Terceros\Delete.cshtml" />
+    <Content Include="Views\Terceros\Details.cshtml" />
+    <Content Include="Views\Terceros\Edit.cshtml" />
+    <Content Include="Views\Terceros\Index.cshtml" />
+    <Content Include="Views\Terceros\Activate.cshtml" />
+    <Content Include="Views\Cuentas\Create.cshtml" />
+    <Content Include="Views\Cuentas\Edit.cshtml" />
+    <Content Include="Views\Cuentas\Index.cshtml" />
+    <Content Include="Views\MovimientosEquipos\Create.cshtml" />
+    <Content Include="Views\MovimientosEquipos\Details.cshtml" />
+    <Content Include="Views\MovimientosEquipos\Edit.cshtml" />
+    <Content Include="Views\MovimientosEquipos\Index.cshtml" />
+    <Content Include="Views\LogCobranzas\Create.cshtml" />
+    <Content Include="Views\LogCobranzas\Delete.cshtml" />
+    <Content Include="Views\LogCobranzas\Details.cshtml" />
+    <Content Include="Views\LogCobranzas\Edit.cshtml" />
+    <Content Include="Views\LogCobranzas\Index.cshtml" />
+    <Content Include="Views\LogCobranzas\Activate.cshtml" />
+    <Content Include="Views\Eventos\Create.cshtml" />
+    <Content Include="Views\Eventos\Delete.cshtml" />
+    <Content Include="Views\Eventos\Details.cshtml" />
+    <Content Include="Views\Eventos\Edit.cshtml" />
+    <Content Include="Views\Eventos\Index.cshtml" />
+    <Content Include="Views\Eventos\Activate.cshtml" />
+    <Content Include="Views\Transferencias\Create.cshtml" />
+    <Content Include="Views\Transferencias\Delete.cshtml" />
+    <Content Include="Views\Transferencias\Details.cshtml" />
+    <Content Include="Views\Transferencias\Edit.cshtml" />
+    <Content Include="Views\Transferencias\Index.cshtml" />
+    <Content Include="Views\TipoServicios\Create.cshtml" />
+    <Content Include="Views\TipoServicios\Delete.cshtml" />
+    <Content Include="Views\TipoServicios\Details.cshtml" />
+    <Content Include="Views\TipoServicios\Edit.cshtml" />
+    <Content Include="Views\TipoServicios\Index.cshtml" />
+    <Content Include="Views\TipoCuentas\Create.cshtml" />
+    <Content Include="Views\TipoCuentas\Delete.cshtml" />
+    <Content Include="Views\TipoCuentas\Edit.cshtml" />
+    <Content Include="Views\TipoCuentas\Index.cshtml" />
+    <Content Include="Views\TipoEgresos\Create.cshtml" />
+    <Content Include="Views\TipoEgresos\Delete.cshtml" />
+    <Content Include="Views\TipoEgresos\Edit.cshtml" />
+    <Content Include="Views\TipoEgresos\Index.cshtml" />
+    <Content Include="Views\TipoIngresos\Create.cshtml" />
+    <Content Include="Views\TipoIngresos\Delete.cshtml" />
+    <Content Include="Views\TipoIngresos\Edit.cshtml" />
+    <Content Include="Views\TipoIngresos\Index.cshtml" />
+    <Content Include="Views\TipoTerceros\Create.cshtml" />
+    <Content Include="Views\TipoTerceros\Delete.cshtml" />
+    <Content Include="Views\TipoTerceros\Details.cshtml" />
+    <Content Include="Views\TipoTerceros\Edit.cshtml" />
+    <Content Include="Views\TipoTerceros\Index.cshtml" />
+    <Content Include="Views\TipoCuentas\Activate.cshtml" />
+    <Content Include="Views\TipoEgresos\Activate.cshtml" />
+    <Content Include="Views\TipoIngresos\Activate.cshtml" />
+    <Content Include="Views\TipoServicios\Activate.cshtml" />
+    <Content Include="Views\TipoTerceros\Activate.cshtml" />
+    <Content Include="Views\EquiposNoRegresaron\Index.cshtml" />
+    <Content Include="Views\LogEquipos\Create.cshtml" />
+    <Content Include="Views\LogEquipos\Delete.cshtml" />
+    <Content Include="Views\LogEquipos\Details.cshtml" />
+    <Content Include="Views\LogEquipos\Edit.cshtml" />
+    <Content Include="Views\LogEquipos\Index.cshtml" />
+    <Content Include="Views\Presupuestos\Create.cshtml" />
+    <Content Include="Views\Presupuestos\Delete.cshtml" />
+    <Content Include="Views\Presupuestos\Details.cshtml" />
+    <Content Include="Views\Presupuestos\Edit.cshtml" />
+    <Content Include="Views\Presupuestos\Index.cshtml" />
+    <Content Include="Views\DetallePresupuesto\Create.cshtml" />
+    <Content Include="Views\DetallePresupuesto\Delete.cshtml" />
+    <Content Include="Views\DetallePresupuesto\Edit.cshtml" />
+    <Content Include="Views\DetallePresupuesto\Index.cshtml" />
+    <Content Include="Views\Presupuestos\Activate.cshtml" />
+    <TypeScriptCompile Include="Scripts\bonificacionPresupuesto.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="AdminLTE\bootstrap\css\bootstrap.css.map" />
+    <Content Include="AdminLTE\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="AdminLTE\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="AdminLTE\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="AdminLTE\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="AdminLTE\plugins\font-awesome\fonts\FontAwesome.otf" />
+    <EntityDeploy Include="CondomiAppModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CondomiAppModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="CondomiAppModel.edmx.diagram">
+      <DependentUpon>CondomiAppModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="CodeTemplates\MvcView\Activate.cs.t4" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\calculoRetenciones.ts" />
+    <TypeScriptCompile Include="Scripts\calcularIvaEgresos.ts" />
+    <TypeScriptCompile Include="Scripts\ivaSaldo.ts" />
+    <TypeScriptCompile Include="Scripts\sueldosDinamico.ts" />
+    <TypeScriptCompile Include="Scripts\detallePresupuestoDinamico.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Messages.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Messages.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>18459</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:18459/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

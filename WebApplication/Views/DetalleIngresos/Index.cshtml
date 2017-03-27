@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WebApplication.DetalleIngresos>
+@{
+    ViewBag.Title = "DetalleIngresos";
+    Layout = null;
+    List<decimal> totalGeneral = new List<decimal>();
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box col-md-12">
+    <div class="box-header">
+        <h3 class="box-title"> Detalle del ingreso</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar un item al ingreso", "Create", "DetalleIngresos", new { idIngreso = ViewBag.idIngreso }, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabladetalles">
+            <thead>
+              <tr>
+           <th>
+               Precio Unitario
+           </th>
+           <th>
+               Cantidad
+           </th>
+        
+           <th>
+               Tipo de Ingreso
+           </th>
+                  <th>
+                      Total
+                  </th>
+           <th>
+            Acciones
+            </th>
+         </tr>
+    </thead>
+     <tfoot>
+          <tr>
+              <th>
+                  Precio Unitario
+              </th>
+              <th>
+                  Cantidad
+              </th>
+
+              <th>
+                  Tipo de Ingreso
+              </th>
+              <th>
+                  Total
+              </th>
+              <th>
+                  Acciones
+              </th>
+           </tr>
+          </tfoot>
+          <tbody>
+            @foreach (var item in Model) {
+               <tr>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.monto)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.cantidad)
+                      </td>
+                      
+                       <td>
+                              @Html.DisplayFor(modelItem => item.TipoIngresos.descripcion)
+                      </td>
+                   <td>
+                       @{
+                           decimal total = 0;
+                           total = item.cantidad * item.monto ;
+                           @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                           totalGeneral.Add(total);
+                       }
+                   </td>
+                         <td>                          
+                       
+                            @Html.Raw(@Html.ActionLink("XXX", "Edit", "DetalleIngresos", new {id=item.idDetalleIngreso }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))                                   
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "DetalleIngresos", new { id=item.idDetalleIngreso }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))                                     
+                        
+                 </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+        @{
+            decimal totalIngreso = 0;
+            for (int i = 0; i < totalGeneral.Count; i++)
+            {
+                totalIngreso += totalGeneral[i];
+            }
+        }
+        <h4 class="text-right" id="txtsubtotal"></h4>       
+        <h4 class="text-right" id="txtresultadoiva"></h4>
+        <h3 class="text-right" id="txttotalfinal"></h3>
+        <input hidden="hidden" value="@totalIngreso" id="totalingreso">
+
+        @*<h3 class="text-right">
+            @Html.Raw("Total: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalIngreso)).ToHtmlString()
+        </h3>*@
+    </div>
+</div>

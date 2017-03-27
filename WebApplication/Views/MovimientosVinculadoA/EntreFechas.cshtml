@@ -1,0 +1,149 @@
+﻿@model IEnumerable<WebApplication.MovimientosVinculadoA>
+
+<input hidden="hidden" value=2 id="suma1" />
+<input hidden="hidden" value=3 id="suma2" />
+<input hidden="hidden" value=6 id="suma3" />
+<input hidden="hidden" value=7 id="suma4" />
+<input hidden="hidden" value=1 id="texto1" />
+<input hidden="hidden" value=4 id="texto2" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<div class="box-body">
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    Monto Neto
+                </th>
+                <th>
+                    Monto Total
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    Monto Neto
+                </th>
+                <th>
+                    Monto Total
+                </th>
+
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    Monto Neto
+                </th>
+                <th>
+                    Monto Total
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    Monto Neto
+                </th>
+                <th>
+                    Monto Total
+                </th>
+
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.detalleEgreso.TipoEgresos.descripcion)
+                    </td>
+
+                    <td>
+                        @{if (item.detalleEgreso != null)
+                            {
+                                if (item.detalleEgreso.Egresos.tipoFactura == tiposFacturas.B)
+                                {
+                                    var iva = ((item.detalleEgreso.monto / ((item.detalleEgreso.Egresos.iva / 100) + 1)) - item.detalleEgreso.monto) * -1;
+                                    @Html.Raw((item.detalleEgreso.monto - iva).ToString("0.##"));
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.detalleEgreso.monto)
+                                }
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{if (item.detalleEgreso != null)
+                            {                              
+                                @Html.DisplayFor(modelItem => item.detalleEgreso.monto)                               
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.detalleIngreso.TipoIngresos.descripcion)
+                    </td>
+
+
+                    <td>
+                        @{if (item.detalleIngreso != null)
+                            {
+                                if (item.detalleIngreso.Ingresos.tipoFactura == tiposFacturas.B)
+                                {
+                                    var iva = ((item.detalleIngreso.monto / ((item.detalleIngreso.Ingresos.iva / 100) + 1)) - item.detalleIngreso.monto) * -1;
+                                    @Html.Raw((item.detalleIngreso.monto - iva).ToString("0.##"));
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.detalleIngreso.monto)
+                                }
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.detalleIngreso.monto)
+                    </td>
+                    <td>
+
+
+                        @*@Html.Raw(@Html.ActionLink("XXX", "Edit", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))*@
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

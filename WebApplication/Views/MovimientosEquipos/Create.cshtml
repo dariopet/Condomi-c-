@@ -1,0 +1,103 @@
+﻿@model WebApplication.MovimientosEquipos
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script>
+    function habilitar() {
+        var val1 = $('#cmbTipoMovimiento option:selected').text();
+        var val2 = $('#cmbEvento option:selected').text();
+        if (val1 === 'Sale a evento') {
+            if (val2 === "") {
+                $('#btnAceptar').prop("disabled", true);
+            }
+            else {
+                $('#btnAceptar').prop("disabled", false);
+            }
+            $("#cmbEvento").prop("disabled", false);
+        }
+        else {
+            $("#cmbEvento").prop("disabled", true);
+            $('#btnAceptar').prop("disabled", false);
+        }
+    }
+
+    $(document).ready(habilitar());
+
+    $('#cmbTipoMovimiento').change(habilitar);
+
+
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body ">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Movimiento</b>
+                <div class="col-md-9">
+                    <div class="checkbox">
+                        @Html.EnumDropDownListFor(model => model.tipoMovimiento, "", new { @class = "form-control", @id = "cmbTipoMovimiento" })
+                        @Html.ValidationMessageFor(model => model.tipoMovimiento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Descripción</b>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Fecha</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fecha, new { @datadateformat = "dd/mm/yyyy hh:ii", @readonly = true, Value = DateTime.Now.ToLocalTime().ToString("dd/MM/yyyy HH:mm"), @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fecha)
+                </div>
+                <b class="control-label col-md-3"> Cantidad</b>
+                <div class="col-md-2">                
+                   @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new {Value=1, min = 1, max = 100, @class = "form-control" } })                
+                    @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Evento</b>
+                <div class="col-md-9">
+                    @Html.DropDownList("idEvento", null, htmlAttributes: new { @class = "form-control", @id = "cmbEvento" })
+                    @Html.ValidationMessageFor(model => model.idEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3"> Código de barras</b>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.codigoBarras, new { htmlAttributes = new { @class = "form-control", @id = "txtCodigoBarras" } })                
+                    @Html.ValidationMessageFor(model => model.codigoBarras, "", new { @class = "text-danger" })
+                </div>           
+            </div>
+            
+
+        </div>
+    </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" id="btnAceptar" />
+        </div>
+}

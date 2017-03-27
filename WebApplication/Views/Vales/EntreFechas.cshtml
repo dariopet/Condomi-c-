@@ -1,0 +1,164 @@
+﻿@model IEnumerable<WebApplication.Vales>
+
+@{ Layout = null; }
+
+
+@Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+@Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+@Scripts.Render("~/AdminLTE/bootstrap/jsB")
+@Scripts.Render("~/Scripts/modalform.js")
+@Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+
+<input hidden="hidden" value=2 id="suma1" />
+<input hidden="hidden" value=3 id="texto1" />
+<input hidden="hidden" value=7 id="texto2" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<div class="box-body">
+    <p>
+        @Html.ActionLink("Agregar Vale", "Create", "Vales", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+         <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+    </p>
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Fue rendido
+                </th>
+                <th>
+                    Generado
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Cuenta origen
+                </th>
+                <th>
+                    Entregado a
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Fue rendido
+                </th>
+                <th>
+                    Generado
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Cuenta origen
+                </th>
+                <th>
+                    Entregado a
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{ if (item.activo == false)
+                            {
+                                @Html.Raw(0).ToHtmlString();
+
+                            }
+                            else
+                            {
+                                @Html.Raw(1).ToHtmlString();
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.monto)
+
+                    </td>
+                    <td>
+                        @{
+                            if (item.rendido)
+                            {  @Html.Raw("Si").ToHtmlString() }
+                            else
+                            { @Html.Raw("No").ToHtmlString()}
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaGenerado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuentas.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaEditado)
+                    </td>
+                    <td>
+                        @{ if (item.rendido == false)
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "Edit", "Vales", new { id = item.idVale }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                                @Html.Raw(@Html.ActionLink("XXX", "Rendido", "Vales", new { id = item.idVale }, new { data_modal = "", id = "btnDelete", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Marcar como rendido" }).ToHtmlString().Replace("XXX", "<i class='fa fa-check-square-o'></i>"))
+
+                            }
+                        }
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+﻿@{
+
+    ViewBag.Title = "Autorización";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+
+    function volver() {
+        if( ($("#myModal").data('bs.modal') || {}).isShown)
+        {
+            $('#myModal').modal('hide');
+        }
+        else
+        {
+            parent.history.back();
+            return false;
+        }
+    }
+</script>
+
+<div class="alert alert-danger alert-dismissable fade in">    
+    <strong>@ViewData["Message"]</strong> 
+<button type="button" class="btn btn-warning hidden-print" onClick="volver()">Volver</button>
+
+
+</div>
+
+

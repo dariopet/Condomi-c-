@@ -1,0 +1,138 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model IEnumerable<#= "<" + ViewDataTypeName + ">" #>
+@{
+    ViewBag.Title = "<#= ViewDataTypeShortName #>";
+    Layout = "<#= LayoutPageFile#>";
+}
+
+@section Menu {
+    <script>
+   $(function () {
+    var menuItem = $('#left-sidebar-menu-inventario');
+    menuItem.addClass('active');
+    var subMenuItem = menuItem.find('#left-sidebar-menu-lista-equipos');
+    subMenuItem.addClass('active');
+   });
+</script>
+<script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de <#= ViewDataTypeShortName #></h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar <#= ViewDataTypeShortName #>", "Create", "<#= ViewDataTypeShortName #>", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+             <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+              <tr>
+<#
+IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>
+           <th>
+               <#= GetValueExpression(property) #>
+           </th>
+<#
+    }
+}
+#>
+           <th>
+            Acciones
+            </th>
+         </tr>
+    </thead>
+     <tfoot>
+          <tr>
+<#
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>
+        <th>
+           <#= GetValueExpression(property) #>
+        </th>
+<#
+    }
+}
+#>
+              <th>
+                Acciones
+              </th>
+           </tr>
+          </tfoot>
+          <tbody>
+            @foreach (var item in Model) {
+               <tr>
+<#
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+            
+#>
+<#
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>
+                       <td>
+                              @Html.DisplayFor(modelItem => <#= "item." + GetValueExpression(property) #>)
+                      </td>
+<#
+    }
+}
+
+string pkName = GetPrimaryKeyName();
+#>      
+                         <td>                          
+                         @{if (item.activo == true)
+                         {
+                            @Html.Raw(@Html.ActionLink("XXX", "Edit", "<#= ViewDataTypeShortName #>", new {id=item.<#= pkName #> }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;                                   
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "<#= ViewDataTypeShortName #>", new { id=item.<#= pkName #> }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;                                    
+                         }
+                         else
+                         {
+                            @Html.Raw(@Html.ActionLink("XXX", "Activate", "<#= ViewDataTypeShortName #>", new { id=item.<#= pkName #> }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                       }
+                  }
+                 </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

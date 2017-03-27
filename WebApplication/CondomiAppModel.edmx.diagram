@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87ce5ccb8b774688a4250444403cf161" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="CondomiBaseModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CondomiBaseModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="46.75" />
+        <EntityTypeShape EntityType="CondomiBaseModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="119.5" />
+        <EntityTypeShape EntityType="CondomiBaseModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="117" />
+        <EntityTypeShape EntityType="CondomiBaseModel.AspNetUsers" Width="1.5" PointX="3" PointY="41.875" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Cheques" Width="1.5" PointX="5.25" PointY="51.375" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Cuentas" Width="1.5" PointX="8.25" PointY="45.125" />
+        <EntityTypeShape EntityType="CondomiBaseModel.DetalleIngresos" Width="1.5" PointX="15.5" PointY="39.375" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Equipos" Width="1.5" PointX="13.25" PointY="40.625" />
+        <EntityTypeShape EntityType="CondomiBaseModel.LogCobranzas" Width="1.5" PointX="5.25" PointY="41" />
+        <EntityTypeShape EntityType="CondomiBaseModel.LogEquipos" Width="1.5" PointX="11.25" PointY="51.125" />
+        <EntityTypeShape EntityType="CondomiBaseModel.MovimientosEquipos" Width="1.5" PointX="16.5" PointY="47.125" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Presupuestos" Width="1.5" PointX="13.5" PointY="50.875" />
+        <EntityTypeShape EntityType="CondomiBaseModel.sysdiagrams" Width="1.5" PointX="3.125" PointY="0.875" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Terceros" Width="1.5" PointX="6" PointY="28.75" />
+        <EntityTypeShape EntityType="CondomiBaseModel.TipoCuentas" Width="1.5" PointX="6" PointY="56.625" />
+        <EntityTypeShape EntityType="CondomiBaseModel.TipoTerceros" Width="1.5" PointX="3.75" PointY="30.625" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Transferencias" Width="1.5" PointX="13.5" PointY="45.75" />
+        <AssociationConnector Association="CondomiBaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CondomiBaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cheques_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogCobranzas_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogEquipos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MovimientosEquipos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Presupuestos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Transferencias_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cheques_Terceros" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="CondomiBaseModel.FK_Cuentas_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cuentas_TipoCuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Transferencias_Cuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Transferencias_Cuentas1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogEquipos_Equipos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MovimientosEquipos_Equipos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogCobranzas_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Terceros_TipoTerceros" />
+        <AssociationConnector Association="CondomiBaseModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="CondomiBaseModel.ModelosEquipos" Width="1.5" PointX="3" PointY="35.875" />
+        <EntityTypeShape EntityType="CondomiBaseModel.TipoServicios" Width="1.5" PointX="0.75" PointY="36.625" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Equipos_ModelosEquipos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_ModelosEquipos_TipoEquipos" />
+        <EntityTypeShape EntityType="CondomiBaseModel.DetallePresupuesto" Width="1.5" PointX="15.75" PointY="52" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetallePresupuesto_ModelosEquipos" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="CondomiBaseModel.FK_DetallePresupuesto_Presupuestos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetallePresupuesto_Terceros" />
+        <EntityTypeShape EntityType="CondomiBaseModel.DetalleEgresos" Width="1.5" PointX="10.5" PointY="37.375" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Sueldos" Width="1.5" PointX="10.5" PointY="45.75" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Sueldos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Sueldos_Cuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Sueldos_Terceros" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Eventos" Width="1.5" PointX="8.25" PointY="51" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Eventos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Eventos_Terceros" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="CondomiBaseModel.FK_MovimientosEquipos_Eventos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Presupuestos_Eventos" />
+        <EntityTypeShape EntityType="CondomiBaseModel.HorasNoTrabajadas" Width="1.5" PointX="18.5" PointY="52.25" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasNoTrabajadas_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasNoTrabajadas_Eventos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasNoTrabajadas_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cheques_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Eventos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasNoTrabajadas_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogCobranzas_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_LogEquipos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MovimientosEquipos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Presupuestos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Sueldos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Transferencias_AspNetUsers1" />
+        <EntityTypeShape EntityType="CondomiBaseModel.HorasTrabajadasTecnico" Width="1.5" PointX="13.5" PointY="56.625" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasTrabajadasTecnico_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasTrabajadasTecnico_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasTrabajadasTecnico_Eventos1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasTrabajadasTecnico_Terceros" />
+        <EntityTypeShape EntityType="CondomiBaseModel.ProximasCompras" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CondomiBaseModel.DetalleMantenimientoPreventivo" Width="1.5" PointX="16.5" PointY="42.5" />
+        <EntityTypeShape EntityType="CondomiBaseModel.MantenimientoPreventivo" Width="1.5" PointX="5.25" PointY="35.75" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleMantenimientoPreventivo_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MantenimientoPreventivo_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MantenimientoPreventivo_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleMantenimientoPreventivo_Equipos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleMantenimientoPreventivo_MantenimientoPreventivo" />
+        <AssociationConnector Association="CondomiBaseModel.FK_MantenimientoPreventivo_ModelosEquipos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_HorasTrabajadasTecnico_AspNetUsers2" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Vales" Width="1.5" PointX="18.75" PointY="45.375" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Vales_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Vales_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Vales_Cuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Vales_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Vales_Transferencias" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Cobros" Width="1.5" PointX="10.5" PointY="55" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cobros_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cobros_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cobros_Cheques" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cobros_Cuentas" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Adelantos" Width="1.5" PointX="10.5" PointY="40.75" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Adelantos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Adelantos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Adelantos_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Adelantos_Cuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cuentas_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Equipos_AspNetUsers" />
+        <EntityTypeShape EntityType="CondomiBaseModel.PlanCuentas" Width="1.5" PointX="6" PointY="25.625" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Pagos" Width="1.5" PointX="18.75" PointY="40.25" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_Adelantos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_Cheques" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_Cuentas1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cuentas_PlanCuentas" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Egresos" Width="1.5" PointX="13.5" PointY="31.875" />
+        <EntityTypeShape EntityType="CondomiBaseModel.Ingresos" Width="1.5" PointX="16.5" PointY="33.25" />
+        <EntityTypeShape EntityType="CondomiBaseModel.TipoEgresos" Width="1.5" PointX="8.25" PointY="37.125" />
+        <EntityTypeShape EntityType="CondomiBaseModel.TipoIngresos" Width="1.5" PointX="13.25" PointY="28.625" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Egresos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Egresos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Ingresos_AspNetUsers" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Ingresos_AspNetUsers1" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Cobros_Ingresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleEgresos_Egresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleEgresos_TipoEgresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleIngresos_Ingresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_DetalleIngresos_TipoIngresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Egresos_Eventos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Egresos_PlanCuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Egresos_Terceros" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Pagos_Egresos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Ingresos_Eventos" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Ingresos_PlanCuentas" />
+        <AssociationConnector Association="CondomiBaseModel.FK_Ingresos_Terceros" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

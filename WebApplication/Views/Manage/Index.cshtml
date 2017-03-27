@@ -1,0 +1,35 @@
+﻿@using WebApplication.Extensions
+@model WebApplication.Models.IndexViewModel
+@{
+    ViewBag.Title = "Editar perfil";
+    ViewBag.SubTitle = "Cambiar contraseña";
+}
+
+@if (ViewBag.StatusMessage != string.Empty)
+{
+    <div class="callout callout-info" style="margin-bottom: 0 !important;">
+        <h4><i class="fa fa-info"></i> Note:</h4>
+        @ViewBag.StatusMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                @*<img class="profile-user-img img-responsive img-circle" src="~/AdminLTE/dist/img/user.svg" alt="User profile picture">*@
+                <h3 class="profile-username text-center">@User.Identity.GetUserNameIdentifier()</h3>
+                <p class="text-muted text-center">@User.Identity.GetUserEmail()</p>
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Contraseña</b>
+                        <div class="pull-right">
+                            [@(Model.HasPassword ? Html.ActionLink(" Cambiar contraseña ", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))]
+                        </div>
+                    </li>                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8"></div>
+</div>

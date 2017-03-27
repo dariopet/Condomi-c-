@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Movimientos de Conceptos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-movimientos-vinculado');
+            subMenuItem.addClass('active');
+        });
+    </script>
+   
+    <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+    <link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+    </script>
+    <script src="~/Scripts/movimientosVinculadoA.js"></script>
+}
+
+
+<div class="box">
+
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Movimientos de conceptos </h3>
+        <hr />
+        <div class="form-group">
+            <b class="control-label col-md-1">Desde</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="01/@DateTime.Now.Month.ToString()/@DateTime.Now.Year.ToString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaInicio" onchange="cargarMovimientosVinculadoA()" />
+
+            </div>
+            <b class="control-label col-md-1">Hasta</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosVinculadoA()" />
+            </div>
+            <b class="control-label col-md-1">Vinculado A</b>
+            <div class="col-md-3">
+               @Html.DropDownList("vinculadoARubros", EnumHelper.GetSelectList(typeof(vinculadoARubros)), "Todos",  new { @class = "form-control" ,@id="vinculadoA", @onchange = "cargarMovimientosVinculadoA()" })
+            </div>
+        </div>
+    </div>
+ <div id="contenido">
+
+ </div>
+</div>

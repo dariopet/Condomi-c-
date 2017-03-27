@@ -1,0 +1,146 @@
+﻿@model IEnumerable<WebApplication.MovimientosTerceros>
+
+<input hidden="hidden" value=3 id="suma1" />
+<input hidden="hidden" value=4 id="suma2" />
+<input hidden="hidden" value=1 id="fecha1" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<div class="box-body">
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Concepto
+                </th>
+                <th>
+                    Debe
+                </th>
+                <th>
+                    Haber
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Concepto
+                </th>
+                <th>
+                    Debe
+                </th>
+                <th>
+                    Haber
+                </th>
+                <th>
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+
+                        @{
+                            if (item.ingreso != null)
+                            {
+                                @Html.Raw(item.ingreso.descripcion + " factura - Nº" + item.ingreso.factura + " de " + item.ingreso.Terceros.nombre)
+                            }
+                            if (item.egreso != null)
+                            {
+
+                                @Html.Raw(item.egreso.descripcion + " factura - Nº" + item.egreso.factura + " de " + item.egreso.Terceros.nombre)
+                            }
+                            if (item.cobro != null)
+                            {
+                                @Html.Raw("Cobro de Nº" + item.cobro.Ingresos.factura + " de " + item.cobro.Ingresos.Terceros.nombre)
+
+                            }
+                            if (item.pago != null)
+                            {
+                                @Html.Raw("Pago de Nº" + item.pago.Egresos.factura + " de " + item.pago.Egresos.Terceros.nombre)
+
+                            }
+                            if (item.sueldo != null)
+                            {
+
+                                @Html.Raw("Sueldo " + item.sueldo.periodo.Month.ToString() + "/" + item.sueldo.periodo.Year.ToString())
+                            }
+                        }
+
+
+
+                    </td>
+                    <td>
+                        @{ if (item.sueldo != null)
+                            {
+
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.sueldo.monto))
+                            }
+
+                            if (item.egreso != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.totalEgreso))
+                            }
+                            if (item.adelanto != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.adelanto.monto))
+                            }
+                            if (item.cobro != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.cobro.monto))
+                            }
+
+                        }
+
+                    </td>
+                    @*haber*@
+                    <td>
+                        @{ if (item.ingreso != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.totalIngreso))
+                            }
+
+
+                            if (item.pago != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.pago.monto))
+                            }
+
+                        }
+                    </td>
+
+                    <td>
+
+
+                        @*@Html.Raw(@Html.ActionLink("XXX", "Edit", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))*@
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

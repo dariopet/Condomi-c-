@@ -1,0 +1,284 @@
+﻿@model IEnumerable<WebApplication.Egresos>
+@{ Layout = null; }
+
+<input hidden="hidden" value=6 id="suma1" />
+<input hidden="hidden" value=7 id="suma2" />
+<input hidden="hidden" value=8 id="suma3" />
+<input hidden="hidden" value=9 id="suma4" />
+<input hidden="hidden" value=14 id="texto1" />
+<input hidden="hidden" value=15 id="texto2" />
+
+@Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+@Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+@Scripts.Render("~/AdminLTE/bootstrap/jsB")
+@Scripts.Render("~/Scripts/modalform.js")
+@Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box-body">
+    <p>
+        @Html.ActionLink("Agregar un Egreso", "Create", "Egresos", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print  hidden-print" })
+
+         <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+    </p>
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Proveedor
+                </th>
+                <th>
+                    Factura y tipo
+                </th>
+                <th>
+                    Emitida
+                </th>
+                <th>
+                    Vencimiento
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Pagado
+                </th>
+                <th>
+                    Retenido
+                </th>
+                <th>
+                    Saldo
+                </th>
+                <th>
+                    Impuestos Internos
+                </th>
+                <th>
+                    Ingresos Brutos
+                </th>
+                <th>
+                    IVA
+                </th>
+                <th>
+                    P. Iva
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Cuenta contable
+                </th>
+                <th>
+                    Evento
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Proveedor
+                </th>
+                <th>
+                    Factura y tipo
+                </th>
+                <th>
+                    Emitida
+                </th>
+                <th>
+                    Vencimiento
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Pagado
+                </th>
+                <th>
+                    Retenido
+                </th>
+                <th>
+                    Saldo
+                </th>
+                <th>
+                    Impuestos Internos
+                </th>
+                <th>
+                    Ingresos Brutos
+                </th>
+                <th>
+                    IVA
+                </th>
+                <th>
+                    P. Iva
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Cuenta contable
+                </th>
+                <th>
+                    Evento
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{ if (item.activo == false)
+                            {
+                                @Html.Raw(0).ToHtmlString();
+
+                            }
+                            else
+                            {
+                                @Html.Raw(1).ToHtmlString();
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.factura)-@Html.DisplayFor(modelItem => item.tipoFactura)
+                        @{ if (item.enBlanco == true)
+                            {
+                                <i class='fa fa-circle-o'></i>
+                            }
+                            else
+                            {
+                                <i class='fa fa-circle'></i>
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @Html.Raw(item.fechaGenerada.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+                        @Html.Raw(item.fechaVencimiento.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+                        @{
+                            decimal total = Convert.ToDecimal(Html.Action("getTotalEgreso", "Egresos", new { idEgreso = item.idEgreso }).ToString());
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                          
+                        }
+                    </td>
+                    <td>
+                        @{
+                            decimal totalPagado = Convert.ToDecimal(Html.Action("getPagadoEgreso", "Egresos", new { idEgreso = item.idEgreso }).ToString());
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalPagado)).ToHtmlString()
+                           
+                        }
+                    </td>
+                    <td>
+                        @{
+                            decimal? retenido = 0;
+                            foreach (Pagos pag in item.Pagos)
+                            {
+                                if (pag.retenido != null)
+                                {
+                                    retenido += pag.retenido;
+                                }
+                            }
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", retenido)).ToHtmlString()
+                        }
+                    </td>
+                    <td>
+                        @{   @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total - (totalPagado))).ToHtmlString()}
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.impuestosInternos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ingresosBrutos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.percepcionIva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlanCuentas.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaEditado)
+                    </td>
+                    <td>
+                        @{if (item.activo == true)
+                            {
+
+                                if (total > 0 && (totalPagado) < total -1)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Create", "Pagos", new { idEgreso = item.idEgreso }, new { data_modal = "", id = "btnCreatePago", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Nuevo Pago" }).ToHtmlString().Replace("XXX", "<i class='fa fa-usd'></i>")) ;
+                                }
+                                if (totalPagado > 0)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Index", "Pagos", new { id = item.idEgreso }, new { id = "btnVerPagos", @class = "btn btn-info", @style = "margin-right:3px; margin-bottom:3px", @title = "Ver Pagos" }).ToHtmlString().Replace("XXX", "<i class='fa fa-list-ul'></i>")) ;
+                                }
+                                @Html.Raw(@Html.ActionLink("XXX", "Edit", "Egresos", new { id = item.idEgreso }, new { id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                @Html.Raw(@Html.ActionLink("XXX", "Delete", "Egresos", new { id = item.idEgreso }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                            }
+                            else
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "Activate", "Egresos", new { id = item.idEgreso }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                            }
+                        }
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>
+
+

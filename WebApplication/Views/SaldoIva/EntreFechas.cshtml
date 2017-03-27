@@ -1,0 +1,132 @@
+﻿@model IEnumerable<WebApplication.SaldoIva>
+
+<input hidden="hidden" value=2 id="suma1" />
+<input hidden="hidden" value=5 id="suma2" />
+<input hidden="hidden" value=1 id="texto1" />
+<input hidden="hidden" value=4 id="texto2" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<div class="box-body">
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    IVA Crédito
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    IVA Débito
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    IVA Crédito
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    IVA Débito
+                </th>
+                <th>
+                   
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @{if (item.egreso != null)
+                            {
+                                @Html.Raw(item.egreso.factura + "-" + item.egreso.tipoFactura)
+
+                                if (item.egreso.enBlanco == true)
+                                {
+                                    <i class='fa fa-circle-o'></i>
+                                }
+                                else
+                                {
+                                    <i class='fa fa-circle'></i>
+                                }
+                            @Html.Raw(item.egreso.Terceros.nombre)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{if (item.egreso != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.ivaCredito)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+                        @{if (item.ingreso != null)
+                            {
+                                @Html.Raw(item.ingreso.factura + "-" + item.ingreso.tipoFactura)
+
+                                if (item.ingreso.enBlanco == true)
+                                {
+                                    <i class='fa fa-circle-o'></i>
+                                }
+                                else
+                                {
+                                    <i class='fa fa-circle'></i>
+                                }
+                            @Html.Raw(item.ingreso.Terceros.nombre)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{if (item.ingreso != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.ivaDebito)
+                            }
+                        }
+                    </td>
+                    <td>
+
+
+                        @*@Html.Raw(@Html.ActionLink("XXX", "Edit", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))*@
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<WebApplication.HorasTrabajadasTecnico>
+@{ Layout = null; }
+
+
+@Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+@Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+@Scripts.Render("~/AdminLTE/bootstrap/jsB")
+@Scripts.Render("~/Scripts/modalform.js")
+@Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+
+<input hidden="hidden" value=3 id="suma1" />
+<input hidden="hidden" value=1 id="texto1" />
+<input hidden="hidden" value=4 id="texto2" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box-body">
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Técnico
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Facturadas
+                </th>
+                <th>
+                    Ultima edición pago
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Evento
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Técnico
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Facturadas
+                </th>
+                <th>
+                    Ultima edición pago
+                </th>
+                <th>
+                    Creado por
+                </th>
+
+                <th>
+                    Evento
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+
+                    </td>
+                    <td>
+                        @{
+                            decimal total = 0;
+                            total = (item.cantidad * item.precioJornada) + item.dimmer + item.seguidor;
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                        }
+
+                    <td>
+                        @{
+                            if (item.pagadas == true)
+                            {
+                                @Html.Raw("Si").ToHtmlString()
+                            }
+                            else
+                            {
+                                @Html.Raw("No").ToHtmlString()
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pagado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaPago)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaEditado)
+                    </td>
+
+                    <td>
+                        @{ if (item.pagadas == false)
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "Pagadas", "HorasTrabajadasTecnico", new { id = item.idHorasTrabajadasTecnico }, new { data_modal = "", id = "btnEdit", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Marcar como facturadas" }).ToHtmlString().Replace("XXX", "<i class='fa fa-check-square-o'></i>"))
+                            }
+                            else
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "NoPagadas", "HorasTrabajadasTecnico", new { id = item.idHorasTrabajadasTecnico }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Marcar como no pagas" }).ToHtmlString().Replace("XXX", "<i class='fa fa-hourglass-half'></i>"))
+                            }
+                        }
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

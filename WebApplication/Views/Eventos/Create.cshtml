@@ -1,0 +1,102 @@
+﻿@model WebApplication.Eventos
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="../../AdminLTE/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<link href="~/AdminLTE/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<script src="~/AdminLTE/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datetimepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy hh:ii',
+                language:'es'
+		    });
+		});
+</script>
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body "> 
+        <div class="form-horizontal">     
+      
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+        @*<div class="form-group">
+                <b class="control-label col-md-3">activo</b>           
+            <div class="col-md-9">
+                <div class="checkbox">                @Html.EditorFor(model => model.activo)
+                    @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+        <div class="form-group">
+                <b class="control-label col-md-2">Descripción</b>           
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Jurisdicción</b>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.jurisdiccion , new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.jurisdiccion , "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Fecha de inicio</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaInicio, new { @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy hh:ii", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2">Fecha de finalización</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaFin, new {  @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy hh:ii", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+       
+        <div class="form-group">
+                <b class="control-label col-md-2">Estado</b>           
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.estado, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <b class="control-label col-md-2"> Cliente</b>
+            <div class="col-md-10">
+                @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idTercero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+                <b class="control-label col-md-2">Observaciones</b>           
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.observaciones,  new { @class = "form-control text-area", rows="5" } )
+                @Html.ValidationMessageFor(model => model.observaciones, "", new { @class = "text-danger" })
+            </div>
+        </div>
+          </div>
+        </div>
+    
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+   }
+

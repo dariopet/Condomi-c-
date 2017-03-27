@@ -1,0 +1,169 @@
+﻿@model WebApplication.Pagos
+
+
+@{
+    ViewBag.Title = "Edit";
+    string idtipo = @Model.Egresos.DetalleEgresos.First().TipoEgresos.idTipoEgreso.ToString();
+    string limite = @Model.Egresos.DetalleEgresos.First().TipoEgresos.limiteRetencion.ToString().Replace(",", ".");
+    string porcentaje = @Model.Egresos.DetalleEgresos.First().TipoEgresos.porcentajeRetencion.ToString().Replace(",", ".");
+    string pagoOriginal = @Model.monto.ToString().Replace(",",".");
+}
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Editar</h4>
+</div>
+
+
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+</script>
+
+<script src="~/Scripts/pagosDinamico.js"></script>
+<script src="~/Scripts/calculoRetenciones.js">
+</script>
+
+<script>
+    @{ if (Model.retenido == null)
+        {
+            Model.retenido = 0;
+        }
+        if (idtipo != null)
+        {
+            Html.Raw("getPagado(" + @idtipo + ", '" + @pagoOriginal  +"');").ToHtmlString();
+        }
+            }
+   
+    @{if (porcentaje != null && limite != null)
+        {
+          //  Html.Raw("calcularRetenido(" + @porcentaje + "," + @limite + ")");
+        }
+    }
+    getPagadoFactura();
+    @{ if (idtipo != null )
+        {
+    Html.Raw("getRetenidoTipo(" + @idtipo +" , " + @Model.retenido +")");
+        }
+
+    } 
+</script>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body ">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.idPago)
+            @Html.HiddenFor(model => model.idEgreso)
+            @Html.HiddenFor(model => model.idUsuario)
+
+
+
+            <input hidden="hidden" value="@Model.monto"   id="pagoOriginal" />
+            <input  hidden="hidden" id="retenidoOriginal" value=@Convert.ToDecimal(Model.retenido) />
+
+            <input hidden="hidden" value="@Model.idEgreso" id="idegreso" />
+            <input hidden="hidden" value="@Model.idAdelanto" id="adelantoOriginal" />
+            <input hidden="hidden" value="@Model.idCheque" id="chequeOriginal" />
+            <input hidden="hidden" value="@Model.Egresos.iva" id="iva" />
+            <input hidden="hidden" value="@Model.Egresos.idTercero" id="idTercero" />
+            <input hidden="hidden" id="yaRetenido" value=@Html.Action("getRetenidoEgreso", "Egresos", new { idEgreso = Model.idEgreso }).ToString() />
+
+            @{
+                decimal saldo = Convert.ToDecimal(Html.Action("getSaldoEgreso", "Egresos", new { idEgreso = Model.idEgreso }).ToString());
+                saldo += Model.monto ;
+            }
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Monto</b>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.monto, new { htmlAttributes = new { Value = Model.monto + Model.retenido, @id = "monto", @class = "form-control", @onchange = "calcularRetenido(" + porcentaje + "," + limite + ")", @type = "number", @step = "any", @max = saldo.ToString() } })
+                    @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2">Fecha de pago</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fecha, new { @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy", @readonly = true, Value = Model.fecha.ToShortDateString(), @id = "fechaPago", @onchange = "getPagado(" + @idtipo + ","+@Model.monto +")" })
+                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-3"> Cuenta origen</b>
+                <div class="col-md-9">
+                    @Html.DropDownList("idCuenta", null, htmlAttributes: new { @id = "cuentaOrigen", @onchange = "habilitarPagos()", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idCuenta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="divcheque1">
+                <b class="control-label col-md-3"> Cheque Nº</b>
+                <div class="col-md-4">
+                    @Html.DropDownList("idCheque", null, htmlAttributes: new { @id = "idCheque", @class = "form-control", @onchange = "getDatosChequePagos()" })
+                    @Html.ValidationMessageFor(model => model.idCheque, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label  col-md-3"> Banco</b>
+                <h4 class="text-left col-md-2" id="banco">  </h4>
+            </div>
+
+            <div class="form-group" id="divcheque2">
+                <b class="control-label text-left col-md-3"> Recibido de</b>
+                <h4 class="text-left col-md-3" id="recibido"> </h4>
+
+                <b class="control-label col-md-3"> Monto disponible</b>
+                <h4 id="montoDisponible" class="text-left col-md-3"> </h4>
+            </div>
+
+            <div class="form-group" id="divadelanto1">
+                <b class="control-label col-md-3"> Adelanto</b>
+                <div class="col-md-4">
+                    @Html.DropDownList("idAdelanto", null, htmlAttributes: new { @id = "idAdelanto", @class = "form-control", @onchange = "getDatosAdelanto()" })
+                    @Html.ValidationMessageFor(model => model.idAdelanto, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2"> Monto disponible</b>
+                <h4 id="montoDisponibleAdelanto" class="text-left col-md-3"> </h4>
+            </div>
+
+
+            <h3 class="text-right" id="saldoAPagar"></h3>
+
+            @{ if (Model.Egresos.DetalleEgresos.First().TipoEgresos.porcentajeRetencion > 0)
+                {
+
+                    <div class="form-group">
+                        <b class="control-label col-md-3">Pagado hasta el momento</b>
+                        <b class="label-info  col-md-3" id="pagado"></b>
+                        <b class="control-label col-md-3">Límite mensual y retención</b>
+                        <b class="label-info col-md-3">$ @limite || @porcentaje %</b>
+
+                    </div>
+                    <div class="form-group">
+                        <b class="control-label col-md-3">A Retener</b>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.retenido, new { htmlAttributes = new { @id = "retenido", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.retenido, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+        <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+    </div>
+                }

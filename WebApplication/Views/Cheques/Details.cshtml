@@ -1,0 +1,99 @@
+﻿@model WebApplication.Cheques
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cheques</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.banco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.banco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaEmitido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEmitido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaCobro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaCobro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cobrado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cobrado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numCheque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numCheque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enBlanco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enBlanco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Terceros.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terceros.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCheque }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

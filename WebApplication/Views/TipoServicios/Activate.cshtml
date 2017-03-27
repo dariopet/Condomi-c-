@@ -1,0 +1,38 @@
+﻿@model WebApplication.TipoServicios
+
+@{
+    ViewBag.Title = "Activate";  
+}
+
+<div class="modal-header ">
+   <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>   
+    <h3>¿Está seguro de activar este tipo de servicio?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+           Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">             
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

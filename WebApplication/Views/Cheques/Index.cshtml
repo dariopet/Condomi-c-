@@ -1,0 +1,217 @@
+﻿@model IEnumerable<WebApplication.Cheques>
+@{
+    ViewBag.Title = "Cheques";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-cheques');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<input hidden="hidden" value=2 id="fecha1" />
+<input hidden="hidden" value=3 id="fecha2" />
+<input hidden="hidden" value=4 id="suma1" />
+<input hidden="hidden" value=5 id="suma2" />
+<input hidden="hidden" value=6 id="suma3" />
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Cheques</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar un cheque", "Create", "Cheques", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+             <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Banco
+                    </th>
+                    <th>
+                        Fecha Emitido
+                    </th>
+                    <th>
+                        Fecha de Cobro
+                    </th>
+                    <th>
+                        Monto
+                    </th>
+                    <th>
+                        Total Cobrado
+                    </th>
+                    <th>
+                        Total Pagado
+                    </th>
+                    <th>
+                        Nº de cheque
+                    </th>
+
+                    <th>
+                        Recibido de
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Banco
+                    </th>
+                    <th>
+                        Fecha Emitido
+                    </th>
+                    <th>
+                        Fecha de Cobro
+                    </th>
+                    <th>
+                        Monto
+                    </th>
+                    <th>
+                        Total Cobrado
+                    </th>
+                    <th>
+                        Total Pagado
+                    </th>
+                    <th>
+                        Nº de cheque
+                    </th>
+
+                    <th>
+                        Recibido de
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.banco)
+                            @{ if (item.enBlanco == true)
+                                {
+                                    <i class='fa fa-circle-o'></i>
+                                }
+                                else
+                                {
+                                    <i class='fa fa-circle'></i>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.Raw(item.fechaEmitido.ToShortDateString()).ToHtmlString()
+
+                        </td>
+                        <td>
+                            @Html.Raw(item.fechaCobro.ToShortDateString()).ToHtmlString()
+
+                        </td>                       
+                        <td>
+                           @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.monto)).ToHtmlString()
+                        </td>
+                        <td>
+                            @{decimal totalCobrado = Convert.ToDecimal(Html.Action("getCobradoCheque", "Cheques", new { idCheque = item.idCheque }).ToString());
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalCobrado)).ToHtmlString()}
+                        </td>
+                        <td>
+                            @{decimal totalPagado = Convert.ToDecimal(Html.Action("getPagadoCheque", "Cheques", new { idCheque = item.idCheque }).ToString());
+                            @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalPagado)).ToHtmlString()}
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numCheque)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+                        </td>
+
+                        <td>
+                            @{if (item.activo == true && totalPagado == 0 && totalCobrado == 0)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "Cheques", new { id = item.idCheque }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Delete", "Cheques", new { id = item.idCheque }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                                }
+                                if (item.activo == false)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Activate", "Cheques", new { id = item.idCheque }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                                }
+                                @*if (totalCobrado > 0)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Index", "Cobros", new { idCheque = item.idCheque }, new { id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "ver cobros" }).ToHtmlString().Replace("XXX", "<i class='fa fa-hand-o-up'></i>")) ;
+
+                                }
+                                if (totalPagado > 0)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Index", "Pagos", new { idCheque = item.idCheque }, new {  id = "btnActivate", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "ver pagos" }).ToHtmlString().Replace("XXX", "<i class='fa fa-hand-o-down'></i>")) ;
+
+                                }*@
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

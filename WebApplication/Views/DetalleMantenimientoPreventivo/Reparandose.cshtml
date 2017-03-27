@@ -1,0 +1,29 @@
+﻿@model WebApplication.DetalleMantenimientoPreventivo
+
+@{
+    ViewBag.Title = "Delete";  
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+    <h3>¿Está seguro de cambiar el estado de este mantenimiento?</h3>
+</div>
+
+
+
+   
+    @*es un misterio, cuando uso solamente un beginform sin antiforgery vuelve a la pagina anterior, sino
+        da la antyforgery exception*@
+
+    @using (Html.BeginForm())
+    {
+    }
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+

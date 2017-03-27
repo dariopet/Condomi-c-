@@ -1,0 +1,84 @@
+﻿@model WebApplication.MantenimientoPreventivo
+
+
+@{
+    ViewBag.Title = "Editar mantenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-inventario');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-mantenimiento-preventivo');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+    <link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+    </script>
+}
+
+ 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body ">
+        <div class="form-horizontal">              
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.idMantenimientoPreventivo)
+            @Html.HiddenFor(model => model.activo)
+            @Html.HiddenFor(model => model.idUsuario)
+            @Html.HiddenFor(model => model.fechaGenerado)
+            @Html.HiddenFor(model => model.idModelo)
+        <div class="form-group">
+             <b class="control-label col-md-3">Descripción</b>          
+           <div class="col-md-9">   
+                @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+
+       
+
+        <div class="form-group">
+             <b class="control-label col-md-3">Fecha Límite</b>          
+           <div class="col-md-4">   
+                @Html.TextBoxFor(model => model.fechaLimite, new { @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy", @readonly = true, Value = Model.fechaLimite.ToShortDateString() })
+                @Html.ValidationMessageFor(model => model.fechaLimite, "", new { @class = "text-danger" })
+            </div>
+        
+             <b class="control-label col-md-2">Prioridad</b>          
+           <div class="col-md-3">   
+                @Html.EnumDropDownListFor(model => model.prioridad, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.prioridad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+        </div>
+     </div>
+
+    <div id="detailFrame">
+        @{Html.RenderAction("Index", "DetalleMantenimientoPreventivo", new { idMantenimientoPreventivo = Model.idMantenimientoPreventivo });}
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-warning hidden-print" onClick="history.go(-1);return true;">Cancelar</a>
+        <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+    </div>
+            }
+
+

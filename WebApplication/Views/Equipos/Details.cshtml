@@ -1,0 +1,68 @@
+﻿@model WebApplication.Equipos
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="modal-body">
+    <h2>Details</h2>
+
+    <div>
+        <h4>Equipos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ModelosEquipos.descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModelosEquipos.descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.idModelo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.idModelo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.serialNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.serialNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.codigoBarras)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.codigoBarras)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.estado)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idEquipo }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>

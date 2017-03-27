@@ -1,0 +1,58 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model <#= ViewDataTypeName #>
+
+@{
+    ViewBag.Title = "<#= ViewName#>";  
+}
+
+<div class="modal-header ">
+   <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>    
+    <h3>¿Está seguro de activar este <#= ViewDataTypeShortName #>?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+   
+    <dl class="dl-horizontal">
+<#
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>
+        <dt>
+            @Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.<#= GetValueExpression(property) #>)
+        </dd>
+
+<#
+    }
+}
+#>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">             
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

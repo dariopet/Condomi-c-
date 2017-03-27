@@ -1,0 +1,143 @@
+﻿@model WebApplication.CertificadoRetencion
+
+
+@{
+    ViewBag.Title = "Certificado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Menu{ 
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-pagos');
+            subMenuItem.addClass('active');
+        });
+</script>  
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="box">
+        <div class="form-horizontal">
+
+            <h2>Comprobante de retención</h2>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Fecha:</b>
+                <div class="col-md-9">
+                    @DateTime.Now.ToShortDateString()
+                </div>
+            </div>
+
+            <h2>A.- Datos del Agente de Retención</h2>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Apellido y Nombre o Denominación:</b>
+                <div class="col-md-9">
+                    @Model.condomi.nombre
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">C.U.I.T Nº:</b>
+                <div class="col-md-9">
+                    @Model.condomi.cuil
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Domicilio:</b>
+                <div class="col-md-9">
+                    @Html.Raw(Model.condomi.direccion + ", " + Model.condomi.localidad + " CP: " + Model.condomi.cp)
+                </div>
+            </div>
+
+            <h2>B.- Datos del Sujeto Retenido</h2>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Apellido y Nombre o Denominación:</b>
+                <div class="col-md-9">
+                    @Model.retenido.nombre
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">C.U.I.T Nº:</b>
+                <div class="col-md-9">
+                    @Model.retenido.cuil
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Domicilio:</b>
+                <div class="col-md-9">
+                    @Html.Raw(Model.retenido.direccion + ", " + Model.retenido.localidad + " CP: " + Model.retenido.cp)
+                </div>
+            </div>
+
+            <h2>C.- Datos de la Retención Practicada</h2>
+          
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Impuesto:</b>
+                <div class="col-md-9">
+                  Impuesto a las Ganancias
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Régimen</b>
+                <div class="col-md-9">
+                    @Model.pago.Egresos.DetalleEgresos.FirstOrDefault().TipoEgresos.conceptoRetencion
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Comprobante que origina la retención</b>
+                <div class="col-md-9">
+                    Factura Nro: @Model.pago.Egresos.factura
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Monto del comprobante que origina la retención</b>
+                <div class="col-md-9">
+                    @{
+                        decimal total = Convert.ToDecimal(Html.Action("getTotalEgreso", "Egresos", new { idEgreso = Model.pago.Egresos.idEgreso }).ToString());
+                    @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                        }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Monto de la retención</b>
+                <div class="col-md-9">                    
+                    @string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", Model.pago.retenido)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Firma del agente de</b>               
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-3">Aclaración:</b>
+            </div>
+            <div class="form-group">
+                <b class="control-label col-md-3">Cargo:</b>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-warning hidden-print"  onClick="history.go(-1);return true;" data-dismiss="modal">Volver</a>
+    </div>
+                }

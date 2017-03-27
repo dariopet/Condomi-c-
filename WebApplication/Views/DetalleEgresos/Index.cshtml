@@ -1,0 +1,127 @@
+﻿@model IEnumerable<WebApplication.DetalleEgresos>
+@{
+    ViewBag.Title = "DetalleEgresos";
+    Layout = null;
+    List<decimal> totalGeneral = new List<decimal>();
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box col-md-12">
+    <div class="box-header">
+        <h3 class="box-title"> Detalle del egreso</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar un item al egreso", "Create", "DetalleEgresos", new { idEgreso = ViewBag.idEgreso }, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabladetalles">
+            <thead>
+                <tr>
+                    <th>
+                        Precio Unitario
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Tipo de Egreso
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        Precio Unitario
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                   
+                    <th>
+                        Tipo de Egreso
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.monto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cantidad)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoEgresos.descripcion)
+                        </td>
+                        <td>
+                            @{
+                                decimal total = 0;
+                                total = item.cantidad * item.monto;
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                                totalGeneral.Add(total);
+                            }
+                        </td>
+
+                        <td>
+                           
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "DetalleEgresos", new { id = item.idDetalleEgreso }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) 
+                                    @Html.Raw(@Html.ActionLink("XXX", "Delete", "DetalleEgresos", new { id = item.idDetalleEgreso }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) 
+                               
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+        @{
+            decimal totalEgreso = 0;
+            for (int i = 0; i < totalGeneral.Count; i++)
+            {
+                totalEgreso += totalGeneral[i];
+            }
+        }
+        <h4 class="text-right" id="txtsubtotal"></h4>
+        <h4 class="text-right" id="txtingresosbrutos"></h4>
+        <h4 class="text-right" id="txtimpuestosinternos"></h4>
+        <h4 class="text-right" id="txtpercepcioniva"></h4>
+         <h4 class="text-right" id="txtresultadoiva"></h4>
+        
+        <h3 class="text-right" id="txttotalfinal"></h3>
+        
+        @*<h3 class="text-right">
+            @Html.Raw("Total: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalIngreso)).ToHtmlString()
+            
+        </h3>*@
+        @*@Html.Hidden("hola",totalIngreso.ToString(), new { htmlAttributes = new { @id = "totalingreso" } })*@
+        <input hidden="hidden" value="@totalEgreso" id="totalegreso">
+         
+        
+    </div>
+</div>

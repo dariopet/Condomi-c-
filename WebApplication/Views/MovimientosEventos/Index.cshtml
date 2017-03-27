@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Movimientos de Eventos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-movimientos-evento');
+            subMenuItem.addClass('active');
+        });
+    </script>
+  
+<script src="~/Scripts/movimientosEventos.js"></script>
+
+}
+
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Movimientos de Eventos</h3>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <b class="control-label col-md-2">Evento</b>
+            <div class="col-md-4">
+                @Html.DropDownList("idEvento", null, htmlAttributes: new { @class = "form-control", @id = "cmbEvento", @onchange= "cargarMovimientosEventos()" })              
+            </div>
+        </div>
+
+        <br />
+
+        <div id="contenido">
+
+        </div>
+</div>
+    </div>

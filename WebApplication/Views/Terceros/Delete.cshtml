@@ -1,0 +1,105 @@
+﻿@model WebApplication.Terceros
+
+@{
+    ViewBag.Title = "Delete";  
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>¿Está seguro de anular este tercero?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+    <dl class="dl-horizontal">
+       
+
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            Dirección
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            CUIL
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cuil)
+        </dd>
+
+        <dt>
+            E-Mail
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+
+        <dt>
+            Celular
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+
+        <dt>
+            Observaciones
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observaciones)
+        </dd>
+
+        <dt>
+            Saldo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo)
+        </dd>
+
+
+        <dt>
+            Tipo de tercero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTerceros.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

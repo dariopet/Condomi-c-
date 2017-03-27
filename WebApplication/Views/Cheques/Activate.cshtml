@@ -1,0 +1,78 @@
+﻿@model WebApplication.Cheques
+
+@{
+    ViewBag.Title = "Activate";  
+}
+
+<div class="modal-header ">
+   <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>    
+    <h3>¿Está seguro de activar este cheque?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+   
+    <dl class="dl-horizontal">
+        <dt>
+            Banco
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.banco)
+        </dd>
+
+        <dt>
+            Fecha emitido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEmitido)
+        </dd>
+
+        <dt>
+            Fecha de cobro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaCobro)
+        </dd>
+        <dt>
+            Monto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            Nº de cheque
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numCheque)
+        </dd>
+
+        <dt>
+            Recibido de
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terceros.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">             
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

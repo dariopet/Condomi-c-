@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Próximos cobros";
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-proximos-cobros');
+            subMenuItem.addClass('active');
+        });
+    </script>
+
+<script src="~/Scripts/proximosCobros.js"></script>
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+</script>
+
+}
+
+ 
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Próximos Cobros </h3>
+    </div>
+    <div class="box-body">
+
+        <div class="form-group">
+            <b class="control-label col-md-2">Hasta la fecha</b>            
+            <div class="col-md-4">
+                <input class="form-control datepicker"value="@DateTime.Now.AddDays(15).ToShortDateString()"  datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaTope" onchange="cargarProximosCobros()" />
+            </div>
+        </div>
+  
+        <br />
+        <div id="contenido">
+
+        </div>
+</div>
+    </div>

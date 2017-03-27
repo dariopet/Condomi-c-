@@ -1,0 +1,169 @@
+﻿@model IEnumerable<WebApplication.Cuentas>
+@{
+    ViewBag.Title = "Cuentas bancarias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-cuentas');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<input hidden="hidden" value=2 id="suma1" />
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Cuentas Bancarias</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar Cuenta Bancaria", "Create", "Cuentas", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Fondos
+                    </th>
+                    <th>
+                        Tipo de cuenta
+                    </th>
+                    <th>
+                        Cuenta contable
+                    </th>
+                    <th>
+                        CBU
+                    </th>
+                    <th>
+                        Banco
+                    </th>
+                    <th>
+                        Número
+                    </th>
+                    <th>
+                        Titular
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Fondos
+                    </th>
+                    <th>
+                        Tipo de cuenta
+                    </th>
+                    <th>
+                        Cuenta contable
+                    </th>
+                    <th>
+                        CBU
+                    </th>
+                    <th>
+                        Banco
+                    </th>
+                    <th>
+                        Número
+                    </th>
+                    <th>
+                        Titular
+                    </th>
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fondos)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoCuentas.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlanCuentas.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CBU)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.banco)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Terceros.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+                        </td>
+                        <td>
+                            @{
+                                //Si no es la cuenta ninguna puedo ver los movimientos
+                                if (item.idCuenta != 0)
+                                {
+                                    @*@Html.Raw(@Html.ActionLink("XXX", "Index", "MovimientosCuentas", new { idCuenta = item.idCuenta }, new { id = "btnEdit", @class = "btn btn-info", @style = "margin-right:3px; margin-bottom:3px", @title = "Ver movimientos" }).ToHtmlString().Replace("XXX", "<i class='fa fa-calculator'></i>")) ;*@
+
+                                }
+                                if (item.idCuenta >0)//si la cuenta no es "ninguna" ni "vales" ni"adelantos" la puedo editar
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "Cuentas", new { id = item.idCuenta }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                                }
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

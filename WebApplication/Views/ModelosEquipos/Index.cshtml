@@ -1,0 +1,150 @@
+﻿@model IEnumerable<WebApplication.ModelosEquipos>
+@{
+    ViewBag.Title = "Modelos de equipos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-inventario');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-modelo-equipos');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Modelos de equipos</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar Modelo", "Create", "ModelosEquipos", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+             <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Costo x hora
+                    </th>
+                    <th>
+                        Costo x día
+                    </th>
+                    <th>
+                        Precio x hora
+                    </th>
+                    <th>
+                        Precio x día
+                    </th>
+                    <th>
+                        Tipo de servicio
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Costo x hora
+                    </th>
+                    <th>
+                        Costo x día
+                    </th>
+                    <th>
+                        Precio x hora
+                    </th>
+                    <th>
+                        Precio x día
+                    </th>
+                    <th>
+                        Tipo de servicio
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.costoHora)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.costoDia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.precioHora)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.precioDia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoServicios.descripcion)
+                        </td>
+
+                        <td>
+                            @{if (item.activo == true)
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "ModelosEquipos", new { id = item.idModelo }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Delete", "ModelosEquipos", new { id = item.idModelo }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                                }
+                                else
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Activate", "ModelosEquipos", new { id = item.idModelo }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                                }
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+</div>

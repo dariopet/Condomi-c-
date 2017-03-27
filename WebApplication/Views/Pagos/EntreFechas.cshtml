@@ -1,0 +1,163 @@
+﻿@model IEnumerable<WebApplication.Pagos>
+@{ Layout = null;}
+
+<input hidden="hidden" value=4 id="suma1" />
+<input hidden="hidden" value=5 id="suma2" />
+<input hidden="hidden" value=6 id="texto1" />
+
+@Scripts.Render("~/AdminLTE/plugins/jquery/jsB")
+@Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+@Scripts.Render("~/AdminLTE/bootstrap/jsB")
+@Scripts.Render("~/Scripts/modalform.js")
+@Scripts.Render("~/AdminLTE/plugins/datatables/jsB")
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box-body">
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egreso
+                </th>
+                <th>
+                    Factura
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Retenido
+                </th>
+
+                <th>
+                    Cuenta origen
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egreso
+                </th>
+                <th>
+                    Factura
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Retenido
+                </th>
+                <th>
+                    Cuenta origen
+                </th>
+                <th>
+                    Creado por
+                </th>
+                <th>
+                    Editado por
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @Html.Raw( item.Egresos.descripcion + " - Pago Nº" + item.idPago.ToString())
+                    </td>
+                    <td>
+                        @Html.Raw(item.Egresos.factura + "-" + item.Egresos.tipoFactura + " " + item.Egresos.Terceros.nombre)
+                        @{ if (item.Egresos.enBlanco == true)
+                            {
+                                <i class='fa fa-circle-o'></i>
+                            }
+                            else
+                            {
+                                <i class='fa fa-circle'></i>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString())
+                    </td>
+                    <td>
+                        @{ @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.monto)).ToHtmlString()}
+                    </td>
+                    <td>
+                        @{ @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.retenido)).ToHtmlString()}
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuentas.descripcion)
+                        @{ if (item.Cuentas.idCuenta == 2)
+                            {
+                                @Html.Raw("Nº: " + item.Cheques.numCheque + " Banco: " + item.Cheques.banco)
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                        @Html.DisplayFor(modelItem => item.fechaEditado)
+
+                    </td>
+                    <td>
+                        @*@Html.Raw(@Html.ActionLink("XXX", "Edit", "Pagos", new { id = item.idPago }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))*@
+                        @Html.Raw(@Html.ActionLink("XXX", "Delete", "Pagos", new { id = item.idPago }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))
+
+                        @{ if (item.retenido != null && item.retenido > 0)
+                            {
+                                @Html.Raw(@Html.ActionLink("XXX", "exportarRetenciones", "Pagos", new { idPago = item.idPago }, new {id = "btnEdit", @class = "btn btn-info hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Exportar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-save'></i>"))
+                                @Html.Raw(@Html.ActionLink("XXX", "CertificadoRetencion", "Pagos", new { idPago = item.idPago }, new { id = "btnEdit", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Imprimir comprobante" }).ToHtmlString().Replace("XXX", "<i class='fa fa-print'></i>"))
+                            }
+                        }
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>
+

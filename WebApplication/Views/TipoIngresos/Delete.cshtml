@@ -1,0 +1,48 @@
+﻿@model WebApplication.TipoIngresos
+
+@{
+    ViewBag.Title = "Delete";  
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>¿Está seguro de anular este tipo de ingreso?</h3>
+</div>
+
+
+<div class="modal-body ">
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            Plan de cuenta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanCuentas.descripcion)
+        </dd>
+
+      
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div class="modal-footer">
+                <button class="btn btn-warning hidden-print" data-dismiss="modal">No</button>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+    }
+    </div>
+</div>
+

@@ -1,0 +1,152 @@
+﻿@model WebApplication.Egresos
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+
+		function verificarFactura() {
+		  $.ajax({
+                url: '@Url.Action("ExisteFactura", "Egresos")',
+                dataType: 'html',
+                data: {
+                    'factura': $('#factura').val()
+                },
+                traditional: true,
+                type: 'POST',
+                success: function (content) {
+                    $("#alerta").html(content);
+
+                    }
+            });
+	};
+</script>
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body "> 
+        <div class="form-horizontal">     
+      
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Factura</b>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.factura, new { htmlAttributes = new { @class = "form-control", @id="factura", @onchange="verificarFactura()" } })
+                    @Html.ValidationMessageFor(model => model.factura, "", new { @class = "text-danger" })
+                    <div id="alerta"></div>
+                </div>
+
+                <div class="col-md-2">
+                    @Html.EnumDropDownListFor(model => model.tipoFactura, htmlAttributes: new {  @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.tipoFactura, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-1">EB</b>
+                <div class="col-md-1">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.enBlanco)
+                        @Html.ValidationMessageFor(model => model.enBlanco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Descripción</b>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Emitida</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaGenerada, new { Value = DateTime.Now.ToShortDateString(), @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaGenerada, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2">Vencimiento</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaVencimiento, new { Value=DateTime.Now.ToShortDateString(), @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaVencimiento, "", new { @class = "text-danger" })
+                </div>              
+            </div>
+
+
+            <div class="form-group">               
+                <b class="control-label col-md-2"> Pertenece a evento</b>
+                <div class="col-md-4">
+                    @Html.DropDownList("idEvento", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idEvento, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2"> Tercero</b>
+                <div class="col-md-4">
+                    @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idTercero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Impuestos Internos</b>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.impuestosInternos, new { htmlAttributes = new { Value = 0, @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.impuestosInternos, "", new { @class = "text-danger" })
+                </div>
+                <b class="control-label col-md-2">Ingresos Brutos</b>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ingresosBrutos, new { htmlAttributes = new { Value = 0, @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ingresosBrutos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">IVA</b>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.iva, new { htmlAttributes = new { Value = 0, @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.iva, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Percepción Iva</b>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.percepcionIva, new { htmlAttributes = new { Value = 0, @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.percepcionIva, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">               
+                <b class="control-label col-md-2"> Cuenta contable </b>
+                <div class="col-md-10">
+                    @Html.DropDownList("idPlanCuentas", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idPlanCuentas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+          </div>
+        </div>
+    
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+   }
+

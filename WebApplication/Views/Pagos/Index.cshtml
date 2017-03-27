@@ -1,0 +1,90 @@
+﻿@{
+    if (ViewBag.unEgreso == "si")
+    {
+        ViewBag.Title = "Pagos de " + ViewBag.Descripcion;
+    }
+    else
+    {
+        ViewBag.Title = "Pagos";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Menu {
+<script src="../../AdminLTE/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<link href="~/AdminLTE/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<script src="~/AdminLTE/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-pagos');
+            subMenuItem.addClass('active');
+        });
+    </script>  
+
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datetimepicker({
+		        autoclose: true,
+		        minView: 'month',
+		        format: 'dd/mm/yyyy',
+                language:'es'
+		    });
+		});
+</script>
+    <script>
+        function pagosFecha() {
+            $.ajax({
+                url: '@Url.Action("EntreFechas", "Pagos")',
+                dataType: 'html',
+                data: {
+                    'inicioT': $('#fechaInicio').val(), 'finT': $('#fechaFin').val()
+                },
+                traditional: true,
+                type: 'POST',
+                success: function (content) {
+                    $("#contenido").html(content);
+
+                    }
+            });
+        };
+        $('document').ready(function () {
+            pagosFecha();
+        });
+    </script>
+    
+}
+
+
+<div class="box">
+
+    <div class="box-header">
+        <div class="form-group text-right">
+        <h3 class="box-title col-md-2"> Lista de Pagos</h3>       
+            <b class="control-label col-md-1">Desde</b>
+            <div class="col-md-2">
+                @{ if (ViewBag.unEgreso == "si")
+                    {
+                        <input class="form-control datepicker" value="01/01/2016" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaInicio" onchange="pagosFecha()" />
+                    }
+                    else
+                    {
+                        <input class="form-control datepicker" value="01/@DateTime.Now.Month.ToString()/@DateTime.Now.Year.ToString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaInicio" onchange="pagosFecha()" />
+                    }
+
+                }
+               
+            </div>
+            <b class="control-label col-md-1">Hasta</b>
+            <div class="col-md-2">
+                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="pagosFecha()" />
+            </div>           
+        </div>
+    </div>
+    <div id="contenido">
+    </div>
+</div>
+

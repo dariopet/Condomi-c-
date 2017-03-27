@@ -1,0 +1,102 @@
+﻿@model WebApplication.Sueldos
+
+
+@{
+    ViewBag.Title = "Create";
+    <script src = "../../Scripts/sueldosDinamico.js" > </script>
+    <script>
+        getDatosSueldo("create");
+    </script>
+}
+
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $("#periodo").datepicker({
+        format: "mm/yyyy",
+        startView: "months",
+        minViewMode: "months",
+        autoclose:true
+    });
+</script>
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body "> 
+        <div class="form-horizontal">     
+      
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <b class="control-label col-md-3"> Empleado</b>
+            <div class="col-md-9">
+                @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control", @id="empleados", @onchange= "getDatosSueldo()" })
+                @Html.ValidationMessageFor(model => model.idTercero, "", new { @class = "text-danger" })
+            </div>           
+        </div>
+            <input type="hidden" value="0" id="pagoOriginal" />
+        <div class="form-group">
+                <b class="control-label col-md-3">Sueldo base</b>           
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.@base, new { htmlAttributes = new {Value=0, @class = "form-control", @id="base", @onchange= "getPrecioHora()" } })
+                @Html.ValidationMessageFor(model => model.@base, "", new { @class = "text-danger" })
+            </div>
+        
+                <b class="control-label col-md-3">Valor hora</b>
+                <div class="col-md-3">
+                    <input id="valorhora" class="form-control"  onchange="calcularSueldo()" value="0" />
+                 
+                </div>
+            </div>
+        <div class="form-group">
+                <b class="control-label col-md-3">Período</b>           
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.periodo, new { Value = DateTime.Now.Month + "/" + DateTime.Now.Year, @id = "periodo", @class = "form-control", @readonly = true, @onchange= "getDatosSueldo()" })
+                @Html.ValidationMessageFor(model => model.periodo, "", new { @class = "text-danger" })
+            </div>
+            <b class="control-label col-md-3"> Cobrado período anterior</b>
+            <div class="col-md-3">
+                <input id="cobradoAnterior" class="form-control" value="0" readonly="readonly" />
+            </div>
+        </div>
+            <div class="form-group">
+                <b class="control-label col-md-3">Horas que no trabajo en el período</b>  
+                <h4 id="horasNoTrabajadas" class="control-label col-md-3"></h4>
+                <b class="control-label col-md-3">Total adelantos</b>  
+                <h4 id="adelantos" class="control-label col-md-3"></h4>
+                </div>
+                <div class="form-group">
+                    <b class="control-label col-md-3"> Cuenta de origen</b>
+                    <div class="col-md-3">
+                        @Html.DropDownList("idCuenta", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idCuenta, "", new { @class = "text-danger" })
+                    </div>
+                    <b class="control-label col-md-3">Monto a pagar</b>
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.monto, new { htmlAttributes = new { Value = 0, @class = "form-control", @id = "monto", @onchange = "calcularSueldo()" } })
+                        @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <h3 id="aPagar" class="text-right"></h3>
+
+            </div>
+        </div>
+
+
+
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+   }
+

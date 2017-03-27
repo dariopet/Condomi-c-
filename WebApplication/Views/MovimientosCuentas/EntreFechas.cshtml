@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebApplication.MovimientosCuentas>
+
+
+<input hidden="hidden" value=2 id="suma1" />
+<input hidden="hidden" value=5 id="suma2" />
+<input hidden="hidden" value=3 id="fecha1" />
+
+<script src="../../Scripts/tablaexportar.js"></script>
+
+<div class="box-body">
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    Monto
+                </th>
+
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    activo
+                </th>
+                <th>
+                    Egresos
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Fecha Emisión
+                </th>
+                <th>
+                    Ingresos
+                </th>
+                <th>
+                    Monto
+                </th>
+
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        @{ if (item.transferencia != null)
+                            {
+                                if (item.transferencia.idCuentaOrigen == item.idCuenta)
+                                {
+                                    @Html.Raw("Transferencia: " + item.transferencia.descripcion);
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.pago.Egresos.descripcion)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{ if (item.transferencia != null)
+                            {
+                                if (item.transferencia.idCuentaOrigen == item.idCuenta)
+                                {
+                                    @Html.DisplayFor(modelItem => item.transferencia.monto)
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.pago.monto)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.fecha.ToShortDateString()).ToHtmlString()
+                    </td>
+                    <td>
+                        @{ if (item.transferencia != null)
+                            {
+                                if (item.transferencia.idCuentaDestino == item.idCuenta)
+                                {
+                                    @Html.Raw("Transferencia: " + item.transferencia.descripcion);
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.cobro.Ingresos.descripcion)
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{ if (item.transferencia != null)
+                            {
+                                if (item.transferencia.idCuentaDestino == item.idCuenta)
+                                {
+                                    @Html.DisplayFor(modelItem => item.transferencia.monto)
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.cobro.monto)
+                            }
+                        }
+                    </td>
+                    <td>
+
+
+                        @*@Html.Raw(@Html.ActionLink("XXX", "Edit", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "Terceros", new { id = item.idTercero }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))*@
+
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+</div>

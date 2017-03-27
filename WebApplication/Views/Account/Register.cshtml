@@ -1,0 +1,77 @@
+﻿@model WebApplication.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrarse";
+    Layout = null;
+}
+
+<div class="modal-header ">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h4 class="modal-title" id="myModalLabel">Nuevo usuario</h4>
+</div>
+
+
+@using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+    <div class="modal-body ">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+            <b class="control-label col-md-3">Nombre de usuario</b>
+            <div class="form-group has-feedback col-md-9">
+                @Html.TextBoxFor(m => m.NameIdentifier, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NameIdentifier, "", new { @class = "text-danger" })
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+        </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">E-mail</b>
+                <div class="form-group has-feedback col-md-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email , "", new { @class = "text-danger" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-3">Contraseña</b>
+                <div class="form-group has-feedback col-md-9">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <b class="control-label col-md-3">Repetir contraseña</b>
+                <div class="form-group has-feedback col-md-9">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+            </div>
+            
+            @*<div class="form-group">
+                <b class="control-label col-md-3">Rol</b>
+                <div class="form-group has-feedback col-md-9">
+                    @Html.DropDownList("Name")
+
+                </div>
+            </div>*@
+
+           
+
+         
+        </div>
+    </div>
+
+
+        <div class="modal-footer">
+            <a class="btn btn-warning hidden-print" data-dismiss="modal">Cancelar</a>
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+
+}
+
+

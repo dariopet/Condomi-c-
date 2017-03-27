@@ -1,0 +1,107 @@
+﻿@model WebApplication.Terceros
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Terceros</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.telefono)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.direccion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.direccion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.cuil)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.cuil)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.mail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.mail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.celular)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.celular)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.observaciones)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.observaciones)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.saldo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.saldo)
+            </dd>
+    
+                
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoTerceros.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoTerceros.descripcion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idTercero }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

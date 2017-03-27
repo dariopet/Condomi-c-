@@ -1,0 +1,124 @@
+﻿@model IEnumerable<WebApplication.ProximasCompras>
+@{
+    ViewBag.Title = "Próximas Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<decimal> totalGeneral = new List<decimal>();
+   
+}
+
+@section Menu {
+    <script>
+   $(function () {
+    var menuItem = $('#left-sidebar-menu-inventario');
+    menuItem.addClass('active');
+    var subMenuItem = menuItem.find('#left-sidebar-menu-proximas-compras');
+    subMenuItem.addClass('active');
+   });
+</script>
+<script src="../../Scripts/tablaexportar.js"></script>
+}
+
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<input hidden="hidden" value=3 id="suma1" />
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de compras próximas</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @Html.ActionLink("Agregar una compra próxima", "Create", "ProximasCompras", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+              <tr>
+                  <th>
+                      activo
+                  </th>
+           <th>
+               Descripción
+           </th>
+           <th>
+               Prioridad
+           </th>
+           <th>
+               Monto
+           </th>
+           <th>
+            Acciones
+            </th>
+         </tr>
+    </thead>
+     <tfoot>
+          <tr>
+              <th>
+                  activo
+              </th>
+              <th>
+                  Descripción
+              </th>
+              <th>
+                  Prioridad
+              </th>
+              <th>
+                  Monto
+              </th>
+              <th>
+                  Acciones
+              </th>
+           </tr>
+          </tfoot>
+          <tbody>
+            @foreach (var item in Model)
+            {
+               <tr>
+                   <td>
+                       1
+                   </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.descripcion)
+                      </td>
+                       <td>
+                              @Html.DisplayFor(modelItem => item.prioridad)
+                      </td>
+                       <td>@{ 
+                                 totalGeneral.Add(item.monto);
+                           }
+                              @Html.DisplayFor(modelItem => item.monto)
+                      </td>
+      
+                         <td>                          
+                        
+                            @Html.Raw(@Html.ActionLink("XXX", "Edit", "ProximasCompras", new {id=item.idProximaCompra }, new { data_modal = "", id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>"))                                  
+                            @Html.Raw(@Html.ActionLink("XXX", "Delete", "ProximasCompras", new { id=item.idProximaCompra }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>"))                                   
+                         
+                 </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+        @{
+            decimal totalComprasProximas = 0;
+            for (int i = 0; i < totalGeneral.Count; i++)
+            {
+                totalComprasProximas += totalGeneral[i];
+            }
+
+        }
+        <h3 class="text-right">
+            @Html.Raw("Total: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalComprasProximas)).ToHtmlString()
+        </h3>
+    </div>
+</div>

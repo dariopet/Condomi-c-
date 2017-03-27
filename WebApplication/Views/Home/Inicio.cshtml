@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Cronograma de eventos";
+    ViewBag.SubTitle = "";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-inicio');
+            menuItem.addClass('active');
+        });
+    </script>
+}
+
+
+@*@Styles.Render("~/AdminLTE/plugins/fullcalendar/cssB")*@
+@Styles.Render("~/AdminLTE/dist/cssB")
+
+<link href="~/AdminLTE/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-body">
+    <div id="external-events">
+        <div class="col-md-3">
+            <div class="external-event bg-light-blue" style="cursor:default">Presupuestado</div>
+        </div>
+        <div class="col-md-3">
+            <div class="external-event bg-green" style="cursor:default">Aceptado</div>
+        </div>
+        <div class="col-md-3">
+            <div class="external-event bg-yellow" style="cursor:default">Cumplido</div>
+        </div>
+        <div class="col-md-3">
+            <div class="external-event bg-red" style="cursor:default">Finalizado</div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/jsB")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/jsB")
+    @Scripts.Render("~/AdminLTE/plugins/fullcalendar/jsB")
+
+    @*@Scripts.Render("~/Scripts/Calendar")*@
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: ''
+                },
+                monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+                dayNamesShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                buttonText: { prev: "<span class='fc-text-arrow'>&lsaquo;</span>", next: "<span class='fc-text-arrow'>&rsaquo;</span>", prevYear: "<span class='fc-text-arrow'>&laquo;</span>", nextYear: "<span class='fc-text-arrow'>&raquo;</span>", today: "hoy", month: "mes", week: "semana", day: "día" },
+
+                editable: false,
+
+                events: "/home/getevents/"
+
+            });
+        });
+
+
+
+
+
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿@model WebApplication.Eventos
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Eventos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.observaciones)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.observaciones)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaInicio)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fechaInicio)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaFin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fechaFin)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.estado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Terceros.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Terceros.nombre)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idEvento }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

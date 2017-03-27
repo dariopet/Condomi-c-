@@ -1,0 +1,244 @@
+﻿@model IEnumerable<WebApplication.Presupuestos>
+@{
+    if (ViewBag.unEvento == "si")
+    {
+        ViewBag.Title = "Presupuestos de " + ViewBag.Descripcion;
+    }
+    else
+    {
+        ViewBag.Title = "Presupuestos";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-eventos');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-ver-presupuestos');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <script src="../../Scripts/tablaexportar.js"></script>
+}
+
+<input hidden="hidden" value=3 id="fecha1" />
+<input hidden="hidden" value=4 id="fecha2" />
+<input hidden="hidden" value=8 id="suma1" />
+
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Presupuestos</h3>
+    </div>
+    <div class="box-body">
+        <p>
+            @{
+                List<decimal> totalGeneral = new List<decimal>();
+                List<decimal> totalAceptado = new List<decimal>();
+                if (ViewBag.unEvento == "si")
+                {
+                    @Html.ActionLink("Agregar Presupuesto", "Create", "Presupuestos", new { id = ViewBag.idEvento }, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print" })
+                }
+            }
+             <label class="hidden-print"><input type="checkbox" id="cbAnulados"  value="cbAnulados" class="hidden-print" >Mostrar anulados</label>
+        </p>
+        <table class="table table-bordered table-striped" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Fecha de inicio
+                    </th>
+                    <th>
+                        Fecha de finalización
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Observaciones
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        activo
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Evento
+                    </th>
+                    <th>
+                        Fecha de inicio
+                    </th>
+                    <th>
+                        Fecha de finalización
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Observaciones
+                    </th>
+                    <th>
+                        Creado por
+                    </th>
+
+                    <th>
+                        Editado por
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @{
+                                if (item.activo == false)
+                                {
+                                    @Html.Raw(0).ToHtmlString();
+
+                                }
+                                else
+                                {
+                                    @Html.Raw(1).ToHtmlString();
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Eventos.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fechaFin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                        <td>
+                            @{
+                                decimal total = 0m;
+                                decimal aceptado = 0m;
+                                foreach (var det in item.DetallePresupuesto)
+                                {
+                                    if (item.activo == true)
+                                    {
+                                        total += det.cantidad * ((det.precioDia * det.dias) + (det.precioHora * det.horas));
+                                        if (item.estado == estadoPresupesto.Aceptado)
+                                        {
+                                            aceptado += det.cantidad * ((det.precioDia * det.dias) + (det.precioHora * det.horas));
+                                        }
+                                    }
+                                }
+                                if (item.bonificacion != null)
+                                {
+                                    total -= Convert.ToDecimal(item.bonificacion);
+                                }
+                                totalAceptado.Add(aceptado);
+                                totalGeneral.Add(total);
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", total)).ToHtmlString()
+                            }
+
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.observaciones)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUsers.NameIdentifier)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
+                            @Html.DisplayFor(modelItem => item.fechaEditado)
+
+                        </td>
+
+                        <td>
+                            @{if (item.activo == true)
+                                {
+
+                                    @Html.Raw(@Html.ActionLink("XXX", "Details", "Presupuestos", new { id = item.idPresupuesto }, new { data_modal = "", id = "btnDetails", @class = "btn btn-info", @style = "margin-right:3px; margin-bottom:3px", @title = "Detalles" }).ToHtmlString().Replace("XXX", "<i class='fa fa-navicon'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Edit", "Presupuestos", new { id = item.idPresupuesto }, new { id = "btnEdit", @class = "btn btn-warning hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Editar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-pencil'></i>")) ;
+                                    @Html.Raw(@Html.ActionLink("XXX", "Delete", "Presupuestos", new { id = item.idPresupuesto }, new { data_modal = "", id = "btnDelete", @class = "btn btn-danger hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Anular" }).ToHtmlString().Replace("XXX", "<i class='fa fa-remove'></i>")) ;
+                                }
+                                else
+                                {
+                                    @Html.Raw(@Html.ActionLink("XXX", "Activate", "Presupuestos", new { id = item.idPresupuesto }, new { data_modal = "", id = "btnActivate", @class = "btn btn-success hidden-print", @style = "margin-right:3px; margin-bottom:3px", @title = "Activar" }).ToHtmlString().Replace("XXX", "<i class='fa fa-arrow-up'></i>")) ;
+                                }
+                            }
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+        @{
+            decimal totalPresupuestos = 0;
+            for (int i = 0; i < totalGeneral.Count; i++)
+            {
+                totalPresupuestos += totalGeneral[i];
+            }
+            decimal sumaAceptado = 0;
+            for (int i = 0; i < totalAceptado.Count; i++)
+            {
+                sumaAceptado += totalAceptado[i];
+            }
+        }
+        <h3 class="text-right">
+            @Html.Raw("Total presupuestado: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", totalPresupuestos)).ToHtmlString()
+        </h3>
+        <h3 class="text-right">
+            @Html.Raw("Total Aceptado: " + string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", sumaAceptado)).ToHtmlString()
+        </h3>
+    </div>
+</div>

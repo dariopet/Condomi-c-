@@ -1,0 +1,78 @@
+﻿@model WebApplication.Equipos
+
+@{
+    ViewBag.Title = "Activate";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal-header">
+    <a type="button" class="close" data-dismiss="modal" aria-hidden="true" href="">&times;</a>
+    <h3>¿Está seguro de activar este equipo?</h3>   
+</div>
+
+<div class="modal-body">
+
+    <div>
+
+        
+        <dl class="dl-horizontal">
+
+            <dt>
+                Modelo
+            </dt>
+
+            <dd>
+               
+                    @Html.DisplayFor(model => model.ModelosEquipos.descripcion)
+             
+            </dd>
+
+            <dt>
+                Nº de serie
+             </dt>
+
+            <dd>
+               
+                    @Html.DisplayFor(model => model.serialNumber)
+                
+            </dd>
+
+            <dt>
+                Código de barras
+            </dt>
+
+            <dd>
+                
+                    @Html.DisplayFor(model => model.codigoBarras)
+                
+            </dd>
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.estado)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.estado)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.activo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.activo)
+                </dd>*@
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="modal-footer">
+                <a class="btn btn-warning hidden-print" data-dismiss="modal">No</a>
+                <input class="btn btn-success hidden-print" type="submit" value="Si" />
+            </div>
+        }
+    </div>
+</div>

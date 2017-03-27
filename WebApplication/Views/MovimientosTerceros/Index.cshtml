@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Movimientos de Terceros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-movimientos-terceros');
+            subMenuItem.addClass('active');
+        });
+</script>
+
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+</script>
+<script src="~/Scripts/movimientosTerceros.js"></script>
+}
+
+
+
+<div class="box">
+
+    <div class="box-header">
+        <h3 class="box-title"> Lista de terceros </h3>
+        <hr />
+        <div class="form-group">
+            <b class="control-label col-md-1">Desde</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="01/@DateTime.Now.Month.ToString()/@DateTime.Now.Year.ToString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaInicio" onchange="cargarMovimientosTerceros()" />
+
+            </div>
+            <b class="control-label col-md-1">Hasta</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosTerceros()" />
+            </div>
+            <b class="control-label col-md-1">Tercero</b>
+            <div class="col-md-3">
+                @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control", @id = "tercero", @onchange = "cargarMovimientosTerceros()" })
+            </div>
+        </div>
+    </div>
+    <div id="contenido">
+
+    </div>
+</div>

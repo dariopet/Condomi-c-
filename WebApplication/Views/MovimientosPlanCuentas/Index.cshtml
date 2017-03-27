@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Movimientos de Plan de cuentas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-movimientos-plan-cuentas');
+            subMenuItem.addClass('active');
+        });
+    </script>
+   
+    <script src="~/Scripts/movimientosPlanCuentas.js"></script>
+    <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+    <link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+    </script>
+}
+
+
+<div class="box">
+
+    <div class="box-header">
+        <h3 class="box-title"> Lista de Movimientos Plan de Cuentas </h3>
+        <hr />
+        <div class="form-group">
+            <b class="control-label col-md-1">Desde</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="01/@DateTime.Now.Month.ToString()/@DateTime.Now.Year.ToString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaInicio" onchange="cargarMovimientosPlanCuentas()" />
+
+            </div>
+            <b class="control-label col-md-1">Hasta</b>
+            <div class="col-md-3">
+                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosPlanCuentas()" />
+            </div>
+            <b class="control-label col-md-1"> Plan de Cuentas</b>
+            <div class="col-md-3">
+                @Html.DropDownList("idPlanCuentas", null, htmlAttributes: new { @class = "form-control", @id= "plan", @onchange = "cargarMovimientosPlanCuentas()" })
+            </div>
+        </div>
+    </div>
+ <div id="contenido">
+
+ </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model WebApplication.MantenimientoPreventivo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MantenimientoPreventivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaEditado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEditado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaGenerado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaGenerado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaLimite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaLimite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Editado.NameIdentifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Editado.NameIdentifier)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMantenimientoPreventivo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Saldo IVA";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-contabilidad');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-saldo-iva');
+            subMenuItem.addClass('active');
+        });
+    </script>
+  
+<script src="~/Scripts/ivaSaldo.js"></script>
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/AdminLTE/plugins/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+<script type="text/javascript">
+		$('document').ready(function() {
+		    $('.datepicker').datepicker({
+		        autoclose: true,
+		        format: 'dd/mm/yyyy'
+		    });
+		});
+</script>
+
+}
+
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"> Saldo IVA entre fechas @ViewBag.Cuenta </h3>
+    </div>
+    <div class="box-body">
+
+        <div class="form-group">
+            <b class="control-label col-md-2">Fecha de inicio</b>
+            <div class="col-md-4">
+                <input class = "form-control datepicker" value="01/@DateTime.Now.Month.ToString()/@DateTime.Now.Year.ToString()" datadateformat = "dd/mm/yyyy" readonly = "readonly" id="fechaInicio" onchange="cargarIvaSaldo()" />
+               
+            </div>
+            <b class="control-label col-md-2">Fecha de finalización</b>
+            <div class="col-md-4">
+                <input class="form-control datepicker"value="@DateTime.Now.ToShortDateString()"  datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarIvaSaldo()" />
+            </div>
+        </div>
+        <hr />
+
+        <div id="contenido">
+
+
+            </div>
+           
+        </div>
+</div>

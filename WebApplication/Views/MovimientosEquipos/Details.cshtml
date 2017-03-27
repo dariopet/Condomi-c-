@@ -1,0 +1,74 @@
+﻿@model WebApplication.MovimientosEquipos
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>MovimientosEquipos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.sale)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.sale)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fecha)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.idEvento)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.idEvento)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUsers.NameIdentifier)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.NameIdentifier)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Equipos.serialNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Equipos.serialNumber)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idMovimientoEquipo }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

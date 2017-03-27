@@ -1,0 +1,134 @@
+﻿@model WebApplication.Presupuestos
+
+
+@{
+    ViewBag.Title = "Editar presupuesto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menu {
+    <script>
+        $(function () {
+            var menuItem = $('#left-sidebar-menu-eventos');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#left-sidebar-menu-ver-presupuestos');
+            subMenuItem.addClass('active');
+        });
+    </script>
+    <link href="~/AdminLTE/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script src="../../AdminLTE/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/AdminLTE/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
+
+    <script type="text/javascript">
+        $('document').ready(function () {       
+            $('.datepicker').datetimepicker({
+                autoclose: true,
+                format: 'dd/mm/yyyy hh:ii:ss',
+                language: 'es'
+            });
+        });
+    </script>
+    <script>
+        function chkImprimir() {
+
+            if ($('#imprimirPrecios').prop('checked')) {
+                $('.sin-imprimir').removeClass("hidden-print");
+            }
+            else {
+                $('.sin-imprimir').addClass("hidden-print");
+            }
+        };
+        chkImprimir();
+    </script>
+
+<script src="../../Scripts/bonificacionPresupuesto.js"></script>
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body ">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.idPresupuesto)
+            @Html.HiddenFor(model => model.activo)
+            @Html.HiddenFor(model => model.idUsuario)
+
+
+            <div class="form-group">
+                <b class="control-label col-md-2"> Evento</b>
+                <div class="col-md-10">
+                    @Html.DropDownList("idEvento", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Descripción</b>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Bonificación</b>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.bonificacion, new { htmlAttributes = new {@id="bonificacion",  @class = "form-control", @onchange= "calcularPrecioPresupuesto()" } })
+                    @Html.ValidationMessageFor(model => model.bonificacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Fecha de inicio</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaInicio, new { @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy hh:ii", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                </div>
+
+                <b class="control-label col-md-2">Fecha de finalización</b>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fechaFin, new { @class = "form-control datepicker", @datadateformat = "dd/mm/yyyy hh:ii", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group hidden-print">
+                <b class="control-label col-md-2">Estado</b>
+                <div class="col-md-4">
+                    @Html.EnumDropDownListFor(model => model.estado, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                </div>                
+                <b class="control-label col-md-2">Probabilidad de ser aprobado</b>
+                <div class="col-md-4">
+                    @Html.EnumDropDownListFor(model => model.probabilidad,  new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.probabilidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b class="control-label col-md-2">Observaciones</b>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.observaciones, new { @class = "form-control text-area", rows = "5" })
+                    @Html.ValidationMessageFor(model => model.observaciones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="detailFrame">
+        @{Html.RenderAction("Index", "DetallePresupuesto", new { idPresupuesto = Model.idPresupuesto });}
+    </div>
+
+
+        <div class="modal-footer  hidden-print">
+            <input type="checkbox" onchange="chkImprimir()" checked="checked" id="imprimirPrecios" />Imprimir precios
+            <a class="btn btn-warning hidden-print" onClick="history.go(-1);return true;">Cancelar</a>          
+            <input class="btn btn-success hidden-print" type="submit" value="Aceptar" id="submit" />
+        </div>
+
+            }
+
