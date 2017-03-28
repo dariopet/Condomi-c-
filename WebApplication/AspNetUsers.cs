@@ -54,10 +54,10 @@ namespace WebApplication
             this.Equipos = new HashSet<Equipos>();
             this.Pagos = new HashSet<Pagos>();
             this.Pagos1 = new HashSet<Pagos>();
-            this.Egresos = new HashSet<Egresos>();
-            this.Egresos1 = new HashSet<Egresos>();
             this.Ingresos = new HashSet<Ingresos>();
             this.Ingresos1 = new HashSet<Ingresos>();
+            this.Egresos = new HashSet<Egresos>();
+            this.Egresos1 = new HashSet<Egresos>();
         }
     
         public string Id { get; set; }
@@ -149,12 +149,12 @@ namespace WebApplication
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagos> Pagos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Egresos> Egresos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Egresos> Egresos1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingresos> Ingresos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingresos> Ingresos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egresos> Egresos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egresos> Egresos1 { get; set; }
     }
 }

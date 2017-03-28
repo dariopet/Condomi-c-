@@ -293,6 +293,7 @@ namespace WebApplication
                                          "~/AdminLTE/plugins/datatables/js/responsive.bootstrap.min.js",
                                          "~/AdminLTE/plugins/datatables/js/jquery.dataTables.yadcf.js",
                                          "~/AdminLTE/plugins/datatables/js/buttons.colVis.min.js",
+                                         "~/AdminLTE/plugins/datatables/js/dataTables.select.min.js",
                                          "~/Scripts/tabladetalles.js" ));
             
             bundles.Add(new StyleBundle("~/AdminLTE/plugins/datatables/cssB").Include(

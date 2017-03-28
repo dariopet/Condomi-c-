@@ -59,9 +59,9 @@ namespace WebApplication
         public virtual DbSet<Adelantos> Adelantos { get; set; }
         public virtual DbSet<PlanCuentas> PlanCuentas { get; set; }
         public virtual DbSet<Pagos> Pagos { get; set; }
-        public virtual DbSet<Egresos> Egresos { get; set; }
         public virtual DbSet<Ingresos> Ingresos { get; set; }
         public virtual DbSet<TipoEgresos> TipoEgresos { get; set; }
         public virtual DbSet<TipoIngresos> TipoIngresos { get; set; }
+        public virtual DbSet<Egresos> Egresos { get; set; }
     }
 }

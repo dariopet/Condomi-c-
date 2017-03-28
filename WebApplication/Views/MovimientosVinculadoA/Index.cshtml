@@ -42,7 +42,7 @@
             </div>
             <b class="control-label col-md-1">Hasta</b>
             <div class="col-md-3">
-                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosVinculadoA()" />
+                <input class="form-control datepicker" value="@DateTime.Now.AddDays(1).ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosVinculadoA()" />
             </div>
             <b class="control-label col-md-1">Vinculado A</b>
             <div class="col-md-3">

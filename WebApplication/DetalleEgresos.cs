@@ -20,7 +20,7 @@ namespace WebApplication
         public int idTipoEgreso { get; set; }
         public int cantidad { get; set; }
     
-        public virtual Egresos Egresos { get; set; }
         public virtual TipoEgresos TipoEgresos { get; set; }
+        public virtual Egresos Egresos { get; set; }
     }
 }

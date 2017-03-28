@@ -18,8 +18,8 @@ namespace WebApplication
         public PlanCuentas()
         {
             this.Cuentas = new HashSet<Cuentas>();
-            this.Egresos = new HashSet<Egresos>();
             this.Ingresos = new HashSet<Ingresos>();
+            this.Egresos = new HashSet<Egresos>();
         }
     
         public int idPlanCuentas { get; set; }
@@ -29,8 +29,8 @@ namespace WebApplication
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuentas> Cuentas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Egresos> Egresos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingresos> Ingresos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egresos> Egresos { get; set; }
     }
 }

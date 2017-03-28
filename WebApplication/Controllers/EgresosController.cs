@@ -118,10 +118,10 @@ namespace WebApplication.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEgreso,activo,descripcion,factura,tipoFactura,fechaVencimiento,fechaGenerada,fechaPago,idUsuario,idCuenta,idTercero,totalPagado,enBlanco,idEvento,impuestosInternos,ingresosBrutos,iva,percepcionIva,idPlanCuentas")] Egresos egresos)
+        public ActionResult Create([Bind(Include = "idEgreso,activo,descripcion,factura,tipoFactura,fechaVencimiento,fechaGenerada,fechaPago,idUsuario,idCuenta,idTercero,totalPagado,enBlanco,idEvento,impuestosInternos,ingresosBrutos,iva,percepcionIva,idPlanCuentas, conceptosNoGravados")] Egresos egresos)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 egresos.idUsuario = User.Identity.GetUserId();
                  egresos.activo=true;               
                 db.Egresos.Add(egresos);
@@ -165,7 +165,7 @@ namespace WebApplication.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idEgreso,activo,descripcion,factura,tipoFactura,fechaVencimiento,fechaGenerada,fechaPago,idUsuario,idCuenta,idTercero,totalPagado,enBlanco,idEvento,impuestosInternos,ingresosBrutos,iva,percepcionIva,idPlanCuentas")] Egresos egresos)
+        public ActionResult Edit([Bind(Include = "idEgreso,activo,descripcion,factura,tipoFactura,fechaVencimiento,fechaGenerada,fechaPago,idUsuario,idCuenta,idTercero,totalPagado,enBlanco,idEvento,impuestosInternos,ingresosBrutos,iva,percepcionIva,idPlanCuentas, conceptosNoGravados")] Egresos egresos)
         {
             if (ModelState.IsValid)
             {
@@ -251,11 +251,20 @@ namespace WebApplication.Controllers
             if (egreso.tipoFactura == tiposFacturas.A)//iva discriminado
             {
                 var resultadoiva = total * (egreso.iva / 100);
-                var ingresosbrutos = total * (egreso.ingresosBrutos / 100);
+                decimal conceptos;
+                if (egreso.conceptosNoGravados != null)
+                {
+                    conceptos = Convert.ToDecimal (egreso.conceptosNoGravados);
+                }
+                else
+                    { conceptos = 0; }
+
+                
+                var ingresosbrutos = (total + conceptos )  * (egreso.ingresosBrutos / 100);
                 var impuestosinternos = total * ((egreso.impuestosInternos / 100));
                 var percepcioniva = total * ((egreso.percepcionIva / 100));
 
-                total = total + resultadoiva + ingresosbrutos + impuestosinternos + percepcioniva;
+                total = total + resultadoiva + ingresosbrutos + impuestosinternos + percepcioniva + conceptos;
             }
             return (total.ToString());
         }

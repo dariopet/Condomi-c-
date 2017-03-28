@@ -65,7 +65,7 @@
             </div>
             <b class="control-label col-md-1">Hasta</b>
             <div class="col-md-2">
-                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="ingresosFecha()" />
+                <input class="form-control datepicker" value="@DateTime.Now.AddDays(1).ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="ingresosFecha()" />
             </div>
         </div>
     </div>

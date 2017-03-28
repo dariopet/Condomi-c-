@@ -39,6 +39,7 @@ namespace WebApplication
         public string editadoPor { get; set; }
         public Nullable<System.DateTime> fechaEditado { get; set; }
         public Nullable<int> idPlanCuentas { get; set; }
+        public Nullable<decimal> conceptosNoGravados { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers Editado { get; set; }

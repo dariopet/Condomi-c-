@@ -200,6 +200,7 @@
           <Property Name="editadoPor" Type="nvarchar" MaxLength="128" />
           <Property Name="fechaEditado" Type="datetime" />
           <Property Name="idPlanCuentas" Type="int" />
+          <Property Name="conceptosNoGravados" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Equipos">
           <Key>
@@ -364,7 +365,7 @@
           <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="idCuenta" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="retenido" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="retenido" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="editadoPor" Type="nvarchar" MaxLength="128" />
           <Property Name="fechaEditado" Type="datetime" />
           <Property Name="idCheque" Type="int" />
@@ -2397,18 +2398,9 @@
             <End Role="PlanCuentas" EntitySet="PlanCuentas" />
             <End Role="Cuentas" EntitySet="Cuentas" />
           </AssociationSet>
-          <EntitySet Name="Egresos" EntityType="CondomiBaseModel.Egresos" />
           <EntitySet Name="Ingresos" EntityType="CondomiBaseModel.Ingresos" />
           <EntitySet Name="TipoEgresos" EntityType="CondomiBaseModel.TipoEgresos" />
           <EntitySet Name="TipoIngresos" EntityType="CondomiBaseModel.TipoIngresos" />
-          <AssociationSet Name="FK_Egresos_AspNetUsers" Association="CondomiBaseModel.FK_Egresos_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Egresos" EntitySet="Egresos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Egresos_AspNetUsers1" Association="CondomiBaseModel.FK_Egresos_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Egresos" EntitySet="Egresos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ingresos_AspNetUsers" Association="CondomiBaseModel.FK_Ingresos_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Ingresos" EntitySet="Ingresos" />
@@ -2421,10 +2413,6 @@
             <End Role="Ingresos" EntitySet="Ingresos" />
             <End Role="Cobros" EntitySet="Cobros" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleEgresos_Egresos" Association="CondomiBaseModel.FK_DetalleEgresos_Egresos">
-            <End Role="Egresos" EntitySet="Egresos" />
-            <End Role="DetalleEgresos" EntitySet="DetalleEgresos" />
-          </AssociationSet>
           <AssociationSet Name="FK_DetalleEgresos_TipoEgresos" Association="CondomiBaseModel.FK_DetalleEgresos_TipoEgresos">
             <End Role="TipoEgresos" EntitySet="TipoEgresos" />
             <End Role="DetalleEgresos" EntitySet="DetalleEgresos" />
@@ -2436,6 +2424,31 @@
           <AssociationSet Name="FK_DetalleIngresos_TipoIngresos" Association="CondomiBaseModel.FK_DetalleIngresos_TipoIngresos">
             <End Role="TipoIngresos" EntitySet="TipoIngresos" />
             <End Role="DetalleIngresos" EntitySet="DetalleIngresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Eventos" Association="CondomiBaseModel.FK_Ingresos_Eventos">
+            <End Role="Eventos" EntitySet="Eventos" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_PlanCuentas" Association="CondomiBaseModel.FK_Ingresos_PlanCuentas">
+            <End Role="PlanCuentas" EntitySet="PlanCuentas" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Terceros" Association="CondomiBaseModel.FK_Ingresos_Terceros">
+            <End Role="Terceros" EntitySet="Terceros" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <EntitySet Name="Egresos" EntityType="CondomiBaseModel.Egresos" />
+          <AssociationSet Name="FK_Egresos_AspNetUsers" Association="CondomiBaseModel.FK_Egresos_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_AspNetUsers1" Association="CondomiBaseModel.FK_Egresos_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEgresos_Egresos" Association="CondomiBaseModel.FK_DetalleEgresos_Egresos">
+            <End Role="Egresos" EntitySet="Egresos" />
+            <End Role="DetalleEgresos" EntitySet="DetalleEgresos" />
           </AssociationSet>
           <AssociationSet Name="FK_Egresos_Eventos" Association="CondomiBaseModel.FK_Egresos_Eventos">
             <End Role="Eventos" EntitySet="Eventos" />
@@ -2452,18 +2465,6 @@
           <AssociationSet Name="FK_Pagos_Egresos" Association="CondomiBaseModel.FK_Pagos_Egresos">
             <End Role="Egresos" EntitySet="Egresos" />
             <End Role="Pagos" EntitySet="Pagos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ingresos_Eventos" Association="CondomiBaseModel.FK_Ingresos_Eventos">
-            <End Role="Eventos" EntitySet="Eventos" />
-            <End Role="Ingresos" EntitySet="Ingresos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ingresos_PlanCuentas" Association="CondomiBaseModel.FK_Ingresos_PlanCuentas">
-            <End Role="PlanCuentas" EntitySet="PlanCuentas" />
-            <End Role="Ingresos" EntitySet="Ingresos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ingresos_Terceros" Association="CondomiBaseModel.FK_Ingresos_Terceros">
-            <End Role="Terceros" EntitySet="Terceros" />
-            <End Role="Ingresos" EntitySet="Ingresos" />
           </AssociationSet>
           </EntityContainer>
         <EnumType Name="Estados">
@@ -2565,10 +2566,10 @@
           <NavigationProperty Name="Equipos" Relationship="CondomiBaseModel.FK_Equipos_AspNetUsers" FromRole="AspNetUsers" ToRole="Equipos" />
           <NavigationProperty Name="Pagos" Relationship="CondomiBaseModel.FK_Pagos_AspNetUsers" FromRole="AspNetUsers" ToRole="Pagos" />
           <NavigationProperty Name="Pagos1" Relationship="CondomiBaseModel.FK_Pagos_AspNetUsers1" FromRole="AspNetUsers" ToRole="Pagos" />
-          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers" FromRole="AspNetUsers" ToRole="Egresos" />
-          <NavigationProperty Name="Egresos1" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers1" FromRole="AspNetUsers" ToRole="Egresos" />
           <NavigationProperty Name="Ingresos" Relationship="CondomiBaseModel.FK_Ingresos_AspNetUsers" FromRole="AspNetUsers" ToRole="Ingresos" />
           <NavigationProperty Name="Ingresos1" Relationship="CondomiBaseModel.FK_Ingresos_AspNetUsers1" FromRole="AspNetUsers" ToRole="Ingresos" />
+          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers" FromRole="AspNetUsers" ToRole="Egresos" />
+          <NavigationProperty Name="Egresos1" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers1" FromRole="AspNetUsers" ToRole="Egresos" />
           </EntityType>
         <EntityType Name="Cheques">
           <Key>
@@ -2762,8 +2763,8 @@
           <NavigationProperty Name="Adelantos" Relationship="CondomiBaseModel.FK_Adelantos_Terceros" FromRole="Terceros" ToRole="Adelantos" />
           <Property Name="localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_Terceros" FromRole="Terceros" ToRole="Egresos" />
           <NavigationProperty Name="Ingresos" Relationship="CondomiBaseModel.FK_Ingresos_Terceros" FromRole="Terceros" ToRole="Ingresos" />
+          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_Terceros" FromRole="Terceros" ToRole="Egresos" />
           </EntityType>
         <EntityType Name="TipoCuentas">
           <Key>
@@ -3151,8 +3152,8 @@
           <Property Name="monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="idTipoEgreso" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_DetalleEgresos_Egresos" FromRole="DetalleEgresos" ToRole="Egresos" />
           <NavigationProperty Name="TipoEgresos" Relationship="CondomiBaseModel.FK_DetalleEgresos_TipoEgresos" FromRole="DetalleEgresos" ToRole="TipoEgresos" />
+          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_DetalleEgresos_Egresos" FromRole="DetalleEgresos" ToRole="Egresos" />
           </EntityType>
         <EntityType Name="Eventos">
           <Key>
@@ -3177,8 +3178,8 @@
           <Property Name="fechaEditado" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Editado" Relationship="CondomiBaseModel.FK_Eventos_AspNetUsers1" FromRole="Eventos" ToRole="AspNetUsers" />
           <NavigationProperty Name="HorasTrabajadasTecnico" Relationship="CondomiBaseModel.FK_HorasTrabajadasTecnico_Eventos1" FromRole="Eventos" ToRole="HorasTrabajadasTecnico" />
-          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_Eventos" FromRole="Eventos" ToRole="Egresos" />
           <NavigationProperty Name="Ingresos" Relationship="CondomiBaseModel.FK_Ingresos_Eventos" FromRole="Eventos" ToRole="Ingresos" />
+          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_Eventos" FromRole="Eventos" ToRole="Egresos" />
         </EntityType>
         <Association Name="FK_Eventos_AspNetUsers">
           <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -3914,8 +3915,8 @@
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cuentas" Relationship="CondomiBaseModel.FK_Cuentas_PlanCuentas" FromRole="PlanCuentas" ToRole="Cuentas" />
-          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_PlanCuentas" FromRole="PlanCuentas" ToRole="Egresos" />
           <NavigationProperty Name="Ingresos" Relationship="CondomiBaseModel.FK_Ingresos_PlanCuentas" FromRole="PlanCuentas" ToRole="Ingresos" />
+          <NavigationProperty Name="Egresos" Relationship="CondomiBaseModel.FK_Egresos_PlanCuentas" FromRole="PlanCuentas" ToRole="Egresos" />
         </EntityType>
         <EntityType Name="Pagos">
           <Key>
@@ -3927,7 +3928,7 @@
           <Property Name="monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="idCuenta" Type="Int32" Nullable="false" />
           <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="retenido" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="retenido" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="editadoPor" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="fechaEditado" Type="DateTime" Precision="3" />
           <Property Name="idCheque" Type="Int32" />
@@ -4011,36 +4012,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Egresos">
-          <Key>
-            <PropertyRef Name="idEgreso" />
-          </Key>
-          <Property Name="idEgreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tipoFactura" Type="CondomiBaseModel.tiposFacturas" Nullable="false" />
-          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaGenerada" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="idTercero" Type="Int32" Nullable="false" />
-          <Property Name="enBlanco" Type="Boolean" Nullable="false" />
-          <Property Name="idEvento" Type="Int32" Nullable="false" />
-          <Property Name="impuestosInternos" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="ingresosBrutos" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="iva" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="percepcionIva" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="editadoPor" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="fechaEditado" Type="DateTime" Precision="3" />
-          <Property Name="idPlanCuentas" Type="Int32" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers" FromRole="Egresos" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Editado" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers1" FromRole="Egresos" ToRole="AspNetUsers" />
-          <NavigationProperty Name="DetalleEgresos" Relationship="CondomiBaseModel.FK_DetalleEgresos_Egresos" FromRole="Egresos" ToRole="DetalleEgresos" />
-          <NavigationProperty Name="Eventos" Relationship="CondomiBaseModel.FK_Egresos_Eventos" FromRole="Egresos" ToRole="Eventos" />
-          <NavigationProperty Name="PlanCuentas" Relationship="CondomiBaseModel.FK_Egresos_PlanCuentas" FromRole="Egresos" ToRole="PlanCuentas" />
-          <NavigationProperty Name="Terceros" Relationship="CondomiBaseModel.FK_Egresos_Terceros" FromRole="Egresos" ToRole="Terceros" />
-          <NavigationProperty Name="Pagos" Relationship="CondomiBaseModel.FK_Pagos_Egresos" FromRole="Egresos" ToRole="Pagos" />
-        </EntityType>
         <EntityType Name="Ingresos">
           <Key>
             <PropertyRef Name="idIngreso" />
@@ -4092,30 +4063,6 @@
           <Property Name="vinculadoA" Type="CondomiBaseModel.vinculadoARubros" Nullable="false" />
           <NavigationProperty Name="DetalleIngresos" Relationship="CondomiBaseModel.FK_DetalleIngresos_TipoIngresos" FromRole="TipoIngresos" ToRole="DetalleIngresos" />
         </EntityType>
-        <Association Name="FK_Egresos_AspNetUsers">
-          <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Egresos">
-              <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Egresos_AspNetUsers1">
-          <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Egresos">
-              <PropertyRef Name="editadoPor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ingresos_AspNetUsers">
           <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
@@ -4152,18 +4099,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleEgresos_Egresos">
-          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="1" />
-          <End Type="CondomiBaseModel.DetalleEgresos" Role="DetalleEgresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Egresos">
-              <PropertyRef Name="idEgreso" />
-            </Principal>
-            <Dependent Role="DetalleEgresos">
-              <PropertyRef Name="idEgreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetalleEgresos_TipoEgresos">
           <End Type="CondomiBaseModel.TipoEgresos" Role="TipoEgresos" Multiplicity="1" />
           <End Type="CondomiBaseModel.DetalleEgresos" Role="DetalleEgresos" Multiplicity="*" />
@@ -4197,6 +4132,109 @@
             </Principal>
             <Dependent Role="DetalleIngresos">
               <PropertyRef Name="idTipoIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Eventos">
+          <End Type="CondomiBaseModel.Eventos" Role="Eventos" Multiplicity="1" />
+          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eventos">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_PlanCuentas">
+          <End Type="CondomiBaseModel.PlanCuentas" Role="PlanCuentas" Multiplicity="0..1" />
+          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanCuentas">
+              <PropertyRef Name="idPlanCuentas" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="idPlanCuentas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Terceros">
+          <End Type="CondomiBaseModel.Terceros" Role="Terceros" Multiplicity="1" />
+          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terceros">
+              <PropertyRef Name="idTercero" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="idTercero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Egresos">
+          <Key>
+            <PropertyRef Name="idEgreso" />
+          </Key>
+          <Property Name="idEgreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoFactura" Type="CondomiBaseModel.tiposFacturas" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaGenerada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="idTercero" Type="Int32" Nullable="false" />
+          <Property Name="enBlanco" Type="Boolean" Nullable="false" />
+          <Property Name="idEvento" Type="Int32" Nullable="false" />
+          <Property Name="impuestosInternos" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ingresosBrutos" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="iva" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="percepcionIva" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="editadoPor" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="fechaEditado" Type="DateTime" Precision="3" />
+          <Property Name="idPlanCuentas" Type="Int32" />
+          <Property Name="conceptosNoGravados" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers" FromRole="Egresos" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Editado" Relationship="CondomiBaseModel.FK_Egresos_AspNetUsers1" FromRole="Egresos" ToRole="AspNetUsers" />
+          <NavigationProperty Name="DetalleEgresos" Relationship="CondomiBaseModel.FK_DetalleEgresos_Egresos" FromRole="Egresos" ToRole="DetalleEgresos" />
+          <NavigationProperty Name="Eventos" Relationship="CondomiBaseModel.FK_Egresos_Eventos" FromRole="Egresos" ToRole="Eventos" />
+          <NavigationProperty Name="PlanCuentas" Relationship="CondomiBaseModel.FK_Egresos_PlanCuentas" FromRole="Egresos" ToRole="PlanCuentas" />
+          <NavigationProperty Name="Terceros" Relationship="CondomiBaseModel.FK_Egresos_Terceros" FromRole="Egresos" ToRole="Terceros" />
+          <NavigationProperty Name="Pagos" Relationship="CondomiBaseModel.FK_Pagos_Egresos" FromRole="Egresos" ToRole="Pagos" />
+        </EntityType>
+        <Association Name="FK_Egresos_AspNetUsers">
+          <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_AspNetUsers1">
+          <End Type="CondomiBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="editadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEgresos_Egresos">
+          <End Type="CondomiBaseModel.Egresos" Role="Egresos" Multiplicity="1" />
+          <End Type="CondomiBaseModel.DetalleEgresos" Role="DetalleEgresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egresos">
+              <PropertyRef Name="idEgreso" />
+            </Principal>
+            <Dependent Role="DetalleEgresos">
+              <PropertyRef Name="idEgreso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4245,42 +4283,6 @@
             </Principal>
             <Dependent Role="Pagos">
               <PropertyRef Name="idEgreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingresos_Eventos">
-          <End Type="CondomiBaseModel.Eventos" Role="Eventos" Multiplicity="1" />
-          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Eventos">
-              <PropertyRef Name="idEvento" />
-            </Principal>
-            <Dependent Role="Ingresos">
-              <PropertyRef Name="idEvento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingresos_PlanCuentas">
-          <End Type="CondomiBaseModel.PlanCuentas" Role="PlanCuentas" Multiplicity="0..1" />
-          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlanCuentas">
-              <PropertyRef Name="idPlanCuentas" />
-            </Principal>
-            <Dependent Role="Ingresos">
-              <PropertyRef Name="idPlanCuentas" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingresos_Terceros">
-          <End Type="CondomiBaseModel.Terceros" Role="Terceros" Multiplicity="1" />
-          <End Type="CondomiBaseModel.Ingresos" Role="Ingresos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Terceros">
-              <PropertyRef Name="idTercero" />
-            </Principal>
-            <Dependent Role="Ingresos">
-              <PropertyRef Name="idTercero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4776,30 +4778,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Egresos">
-            <EntityTypeMapping TypeName="CondomiBaseModel.Egresos">
-              <MappingFragment StoreEntitySet="Egresos">
-                <ScalarProperty Name="idPlanCuentas" ColumnName="idPlanCuentas" />
-                <ScalarProperty Name="fechaEditado" ColumnName="fechaEditado" />
-                <ScalarProperty Name="editadoPor" ColumnName="editadoPor" />
-                <ScalarProperty Name="percepcionIva" ColumnName="percepcionIva" />
-                <ScalarProperty Name="iva" ColumnName="iva" />
-                <ScalarProperty Name="ingresosBrutos" ColumnName="ingresosBrutos" />
-                <ScalarProperty Name="impuestosInternos" ColumnName="impuestosInternos" />
-                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
-                <ScalarProperty Name="enBlanco" ColumnName="enBlanco" />
-                <ScalarProperty Name="idTercero" ColumnName="idTercero" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="fechaGenerada" ColumnName="fechaGenerada" />
-                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
-                <ScalarProperty Name="tipoFactura" ColumnName="tipoFactura" />
-                <ScalarProperty Name="factura" ColumnName="factura" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="idEgreso" ColumnName="idEgreso" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Ingresos">
             <EntityTypeMapping TypeName="CondomiBaseModel.Ingresos">
               <MappingFragment StoreEntitySet="Ingresos">
@@ -4842,6 +4820,31 @@
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="idTipoIngreso" ColumnName="idTipoIngreso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Egresos">
+            <EntityTypeMapping TypeName="CondomiBaseModel.Egresos">
+              <MappingFragment StoreEntitySet="Egresos">
+                <ScalarProperty Name="conceptosNoGravados" ColumnName="conceptosNoGravados" />
+                <ScalarProperty Name="idPlanCuentas" ColumnName="idPlanCuentas" />
+                <ScalarProperty Name="fechaEditado" ColumnName="fechaEditado" />
+                <ScalarProperty Name="editadoPor" ColumnName="editadoPor" />
+                <ScalarProperty Name="percepcionIva" ColumnName="percepcionIva" />
+                <ScalarProperty Name="iva" ColumnName="iva" />
+                <ScalarProperty Name="ingresosBrutos" ColumnName="ingresosBrutos" />
+                <ScalarProperty Name="impuestosInternos" ColumnName="impuestosInternos" />
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="enBlanco" ColumnName="enBlanco" />
+                <ScalarProperty Name="idTercero" ColumnName="idTercero" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fechaGenerada" ColumnName="fechaGenerada" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="tipoFactura" ColumnName="tipoFactura" />
+                <ScalarProperty Name="factura" ColumnName="factura" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idEgreso" ColumnName="idEgreso" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

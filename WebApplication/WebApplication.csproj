@@ -454,6 +454,7 @@
     <Content Include="AdminLTE\dist\js\colores.js" />
     <Content Include="AdminLTE\documentation\css\style.css" />
     <Content Include="AdminLTE\documentation\js\docs.js" />
+    <Content Include="AdminLTE\plugins\datatables\js\dataTables.select.min.js" />
     <Content Include="AdminLTE\plugins\icheck\css\all.css" />
     <Content Include="AdminLTE\plugins\icheck\css\flat\aero%402x.png" />
     <Content Include="AdminLTE\plugins\icheck\css\flat\aero%402x.png.png" />

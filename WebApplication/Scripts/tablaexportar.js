@@ -65,13 +65,22 @@ $(function () {
                          titleAttr: 'Imprimir',
                          title: 'Condomi'
                      },
+                     {
+                         extend: 'print',
+                         text: '<i class="fa fa-print"></i> Seleccionado',
+                         exportOptions: {
+                             modifier: {
+                                 selected: true
+                             }
+                         }
+                     },
                     'pageLength',
                      {
                          extend: 'colvis',
                          columns: ':not(:first-child)'
                      }
         ],
-        
+        select: true,
         "autoWidth": false,
         responsive: true,
         language: {

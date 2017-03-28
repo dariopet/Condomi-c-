@@ -142,6 +142,11 @@
                     @Html.DropDownList("idPlanCuentas", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.idPlanCuentas, "", new { @class = "text-danger" })
                 </div>
+                <b class="control-label col-md-2">Conceptos no gravados</b>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.conceptosNoGravados, new { htmlAttributes = new { @class = "form-control", @id = "conceptos", @onchange = "calcularIva()" } })
+                    @Html.ValidationMessageFor(model => model.conceptosNoGravados, "", new { @class = "text-danger" })
+                </div>
             </div>
 
         

@@ -41,7 +41,7 @@
             </div>
             <b class="control-label col-md-1">Hasta</b>
             <div class="col-md-3">
-                <input class="form-control datepicker" value="@DateTime.Now.ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosCuentas()" />
+                <input class="form-control datepicker" value="@DateTime.Now.AddDays(1).ToShortDateString()" datadateformat="dd/mm/yyyy" readonly="readonly" id="fechaFin" onchange="cargarMovimientosCuentas()" />
             </div>
             <b class="control-label col-md-1">Cuenta</b>
             <div class="col-md-3">
