@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebApplication.MovimientosTerceros>
 
-<input hidden="hidden" value=3 id="suma1" />
+<input hidden="hidden" value=5 id="suma1" />
 <input hidden="hidden" value=4 id="suma2" />
 <input hidden="hidden" value=1 id="fecha1" />
 
@@ -19,6 +19,9 @@
                 </th>
                 <th>
                     Concepto
+                </th>
+                <th>
+                    Identificador
                 </th>
                 <th>
                     Debe
@@ -40,6 +43,9 @@
                 </th>
                 <th>
                     Concepto
+                </th>
+                <th>
+                    Identificador
                 </th>
                 <th>
                     Debe
@@ -66,21 +72,21 @@
                         @{
                             if (item.ingreso != null)
                             {
-                                @Html.Raw(item.ingreso.descripcion + " factura - Nº" + item.ingreso.factura + " de " + item.ingreso.Terceros.nombre)
+                                @Html.Raw(item.ingreso.descripcion + " de " + item.ingreso.Terceros.nombre + " factura - Nº" )
                             }
                             if (item.egreso != null)
                             {
 
-                                @Html.Raw(item.egreso.descripcion + " factura - Nº" + item.egreso.factura + " de " + item.egreso.Terceros.nombre)
+                                @Html.Raw(item.egreso.descripcion + " de " + item.egreso.Terceros.nombre + " factura - Nº")
                             }
                             if (item.cobro != null)
                             {
-                                @Html.Raw("Cobro de Nº" + item.cobro.Ingresos.factura + " de " + item.cobro.Ingresos.Terceros.nombre)
+                                @Html.Raw("Cobro de" + item.cobro.Ingresos.Terceros.nombre + " Nº" )
 
                             }
                             if (item.pago != null)
                             {
-                                @Html.Raw("Pago de Nº" + item.pago.Egresos.factura + " de " + item.pago.Egresos.Terceros.nombre)
+                                @Html.Raw("Pago de " + item.pago.Egresos.Terceros.nombre + " Nº "  )
 
                             }
                             if (item.sueldo != null)
@@ -94,20 +100,39 @@
 
                     </td>
                     <td>
-                        @{ if (item.sueldo != null)
+
+                        @{
+                            if (item.ingreso != null)
+                            {
+                                @Html.Raw( item.ingreso.factura)
+                            }
+                            if (item.egreso != null)
                             {
 
-                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.sueldo.monto))
+                                @Html.Raw( item.egreso.factura )
+                            }
+                            if (item.cobro != null)
+                            {
+                                @Html.Raw( item.cobro.Ingresos.factura)
+
+                            }
+                            if (item.pago != null)
+                            {
+                                @Html.Raw( item.pago.Egresos.factura)
+
                             }
 
+                        }
+                    </td>
+                    @*debe*@
+                    <td>
+                        @{
+                         
                             if (item.egreso != null)
                             {
                                 @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.totalEgreso))
                             }
-                            if (item.adelanto != null)
-                            {
-                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.adelanto.monto))
-                            }
+                           
                             if (item.cobro != null)
                             {
                                 @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.cobro.monto))
@@ -122,7 +147,16 @@
                             {
                                 @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.totalIngreso))
                             }
+                            if (item.sueldo != null)
+                            {
 
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.sueldo.monto))
+                            }
+
+                            if (item.adelanto != null)
+                            {
+                                @Html.Raw(string.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C}", item.adelanto.monto))
+                            }
 
                             if (item.pago != null)
                             {

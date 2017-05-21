@@ -56,7 +56,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");
             ViewBag.idCuenta = new SelectList(db.Cuentas.Where(p=>p.idTercero==0) , "idCuenta", "descripcion");                                             
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre").OrderBy(p => p.Text);
             Sueldos sueldo = new Sueldos();
             sueldo.idCuenta = 1;
                                    
@@ -84,7 +84,7 @@ namespace WebApplication.Controllers
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", sueldos.idUsuario);
             ViewBag.idCuenta = new SelectList(db.Cuentas.Where(p => p.idTercero == 0), "idCuenta", "descripcion", sueldos.idCuenta);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero).OrderBy(p => p.Text);
             return PartialView(sueldos);
         }
 
@@ -106,7 +106,7 @@ namespace WebApplication.Controllers
             TempData["monto"] = sueldos.monto;
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", sueldos.idUsuario);
             ViewBag.idCuenta = new SelectList(db.Cuentas.Where(p => p.idTercero == 0), "idCuenta", "descripcion", sueldos.idCuenta);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero).OrderBy(p => p.Text);
             return PartialView(sueldos);
         }
 
@@ -143,7 +143,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", sueldos.idUsuario);
             ViewBag.idCuenta = new SelectList(db.Cuentas.Where(p => p.idTercero == 0), "idCuenta", "descripcion", sueldos.idCuenta);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", sueldos.idTercero).OrderBy(p => p.Text);
             return PartialView(sueldos);
         }
 
@@ -182,7 +182,7 @@ namespace WebApplication.Controllers
             decimal cobradoPeriodoAnterior;
 
             //horas no trabajadas
-            var data = db.HorasNoTrabajadas.Where(a => a.idTercero == idTercero && (a.periodo.Month + "/" + a.periodo.Year).Equals(periodo));
+            var data = db.HorasNoTrabajadas.Where(a => a.idTercero == idTercero && ((a.periodo.Month.ToString() + "/" + a.periodo.Year.ToString()).Equals(periodo) || ("0"+ a.periodo.Month.ToString() + "/" + a.periodo.Year.ToString()).Equals(periodo)));
             if (data.Count() != 0)
             {
                 horas = data.Sum(d => d.cantidad);                
@@ -192,7 +192,7 @@ namespace WebApplication.Controllers
                 horas = 0;
             }
             //adelantos recibidos
-            var data2 = db.Sueldos.Where(a => a.idTercero == idTercero && (a.periodo.Month + "/" + a.periodo.Year).Equals(periodo));
+            var data2 = db.Sueldos.Where(a => a.idTercero == idTercero && ((a.periodo.Month.ToString() + "/" + a.periodo.Year.ToString()).Equals(periodo) || ("0" + a.periodo.Month.ToString() + "/" + a.periodo.Year.ToString()).Equals(periodo)));
             if (data2.Count() != 0)
             {
                 adelantos = data2.Sum(d => d.monto);            
@@ -218,7 +218,7 @@ namespace WebApplication.Controllers
             periodoTemp=periodoTemp.AddMonths(-1);
             String periodoAnterior = periodoTemp.Month.ToString() + "/" + periodoTemp.Year.ToString();
 
-            var data4 = db.Sueldos.Where(a => a.idTercero == idTercero && (a.periodo.Month + "/" + a.periodo.Year).Equals(periodoAnterior));
+            var data4 = db.Sueldos.Where(a => a.idTercero == idTercero &&( (a.periodo.Month + "/" + a.periodo.Year).Equals(periodoAnterior) || ("0"+ a.periodo.Month + "/" + a.periodo.Year).Equals(periodoAnterior)));
             if (data4.Count() != 0)
             {
                 cobradoPeriodoAnterior  = data4.Sum(d => d.monto);

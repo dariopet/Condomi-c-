@@ -42,7 +42,7 @@ namespace WebApplication.Controllers
         {
            
             ViewBag.idModeloEquipo = new SelectList(db.ModelosEquipos.Where(p => p.activo == true), "idModelo", "descripcion");
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre").OrderBy(p => p.Text);
             ViewBag.idPresupuesto = new SelectList(db.Presupuestos.Where(p => p.activo == true), "idPresupuesto", "descripcion");
 
             DetallePresupuesto detallePresupuesto = new DetallePresupuesto();
@@ -68,7 +68,7 @@ namespace WebApplication.Controllers
             }
 
             ViewBag.idModeloEquipo = new SelectList(db.ModelosEquipos.Where(p => p.activo == true), "idModelo", "descripcion", detallePresupuesto.idModeloEquipo);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero).OrderBy(p => p.Text);
             ViewBag.idPresupuesto = new SelectList(db.Presupuestos.Where(p => p.activo == true), "idPresupuesto", "descripcion", detallePresupuesto.idPresupuesto);
             return PartialView(detallePresupuesto);
         }
@@ -86,7 +86,7 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.idModeloEquipo = new SelectList(db.ModelosEquipos.Where(p => p.activo == true), "idModelo", "descripcion", detallePresupuesto.idModeloEquipo);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero).OrderBy(p => p.Text);
             ViewBag.idPresupuesto = new SelectList(db.Presupuestos.Where(p => p.activo == true), "idPresupuesto", "descripcion", detallePresupuesto.idPresupuesto);
             return PartialView(detallePresupuesto);
         }
@@ -107,7 +107,7 @@ namespace WebApplication.Controllers
                 
             }
             ViewBag.idModeloEquipo = new SelectList(db.ModelosEquipos.Where(p => p.activo == true), "idModelo", "descripcion", detallePresupuesto.idModeloEquipo);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre", detallePresupuesto.idTercero).OrderBy(p => p.Text);
             ViewBag.idPresupuesto = new SelectList(db.Presupuestos.Where(p => p.activo == true), "idPresupuesto", "descripcion", detallePresupuesto.idPresupuesto);
             return PartialView(detallePresupuesto);
         }

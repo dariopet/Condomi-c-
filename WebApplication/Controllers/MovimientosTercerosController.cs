@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
         [AuthLog(Roles = "Administrador, Contabilidad total, Contabilidad parcial")]
         public ActionResult Index()
         {
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre").OrderBy(p => p.Text);
             return View();
         }
 

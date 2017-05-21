@@ -44,7 +44,7 @@ namespace WebApplication.Controllers
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");                                             
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true), "idEvento", "descripcion");
             //empleado o tecnico                                             
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true &&(p.idTipoTercero==1 || p.idTipoTercero==2)), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true &&(p.idTipoTercero==1 || p.idTipoTercero==2)), "idTercero", "nombre").OrderBy(p => p.Text);
                                              
             return PartialView();
         }
@@ -67,7 +67,7 @@ namespace WebApplication.Controllers
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasNoTrabajadas.idUsuario);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true), "idEvento", "descripcion", horasNoTrabajadas.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero).OrderBy(p => p.Text);
             return PartialView(horasNoTrabajadas);
         }
 
@@ -85,7 +85,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasNoTrabajadas.idUsuario);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true), "idEvento", "descripcion", horasNoTrabajadas.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero).OrderBy(p => p.Text);
             return PartialView(horasNoTrabajadas);
         }
 
@@ -107,7 +107,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasNoTrabajadas.idUsuario);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true), "idEvento", "descripcion", horasNoTrabajadas.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasNoTrabajadas.idTercero).OrderBy(p => p.Text);
             return PartialView(horasNoTrabajadas);
         }
 

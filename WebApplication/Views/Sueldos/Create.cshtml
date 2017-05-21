@@ -39,7 +39,7 @@
         <div class="form-group">
             <b class="control-label col-md-3"> Empleado</b>
             <div class="col-md-9">
-                @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control", @id="empleados", @onchange= "getDatosSueldo()" })
+                @Html.DropDownList("idTercero", null, htmlAttributes: new { @class = "form-control", @id="empleados", @onchange= "getDatosSueldo('create')" })
                 @Html.ValidationMessageFor(model => model.idTercero, "", new { @class = "text-danger" })
             </div>           
         </div>
@@ -60,7 +60,7 @@
         <div class="form-group">
                 <b class="control-label col-md-3">Período</b>           
             <div class="col-md-3">
-                @Html.TextBoxFor(model => model.periodo, new { Value = DateTime.Now.Month + "/" + DateTime.Now.Year, @id = "periodo", @class = "form-control", @readonly = true, @onchange= "getDatosSueldo()" })
+                @Html.TextBoxFor(model => model.periodo, new { Value = DateTime.Now.Month + "/" + DateTime.Now.Year, @id = "periodo", @class = "form-control", @readonly = true, @onchange= "getDatosSueldo('create')" })
                 @Html.ValidationMessageFor(model => model.periodo, "", new { @class = "text-danger" })
             </div>
             <b class="control-label col-md-3"> Cobrado período anterior</b>

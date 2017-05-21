@@ -89,7 +89,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");
                                              
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre").OrderBy(p => p.Text);
                                              
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && p.estado== estadoEvento.Aceptado), "idEvento", "descripcion");
                                              
@@ -113,7 +113,7 @@ namespace WebApplication.Controllers
             }
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasTrabajadasTecnico.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero).OrderBy(p => p.Text);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && p.estado == estadoEvento.Aceptado), "idEvento", "descripcion", horasTrabajadasTecnico.idEvento);
             return PartialView(horasTrabajadasTecnico);
         }
@@ -131,7 +131,7 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasTrabajadasTecnico.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero).OrderBy(p => p.Text);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && p.estado == estadoEvento.Aceptado), "idEvento", "descripcion", horasTrabajadasTecnico.idEvento);
             return PartialView(horasTrabajadasTecnico);
         }
@@ -153,7 +153,7 @@ namespace WebApplication.Controllers
                 
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", horasTrabajadasTecnico.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && (p.idTipoTercero == 1 || p.idTipoTercero == 2)), "idTercero", "nombre", horasTrabajadasTecnico.idTercero).OrderBy(p => p.Text);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && p.estado == estadoEvento.Aceptado), "idEvento", "descripcion", horasTrabajadasTecnico.idEvento);
             return PartialView(horasTrabajadasTecnico);
         }

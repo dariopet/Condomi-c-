@@ -33,7 +33,7 @@ namespace WebApplication.Controllers
         public ActionResult Create()
         {
             //ViewBag.idTercero = new SelectList(db.Terceros, "idTercero", "nombre");
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo  == true), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo  == true), "idTercero", "nombre").OrderBy(p => p.Text);
             ViewBag.idTipoCuenta = new SelectList(db.TipoCuentas, "idTipoCuenta", "descripcion");
             ViewBag.idPlanCuentas = new SelectList(db.PlanCuentas.Where(p => p.activo == true), "idPlanCuentas", "descripcion");
 
@@ -57,7 +57,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idPlanCuentas = new SelectList(db.PlanCuentas.Where(p => p.activo == true), "idPlanCuentas", "descripcion", cuentas.idPlanCuentas);
 
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre").OrderBy(p => p.Text);
             ViewBag.idTipoCuenta = new SelectList(db.TipoCuentas, "idTipoCuenta", "descripcion", cuentas.idTipoCuenta);
             return PartialView(cuentas);
         }
@@ -77,7 +77,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idPlanCuentas = new SelectList(db.PlanCuentas.Where(p => p.activo == true), "idPlanCuentas", "descripcion", cuentas.idPlanCuentas);
 
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre").OrderBy(p => p.Text);
             ViewBag.idTipoCuenta = new SelectList(db.TipoCuentas, "idTipoCuenta", "descripcion", cuentas.idTipoCuenta);
             return PartialView(cuentas);
         }
@@ -101,7 +101,7 @@ namespace WebApplication.Controllers
             }
             ViewBag.idPlanCuentas = new SelectList(db.PlanCuentas.Where(p => p.activo == true), "idPlanCuentas", "descripcion", cuentas.idPlanCuentas);
 
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true), "idTercero", "nombre").OrderBy(p => p.Text);
             ViewBag.idTipoCuenta = new SelectList(db.TipoCuentas, "idTipoCuenta", "descripcion", cuentas.idTipoCuenta);
             return PartialView(cuentas);
         }

@@ -45,7 +45,7 @@ namespace WebApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");                                             
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero!=0), "idTercero", "nombre");                                             
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero!=0), "idTercero", "nombre").OrderBy(p => p.Text);                                             
             return PartialView();
         }
 
@@ -67,7 +67,7 @@ namespace WebApplication.Controllers
             }
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", cheques.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero).OrderBy(p => p.Text);
             return PartialView(cheques);
         }
 
@@ -85,7 +85,7 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", cheques.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero).OrderBy(p => p.Text);
             return PartialView(cheques);
         }
 
@@ -107,7 +107,7 @@ namespace WebApplication.Controllers
                 
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", cheques.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", cheques.idTercero).OrderBy(p => p.Text);
             return PartialView(cheques);
         }
 

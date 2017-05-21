@@ -33,12 +33,22 @@ $(function () {
 
     var dTable = $('#tabla').dataTable({
         dom: 'Bfrtip',
-        buttons: [
-           
+        "lengthMenu": [ [ 10, 25, 50,100, -1], [ 10, 25, 50,100, "Todos"] ],
+        buttons: [           
                      {
                          extend: 'excelHtml5',
                          exportOptions: {
-                             columns: [':not(:first):not(:last)']
+                             columns: [':not(:first):not(:last)'],
+                             format: {
+                                 body: function (data, row, column, node) {
+                                     //reemplazo los textos no deseados en la exportacion a excel
+                                                                        
+                                    data= data.replace('$', '');
+                                    data= data.replace('<i class="fa fa-circle"></i>', '');
+                                    data = data.replace('<i class="fa fa-circle-o"></i>', '');
+                                    return data;
+                                 }
+                             }
                          },
                          text: '<i class="fa fa-file-excel-o"></i>',
                          title: 'Condomi',
@@ -69,10 +79,13 @@ $(function () {
                          extend: 'print',
                          text: '<i class="fa fa-print"></i> Seleccionado',
                          exportOptions: {
+                             columns: [':not(:first):not(:last)'],
                              modifier: {
                                  selected: true
                              }
-                         }
+                         },
+                         titleAttr: 'Imprimir',
+                         title: 'Condomi'
                      },
                     'pageLength',
                      {

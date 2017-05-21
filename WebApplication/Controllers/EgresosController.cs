@@ -30,7 +30,7 @@ namespace WebApplication.Controllers
         {
             DateTime inicio = Convert.ToDateTime(inicioT);
             DateTime fin = Convert.ToDateTime(finT);
-            var egresos = db.Egresos.Include(e => e.AspNetUsers).Include(e => e.Eventos).Include(e => e.Terceros).Include(t => t.PlanCuentas); ;
+            var egresos = db.Egresos.Include(e => e.AspNetUsers).Include(e => e.Eventos).Include(e => e.Terceros).Include(t => t.PlanCuentas) ;
                       
             return PartialView(egresos.Where(a => a.fechaGenerada >= inicio && a.fechaGenerada <= fin ).OrderByDescending(a => a.fechaGenerada));            
         }
@@ -106,7 +106,7 @@ namespace WebApplication.Controllers
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");                                             
             ViewBag.idCuenta = new SelectList(db.Cuentas, "idCuenta", "descripcion");                                             
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && (p.estado==estadoEvento.Aceptado || p.estado==estadoEvento.Cumplido)), "idEvento", "descripcion");                                             
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0) , "idTercero", "nombre").OrderBy (a=>a.Text  ) ;
             Egresos egr = new Egresos();
             egr.tipoFactura = tiposFacturas.A;
             egr.factura = (db.Egresos.OrderByDescending(p=>p.idEgreso).FirstOrDefault().idEgreso + 1).ToString(); 
@@ -135,7 +135,7 @@ namespace WebApplication.Controllers
             ViewBag.idPlanCuentas = new SelectList(db.PlanCuentas.Where(p => p.activo == true), "idPlanCuentas", "descripcion", egresos.idPlanCuentas);
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", egresos.idUsuario);        
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && (p.estado == estadoEvento.Aceptado || p.estado == estadoEvento.Cumplido)), "idEvento", "descripcion", egresos.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero).OrderBy (p=>p.Text );
             return PartialView(egresos);
         }
 
@@ -156,7 +156,7 @@ namespace WebApplication.Controllers
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", egresos.idUsuario);      
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && (p.estado == estadoEvento.Aceptado || p.estado == estadoEvento.Cumplido)), "idEvento", "descripcion", egresos.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero).OrderBy(p => p.Text);
             return PartialView(egresos);
         }
 
@@ -181,7 +181,7 @@ namespace WebApplication.Controllers
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", egresos.idUsuario);
             ViewBag.idEvento = new SelectList(db.Eventos.Where(p => p.activo == true && (p.estado == estadoEvento.Aceptado || p.estado == estadoEvento.Cumplido)), "idEvento", "descripcion", egresos.idEvento);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", egresos.idTercero).OrderBy(p => p.Text);
             return PartialView(egresos);
         }
 

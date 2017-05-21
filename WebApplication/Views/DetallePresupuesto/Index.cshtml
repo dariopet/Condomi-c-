@@ -24,7 +24,8 @@
     <div class="box-body">
         <p>
           
-                @{if (Model.FirstOrDefault().Presupuestos.estado == estadoPresupesto.Pendiente || Model.FirstOrDefault()==null)
+                @{
+                    if (Model.FirstOrDefault() !=null  && Model.FirstOrDefault().Presupuestos.estado == estadoPresupesto.Pendiente || Model.FirstOrDefault()==null)
                     {
                     @Html.ActionLink("Agregar servicio", "Create", "DetallePresupuesto", new { idPresupuesto = ViewBag.idPresupuesto }, new { data_modal = "", id = "btnCreate", @class = "btn btn-success hidden-print hidden-print" })
                         }

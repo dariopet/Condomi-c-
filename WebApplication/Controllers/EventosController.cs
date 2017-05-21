@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier");
                                              
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero!=0), "idTercero", "nombre");
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero!=0), "idTercero", "nombre").OrderBy(p => p.Text);
                                              
             return PartialView();
         }
@@ -66,7 +66,7 @@ namespace WebApplication.Controllers
             }
 
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", eventos.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero).OrderBy(p => p.Text);
             return PartialView(eventos);
         }
 
@@ -84,7 +84,7 @@ namespace WebApplication.Controllers
             }
             
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", eventos.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero).OrderBy(p => p.Text);
             return PartialView(eventos);
         }
 
@@ -107,7 +107,7 @@ namespace WebApplication.Controllers
                 
             }
             ViewBag.idUsuario = new SelectList(db.AspNetUsers, "Id", "NameIdentifier", eventos.idUsuario);
-            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero);
+            ViewBag.idTercero = new SelectList(db.Terceros.Where(p => p.activo == true && p.idTercero != 0), "idTercero", "nombre", eventos.idTercero).OrderBy(p => p.Text);
             return PartialView(eventos);
         }
 

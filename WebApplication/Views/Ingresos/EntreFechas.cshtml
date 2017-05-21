@@ -41,6 +41,9 @@
                     Descripción
                 </th>
                 <th>
+                    Cliente
+                </th>
+                <th>
                     Factura y tipo
                 </th>
                 <th>
@@ -71,9 +74,6 @@
                     Evento
                 </th>
                 <th>
-                    Cliente
-                </th>
-                <th>
                     Editado por
                 </th>
                 <th>
@@ -88,6 +88,9 @@
                 </th>
                 <th>
                     Descripción
+                </th>
+                <th>
+                    Cliente
                 </th>
                 <th>
                     Factura y tipo
@@ -119,9 +122,6 @@
 
                 <th>
                     Evento
-                </th>
-                <th>
-                    Cliente
                 </th>
                 <th>
                     Editado por
@@ -150,6 +150,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.factura)-@Html.DisplayFor(modelItem => item.tipoFactura)
@@ -199,9 +202,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Eventos.descripcion)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Terceros.nombre)
-                    </td>
+                   
                     <td>
                         @Html.DisplayFor(modelItem => item.Editado.NameIdentifier) -
                         @Html.DisplayFor(modelItem => item.fechaEditado)
